@@ -1,0 +1,141 @@
+@import 'tailwindcss';
+
+:root {
+  --ink: #292b2c;
+  --stone: #e8e6df;
+  --sand: #f7f5f0;
+  --blue: #282828;
+  --gold: #a0937b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--sand);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: #8e826b transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: #8e826b;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #625a4b;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.viaza-dropdown-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #8e826b transparent;
+}
+
+.viaza-dropdown-scrollbar::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.viaza-dropdown-scrollbar::-webkit-scrollbar-track {
+  margin: 0.45rem 0;
+  background: transparent;
+}
+
+.viaza-dropdown-scrollbar::-webkit-scrollbar-thumb {
+  border: 2px solid #f7f5f0;
+  border-radius: 999px;
+  background: #8e826b;
+  background-clip: padding-box;
+}
+
+.viaza-dropdown-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #625a4b;
+  background-clip: padding-box;
+}
+
+::selection {
+  background: var(--blue);
+  color: white;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.font-display {
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.eyebrow {
+  color: var(--blue);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+}
+
+.button-primary,
+.button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.9rem;
+  padding: 0.7rem 1.3rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.button-primary {
+  background: var(--blue);
+  color: white;
+}
+
+.button-primary:hover {
+  background: #0f0f0f;
+}
+
+.button-secondary {
+  border: 1px solid currentColor;
+  color: inherit;
+}
+
+.button-secondary:hover {
+  background: white;
+  color: var(--blue);
+}

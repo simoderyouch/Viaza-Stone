@@ -91,9 +91,9 @@ export default function HomePage() {
       <section className="bg-white px-5 py-18 lg:px-8">
         <div className="mx-auto max-w-[1800px]">
           <ScrollReveal><SectionHeading eyebrow="Material library" title="Find the character of your project" centered /></ScrollReveal>
-          <div className="mt-11 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-11 grid gap-5 md:grid-cols-2">
             {materialCollections.map((material, index) => (
-              <ScrollReveal key={material.name} delay={index * 0.07} hover className="h-full"><MaterialCard {...material} className="min-h-[30rem]" /></ScrollReveal>
+              <ScrollReveal key={material.name} delay={index * 0.07} hover className="h-full"><MaterialCard {...material} index={index + 1} className="min-h-[32rem] sm:min-h-[36rem]" /></ScrollReveal>
             ))}
           </div>
         </div>

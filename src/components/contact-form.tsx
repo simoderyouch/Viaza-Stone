@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from 'react'
 import { CustomSelect } from '@/components/custom-select'
+import { useLocale } from '@/components/locale-provider'
 
 const contactEmail = 'hello@viazastone.com'
 
@@ -14,6 +15,7 @@ export function ContactForm({
   sample?: string
   initialEnquiryType?: string
 }) {
+  const { t } = useLocale()
   const [submitted, setSubmitted] = useState(false)
   const [enquiryType, setEnquiryType] = useState(sample ? 'Material sample request' : initialEnquiryType)
   const [enquiryTypeError, setEnquiryTypeError] = useState(false)
@@ -32,15 +34,15 @@ export function ContactForm({
       ? `Sample request${selectedMaterial ? ` — ${selectedMaterial}` : ''}`
       : `Viaza Stone project enquiry${selectedMaterial ? ` — ${selectedMaterial}` : ''}`
     const details = [
-      ['Name', form.get('name')],
-      ['Company', form.get('company')],
-      ['Email', form.get('email')],
-      ['Phone', form.get('phone')],
-      ['Enquiry type', form.get('enquiryType')],
-      ['Material / surface', selectedMaterial],
-      ['Project location', form.get('location')],
-      ['Project scale / quantity', form.get('quantity')],
-      ['Project details', form.get('message')],
+      [t('contact.name'), form.get('name')],
+      [t('contact.company'), form.get('company')],
+      [t('contact.email'), form.get('email')],
+      [t('contact.phone'), form.get('phone')],
+      [t('contact.need'), form.get('enquiryType')],
+      [t('contact.material'), selectedMaterial],
+      [t('contact.location'), form.get('location')],
+      [t('contact.quantity'), form.get('quantity')],
+      [t('contact.projectDetails'), form.get('message')],
     ]
       .filter(([, value]) => value)
       .map(([label, value]) => `${label}: ${value}`)
@@ -53,24 +55,24 @@ export function ContactForm({
   if (submitted) {
     return (
       <div className="border border-[#282828] bg-[#f3f3f3] p-8" role="status">
-        <p className="eyebrow">Thank you</p>
-        <h2 className="font-display mt-3 text-3xl">Your email draft is ready.</h2>
-        <p className="mt-3 leading-7 text-stone-600">We opened a pre-filled message in your email application. Review it, add any drawings or references, and send it to the Viaza Stone team.</p>
-        <a href={`mailto:${contactEmail}`} className="button-primary mt-6">Email Viaza Stone directly</a>
+        <p className="eyebrow">{t('contact.thankYou')}</p>
+        <h2 className="font-display mt-3 text-3xl">{t('contact.emailReady')}</h2>
+        <p className="mt-3 leading-7 text-stone-600">{t('contact.emailReadyCopy')}</p>
+        <a href={`mailto:${contactEmail}`} className="button-primary mt-6">{t('contact.emailDirect')}</a>
       </div>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-5" aria-label="Contact Viaza Stone">
-      <p className="text-sm leading-6 text-stone-600">Share the material direction, project location, intended use, and any quantity or timing notes. The form prepares a detailed email that you can review and send.</p>
+    <form onSubmit={handleSubmit} className="grid gap-5" aria-label={t('contact.formLabel')}>
+      <p className="text-sm leading-6 text-stone-600">{t('contact.intro')}</p>
       <div className="grid gap-5 sm:grid-cols-2">
-        <FormField label="Name" name="name" required autoComplete="name" />
-        <FormField label="Company" name="company" />
-        <FormField label="Email" name="email" type="email" required autoComplete="email" />
-        <FormField label="Phone" name="phone" type="tel" autoComplete="tel" />
+        <FormField label={t('contact.name')} name="name" required autoComplete="name" />
+        <FormField label={t('contact.company')} name="company" />
+        <FormField label={t('contact.email')} name="email" type="email" required autoComplete="email" />
+        <FormField label={t('contact.phone')} name="phone" type="tel" autoComplete="tel" />
         <div className="block sm:col-span-2">
-          <span className="mb-2 block text-sm font-semibold text-stone-700">What do you need?</span>
+          <span className="mb-2 block text-sm font-semibold text-stone-700">{t('contact.need')}</span>
           <CustomSelect
             name="enquiryType"
             value={enquiryType}
@@ -78,28 +80,28 @@ export function ContactForm({
               setEnquiryType(value)
               setEnquiryTypeError(false)
             }}
-            placeholder="Select an enquiry type"
+            placeholder={t('contact.selectType')}
             invalid={enquiryTypeError}
             options={[
-              { value: 'Material selection', label: 'Material selection', detail: 'Help me find the right stone direction' },
-              { value: 'Material sample request', label: 'Material sample request', detail: 'I would like to review a sample' },
-              { value: 'Project quote', label: 'Project quote', detail: 'I have a defined project requirement' },
-              { value: 'Custom finish or format', label: 'Custom finish or format', detail: 'I need a tailored surface or cut' },
-              { value: 'Export or supply enquiry', label: 'Export or supply enquiry', detail: 'I am sourcing for an international project' },
+              { value: 'Material selection', label: t('contact.materialSelection'), detail: t('contact.materialSelectionDetail') },
+              { value: 'Material sample request', label: t('contact.sampleRequest'), detail: t('contact.sampleRequestDetail') },
+              { value: 'Project quote', label: t('contact.projectQuote'), detail: t('contact.projectQuoteDetail') },
+              { value: 'Custom finish or format', label: t('contact.customFinish'), detail: t('contact.customFinishDetail') },
+              { value: 'Export or supply enquiry', label: t('contact.export'), detail: t('contact.exportDetail') },
             ]}
           />
-          {enquiryTypeError && <p className="mt-2 text-xs text-red-700">Choose an enquiry type before preparing your email.</p>}
+          {enquiryTypeError && <p className="mt-2 text-xs text-red-700">{t('contact.chooseType')}</p>}
         </div>
-        <FormField label="Material or surface" name="material" defaultValue={material || sample} />
-        <FormField label="Project location / destination" name="location" required />
-        <FormField label="Project scale or estimated quantity" name="quantity" />
+        <FormField label={t('contact.material')} name="material" defaultValue={material || sample} />
+        <FormField label={t('contact.location')} name="location" required />
+        <FormField label={t('contact.quantity')} name="quantity" />
         <label className="block sm:col-span-2">
-          <span className="mb-2 block text-sm font-semibold text-stone-700">Tell us about the project</span>
-          <textarea name="message" rows={6} required placeholder="Application, finish or format, timing, and anything else that will help us understand the brief." className="w-full border border-stone-300 bg-white px-3 py-3 text-sm placeholder:text-stone-400" />
+          <span className="mb-2 block text-sm font-semibold text-stone-700">{t('contact.projectDetails')}</span>
+          <textarea name="message" rows={6} required placeholder={t('contact.projectPlaceholder')} className="w-full border border-stone-300 bg-white px-3 py-3 text-sm placeholder:text-stone-400" />
         </label>
       </div>
       <button type="submit" className="button-primary w-fit">
-        Prepare enquiry email
+        {t('contact.prepareEmail')}
       </button>
     </form>
   )

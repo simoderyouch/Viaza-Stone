@@ -99,6 +99,14 @@ textarea:focus {
   font-family: Georgia, 'Times New Roman', serif;
 }
 
+html[dir='rtl'] body {
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+html[dir='rtl'] .font-display {
+  font-family: Tahoma, Arial, sans-serif;
+}
+
 .eyebrow {
   color: var(--blue);
   font-size: 0.7rem;

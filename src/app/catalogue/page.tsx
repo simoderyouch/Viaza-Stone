@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { CatalogueBrowser } from '@/components/catalogue-browser'
+import { ProductCard } from '@/components/product-card'
 import { SectionHeading } from '@/components/section-heading'
+import { collectionPages, materialCollections } from '@/data/collections'
 import { products } from '@/data/products'
 
 export const metadata: Metadata = {
@@ -10,17 +11,11 @@ export const metadata: Metadata = {
   description: 'Search the Viaza Stone collection of Taza limestone and premium Moroccan marble.',
 }
 
-export default async function CataloguePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ material?: string; type?: string; q?: string }>
-}) {
-  const { material, type, q } = await searchParams
-
+export default function CataloguePage() {
   return (
     <>
       <section className="relative isolate overflow-hidden bg-stone-900 px-5 pb-16 pt-42 lg:px-8 lg:pb-20 lg:pt-48">
-        <Image src="/images/showcase/ns-featured-101.jpeg" alt="Natural stone slab detail" fill priority sizes="100vw" className="object-cover" />
+        <Image src="/images/viaza-biege-header-image.jpeg" alt="Viaza Beige natural stone" fill priority sizes="100vw" className="object-cover" />
         <div className="absolute inset-0 bg-black/70" />
         <div className="relative mx-auto max-w-7xl text-white">
           <p className="text-[0.7rem] font-bold tracking-[0.19em] text-[#d4c5aa] uppercase">Live collection</p>
@@ -35,11 +30,33 @@ export default async function CataloguePage({
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Find the right surface"
-            title="Browse the collection"
-            description="Use the filters to narrow a material direction, then open each surface for its formats, finish directions, applications, and enquiry links."
+            title="Find your own finish"
+            description="Explore the complete Viaza Stone range by material type, then open a surface to view its finishes, applications, and enquiry details."
           />
-          <div className="mt-10">
-            <CatalogueBrowser products={products} initialMaterial={material} initialType={type} initialQuery={q} />
+          <div className="mt-12 space-y-18">
+            {materialCollections.map((materialCollection) => {
+              const collectionSlug = materialCollection.href.split('/').pop()
+              const collection = collectionPages.find((page) => page.slug === collectionSlug)
+
+              if (!collection) return null
+
+              const collectionProducts = 'productNamePrefix' in collection
+                ? products.filter((product) => product.name.startsWith(collection.productNamePrefix))
+                : products.filter((product) => product.material === collection.material)
+
+              return (
+                <section key={materialCollection.name} className="border-t border-stone-200 pt-8 sm:pt-10">
+                  <div className="max-w-2xl">
+                    <p className="text-[0.7rem] font-bold tracking-[0.19em] text-[#a0937b] uppercase">Collection</p>
+                    <h2 className="font-display mt-3 text-3xl leading-tight text-[#292b2c] sm:text-4xl">{materialCollection.name}</h2>
+                    <p className="mt-3 leading-7 text-stone-600">{materialCollection.description}</p>
+                  </div>
+                  <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+                    {collectionProducts.map((product) => <ProductCard key={product.slug} product={product} />)}
+                  </div>
+                </section>
+              )
+            })}
           </div>
         </div>
       </section>

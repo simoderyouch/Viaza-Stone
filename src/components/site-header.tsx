@@ -5,7 +5,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
 import { type FormEvent, useEffect, useState } from 'react'
+import { LanguageSwitcher } from '@/components/language-switcher'
+import { useLocale } from '@/components/locale-provider'
 import {
+  materialCollections,
   primaryNavigation as primaryLinks,
   utilityNavigation,
 } from '@/data/collections'
@@ -15,10 +18,17 @@ const floatingLinks = [
   ...utilityNavigation,
 ]
 
+const collectionLinks = [
+  ...materialCollections.map(({ name, href }) => ({ label: name, href })),
+  { label: 'All collections', href: '/catalogue' },
+]
+
 export function SiteHeader() {
   const router = useRouter()
+  const { t } = useLocale()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [collectionsOpen, setCollectionsOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
 
@@ -64,14 +74,15 @@ export function SiteHeader() {
         <div className="mx-auto max-w-7xl ">
           <div className="grid h-[96px] grid-cols-[1fr_auto_1fr] items-center px-8">
             <div className="flex items-center justify-center gap-7 text-[15px] font-light leading-[20px]">
-              {primaryLinks.slice(0, 2).map((link) => <NavLink key={link.label} href={link.href}>{link.label}</NavLink>)}
+              {primaryLinks.slice(0, 2).map((link) => <HeaderNavigationLink key={link.label} href={link.href}>{link.label}</HeaderNavigationLink>)}
             </div>
             <Link href="/" aria-label="Viaza Stone home" className="justify-self-center">
               <Image src="/images/brand/viaza-stone-logo-white.png" alt="Viaza Stone" width={1992} height={521} priority className="h-auto w-[250px]" />
             </Link>
             <div className="flex items-center justify-center gap-7 text-[15px] font-light leading-[20px]">
               {floatingLinks.slice(2).map((link) => <NavLink key={link.label} href={link.href}>{link.label}</NavLink>)}
-              <button type="button" aria-label="Search the collection" onClick={() => setSearchOpen(true)} className="transition hover:text-[#d4c5aa]">
+              <LanguageSwitcher />
+              <button type="button" aria-label={t('nav.search')} onClick={() => setSearchOpen(true)} className="transition hover:text-[#d4c5aa]">
                 <SearchIcon />
               </button>
             </div>
@@ -89,9 +100,10 @@ export function SiteHeader() {
           </Link>
           <ul className="flex flex-1 items-center justify-end gap-9 text-[17px] font-light">
             {floatingLinks.map((link) => (
-              <li key={link.label}><NavLink href={link.href}>{link.label}</NavLink></li>
+              <li key={link.label}><HeaderNavigationLink href={link.href}>{link.label}</HeaderNavigationLink></li>
             ))}
-            <li><button type="button" aria-label="Search the collection" onClick={() => setSearchOpen(true)} className="transition hover:text-[#d4c5aa]"><SearchIcon /></button></li>
+            <li><LanguageSwitcher /></li>
+            <li><button type="button" aria-label={t('nav.search')} onClick={() => setSearchOpen(true)} className="transition hover:text-[#d4c5aa]"><SearchIcon /></button></li>
           </ul>
         </div>
       </nav>
@@ -103,12 +115,12 @@ export function SiteHeader() {
           </Link>
           <button
             type="button"
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-label={mobileOpen ? t('nav.closeMenu') : t('nav.openMenu')}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((open) => !open)}
             className="grid size-10 place-items-center border border-white/60"
           >
-            <span className="sr-only">Menu</span>
+              <span className="sr-only">{t('nav.openMenu')}</span>
             <span className="grid gap-1.5">
               <span className={`h-px w-5 bg-white transition ${mobileOpen ? 'translate-y-[7px] rotate-45' : ''}`} />
               <span className={`h-px w-5 bg-white transition ${mobileOpen ? 'opacity-0' : ''}`} />
@@ -123,7 +135,7 @@ export function SiteHeader() {
           <>
             <motion.button
               type="button"
-              aria-label="Close menu"
+              aria-label={t('nav.closeMenu')}
               onClick={() => setMobileOpen(false)}
               className="fixed inset-0 top-20 -z-10 bg-black/55 backdrop-blur-sm lg:hidden"
               initial={{ opacity: 0 }}
@@ -143,7 +155,7 @@ export function SiteHeader() {
             >
               <div className="border-b border-white/15 bg-linear-to-r from-white/8 to-transparent px-6 py-5">
                 <p className="text-[0.62rem] font-light tracking-[0.2em] text-[#d4c5aa] uppercase">Viaza Stone</p>
-                <p className="mt-2 font-display text-2xl text-white">Natural stone for distinctive projects.</p>
+                <p className="mt-2 font-display text-2xl text-white">{t('nav.naturalStone')}</p>
               </div>
               <motion.ul
                 className="px-6 py-3"
@@ -158,15 +170,48 @@ export function SiteHeader() {
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     className="border-b border-white/10 last:border-0"
                   >
-                    <Link href={link.href} onClick={() => setMobileOpen(false)} className="flex items-center justify-between py-4 text-[0.8rem] font-light tracking-[0.14em] text-white uppercase transition hover:pl-1 hover:text-[#d4c5aa]">
-                      {link.label}<span aria-hidden="true" className="text-lg font-light">→</span>
-                    </Link>
+                    {link.label === 'Collections' ? (
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => setCollectionsOpen((open) => !open)}
+                          aria-expanded={collectionsOpen}
+                          className="flex w-full items-center justify-between py-4 text-left text-[0.8rem] font-light tracking-[0.14em] text-white uppercase transition hover:pl-1 hover:text-[#d4c5aa]"
+                        >
+                          {t('nav.collections')} <ChevronDown className={`transition-transform ${collectionsOpen ? 'rotate-180' : ''}`} />
+                        </button>
+                        <AnimatePresence initial={false}>
+                          {collectionsOpen && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="overflow-hidden border-t border-white/10"
+                            >
+                              {collectionLinks.map((collection) => (
+                                <Link key={collection.href} href={collection.href} onClick={() => setMobileOpen(false)} className="flex items-center justify-between py-3 pl-4 text-[0.7rem] font-light tracking-[0.12em] text-stone-300 uppercase transition hover:text-[#d4c5aa]">
+                                  {collection.label === 'All collections' ? t('nav.allCollections') : collection.label}<span aria-hidden="true">→</span>
+                                </Link>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </>
+                    ) : (
+                      <Link href={link.href} onClick={() => setMobileOpen(false)} className="flex items-center justify-between py-4 text-[0.8rem] font-light tracking-[0.14em] text-white uppercase transition hover:pl-1 hover:text-[#d4c5aa]">
+                        {navigationLabel(link.label, t)}<span aria-hidden="true" className="text-lg font-light">→</span>
+                      </Link>
+                    )}
                   </motion.li>
                 ))}
               </motion.ul>
+              <div className="border-t border-white/15 px-6 py-4">
+                <LanguageSwitcher compact />
+              </div>
               <div className="border-t border-white/15 bg-white/5 p-6">
-                <p className="text-sm leading-6 text-stone-300">Have plans, drawings, or a material direction? Start an enquiry with our team.</p>
-                <Link href="/contact" onClick={() => setMobileOpen(false)} className="button-primary mt-5 w-full">Contact / Request a Quote</Link>
+                <p className="text-sm leading-6 text-stone-300">{t('footer.connectCopy')}</p>
+                <Link href="/contact" onClick={() => setMobileOpen(false)} className="button-primary mt-5 w-full">{t('nav.contact')}</Link>
               </div>
             </motion.div>
           </>
@@ -193,25 +238,25 @@ export function SiteHeader() {
             >
               <div className="flex items-start justify-between gap-6">
                 <div>
-                  <p className="text-[0.63rem] font-light tracking-[0.2em] text-[#d4c5aa] uppercase">Material search</p>
-                  <h2 id="catalogue-search-title" className="font-display mt-2 text-3xl sm:text-4xl">Find a surface</h2>
+                  <p className="text-[0.63rem] font-light tracking-[0.2em] text-[#d4c5aa] uppercase">{t('nav.materialSearch')}</p>
+                  <h2 id="catalogue-search-title" className="font-display mt-2 text-3xl sm:text-4xl">{t('nav.findSurface')}</h2>
                 </div>
-                <button type="button" onClick={() => setSearchOpen(false)} className="grid size-10 shrink-0 place-items-center border border-white/40 text-xl transition hover:border-white" aria-label="Close search">×</button>
+                <button type="button" onClick={() => setSearchOpen(false)} className="grid size-10 shrink-0 place-items-center border border-white/40 text-xl transition hover:border-white" aria-label={t('nav.closeMenu')}>×</button>
               </div>
               <form onSubmit={submitSearch} className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <label className="sr-only" htmlFor="catalogue-search">Search the catalogue</label>
+                <label className="sr-only" htmlFor="catalogue-search">{t('nav.searchCatalogue')}</label>
                 <input
                   id="catalogue-search"
                   type="search"
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
-                  placeholder="Search a stone, colour, or material"
+                  placeholder={t('nav.searchPlaceholder')}
                   autoFocus
                   className="min-w-0 flex-1 border border-white/35 bg-white px-4 py-3 text-sm text-[#292b2c] placeholder:text-stone-500"
                 />
-                <button type="submit" className="button-primary bg-[#a0937b] hover:bg-[#8b806d]">Search catalogue</button>
+                <button type="submit" className="button-primary bg-[#a0937b] hover:bg-[#8b806d]">{t('nav.searchCatalogue')}</button>
               </form>
-              <p className="mt-5 text-sm leading-6 text-stone-300">Try “marble”, “travertine”, “white”, or a material name from the collection.</p>
+              <p className="mt-5 text-sm leading-6 text-stone-300">{t('nav.searchHint')}</p>
             </motion.div>
           </motion.div>
         )}
@@ -222,6 +267,44 @@ export function SiteHeader() {
 
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return <Link href={href} className="transition hover:text-[#d4c5aa]">{children}</Link>
+}
+
+function HeaderNavigationLink({ href, children }: { href: string; children: React.ReactNode }) {
+  const { t } = useLocale()
+  if (children !== 'Collections') return <NavLink href={href}>{navigationLabel(String(children), t)}</NavLink>
+
+  return (
+    <div className="group relative">
+      <Link href={href} className="inline-flex items-center gap-1.5 transition hover:text-[#d4c5aa]">
+        {t('nav.collections')} <ChevronDown />
+      </Link>
+      <div className="invisible absolute left-1/2 top-full w-60 -translate-x-1/2 pt-5 opacity-0 transition duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+        <div className="border border-white/15 bg-[#242424]/98 p-2 shadow-2xl shadow-black/30 backdrop-blur-sm">
+          {collectionLinks.map((collection) => (
+            <Link key={collection.href} href={collection.href} className="flex items-center justify-between px-4 py-3 text-[0.66rem] font-light tracking-[0.13em] text-stone-200 uppercase transition hover:bg-white/8 hover:text-[#d4c5aa]">
+              {collection.label === 'All collections' ? t('nav.allCollections') : collection.label}<span aria-hidden="true">→</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function navigationLabel(label: string, t: ReturnType<typeof useLocale>['t']) {
+  if (label === 'Collections') return t('nav.collections')
+  if (label === 'Applications') return t('nav.applications')
+  if (label === 'About Us') return t('nav.about')
+  if (label === 'Contact / Request a Quote') return t('nav.contact')
+  return label
+}
+
+function ChevronDown({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+      <path d="m2.5 4.25 3.5 3.5 3.5-3.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
 }
 
 function SearchIcon() {

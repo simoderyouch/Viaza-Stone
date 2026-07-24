@@ -45,7 +45,7 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
           </Link>
           <div className="mt-7 grid items-start gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16">
             <div className="relative aspect-[5/4] overflow-hidden bg-stone-200">
-              <Image src={product.image} alt={product.name} fill priority sizes="(max-width: 1024px) 100vw, 58vw" className="object-cover" />
+              <Image data-no-translate src={product.image} alt={product.name} fill priority sizes="(max-width: 1024px) 100vw, 58vw" className="object-cover" />
             </div>
             {product.gallery.length > 0 && (
               <div className="mt-4 grid grid-cols-3 gap-3">
@@ -58,7 +58,7 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
             )}
             <div className="lg:pt-4">
               <p className="text-[0.68rem] font-bold tracking-[0.18em] text-[#282828] uppercase">{product.type} · {product.material}</p>
-              <h1 className="font-display mt-4 text-5xl leading-tight text-[#292b2c] sm:text-6xl">{product.name}</h1>
+              <h1 data-no-translate className="font-display mt-4 text-5xl leading-tight text-[#292b2c] sm:text-6xl">{product.name}</h1>
               <p className="mt-5 max-w-xl text-base leading-7 text-stone-700">{product.description}</p>
               <p className="mt-6 inline-flex border-y border-stone-300 py-3 text-sm font-semibold text-[#282828]">{product.availability}</p>
               <dl className="mt-8 grid gap-x-7 gap-y-5 border-t border-stone-300 pt-6 sm:grid-cols-2">

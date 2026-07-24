@@ -1,6 +1,10 @@
 import type { Metadata } from 'next'
 import { Footer } from '@/components/footer'
+import { ContentLocalizer } from '@/components/content-localizer'
+import { LocaleProvider } from '@/components/locale-provider'
 import { SiteHeader } from '@/components/site-header'
+import { localeDetails } from '@/i18n/config'
+import { getRequestLocale } from '@/i18n/server'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -15,13 +19,18 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const locale = await getRequestLocale()
+
   return (
-    <html lang="en">
+    <html lang={locale} dir={localeDetails[locale].direction} suppressHydrationWarning>
       <body>
-        <SiteHeader />
-        <main>{children}</main>
-        <Footer />
+        <LocaleProvider locale={locale}>
+          <SiteHeader />
+          <main>{children}</main>
+          <Footer />
+          <ContentLocalizer />
+        </LocaleProvider>
       </body>
     </html>
   )

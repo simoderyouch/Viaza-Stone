@@ -10,9 +10,16 @@ export type Product = {
   color: string
   origin: string
   image: string
+  largeHeroImage?: boolean
   thumbnail: string
   applicationImage: string
   gallery: string[]
+  detailHeading?: string
+  stoneDetails?: { label: string; value: string; icon: StoneDetailIcon }[]
+  applicationEyebrow?: string
+  applicationTitle?: string
+  applicationDescription?: string
+  applicationImageFit?: 'cover' | 'contain'
   description: string
   availability: string
   finishes: string[]
@@ -20,6 +27,8 @@ export type Product = {
   applications: string[]
   note: string
 }
+
+export type StoneDetailIcon = 'material' | 'origin' | 'finish' | 'dimensions' | 'thickness' | 'availability'
 
 const isViazaProduct = (slug: string) => slug.startsWith('viaza-')
 const originalViazaImageSlugs = new Set([
@@ -48,7 +57,16 @@ function createProduct({
   finish,
   applications,
   image,
+  largeHeroImage,
   thumbnail,
+  gallery,
+  applicationImage: productApplicationImage,
+  applicationEyebrow,
+  applicationTitle,
+  applicationDescription,
+  applicationImageFit,
+  detailHeading,
+  stoneDetails,
 }: {
   name: string
   slug: string
@@ -59,7 +77,16 @@ function createProduct({
   finish: string
   applications: string[]
   image?: string
+  largeHeroImage?: boolean
   thumbnail?: string
+  gallery?: string[]
+  applicationImage?: string
+  applicationEyebrow?: string
+  applicationTitle?: string
+  applicationDescription?: string
+  applicationImageFit?: Product['applicationImageFit']
+  detailHeading?: string
+  stoneDetails?: Product['stoneDetails']
 }): Product {
   const selectionNote = name.startsWith('Viaza Beige')
     ? 'Viaza Beige is a noble, robust Moroccan limestone prized for luminous tones, timeless elegance, high density, and excellent weather resistance. Confirm the selected sample, finish, and format before final approval.'
@@ -75,9 +102,16 @@ function createProduct({
     color,
     origin: type === 'Viaza Limestone' ? 'Taza, Morocco' : 'Morocco',
     image: image ?? detailImage(slug),
+    largeHeroImage,
     thumbnail: thumbnail ?? thumbnailImage(slug),
-    applicationImage: applicationImage(slug),
-    gallery: [],
+    applicationImage: productApplicationImage ?? applicationImage(slug),
+    gallery: gallery ?? [],
+    applicationEyebrow,
+    applicationTitle,
+    applicationDescription,
+    applicationImageFit,
+    detailHeading,
+    stoneDetails,
     description,
     availability: 'Enquire for availability',
     finishes: [finish],
@@ -88,8 +122,60 @@ function createProduct({
 }
 
 export const products: Product[] = [
-  createProduct({ name: 'Viaza Beige Bush-Hammered', slug: 'viaza-beige-bush-hammered', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', finish: 'Bush-Hammered', applications: beigeApplications, description: 'High-density Viaza Beige limestone with a textured bush-hammered finish that adds grip and depth.' }),
-  createProduct({ name: 'Viaza Beige Raw', slug: 'viaza-beige-raw', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', finish: 'Raw', applications: beigeApplications, description: 'High-density Viaza Beige limestone in an untreated finish that preserves its authentic natural texture.' }),
+  createProduct({
+    name: 'Viaza Beige Bush-Hammered',
+    slug: 'viaza-beige-bush-hammered',
+    type: 'Viaza Limestone',
+    material: 'Limestone',
+    color: 'Luminous Beige',
+    finish: 'Bush-Hammered',
+    applications: beigeApplications,
+    // Keep the catalogue preview image unchanged; these V3 assets are for the product page only.
+    image: '/images/products/v3/Viaza-Beige-Bush-Hammered.png',
+    largeHeroImage: true,
+    applicationImage: '/images/products/v3/Viaza-Beige-Bush-Hammered2.png',
+    applicationEyebrow: 'Material presentation',
+    applicationTitle: 'A closer look at the bush-hammered finish.',
+    applicationDescription: 'Made-to-order VIAZA Limestone Beige tiles reveal the tactile texture, soft tonal movement, and substantial profile of the material.',
+    applicationImageFit: 'contain',
+    detailHeading: 'VIAZA Limestone – Bush-Hammered Finish',
+    description: 'With its bush-hammered finish, VIAZA Limestone Beige reveals the authentic beauty of Moroccan natural stone through a richly textured surface. Its soft tonal variations, tactile character, and timeless appeal make it an exceptional choice for architectural projects seeking durability, grip, and natural elegance.',
+    stoneDetails: [
+      { label: 'Material', value: 'Limestone', icon: 'material' },
+      { label: 'Collection origin', value: 'Morocco', icon: 'origin' },
+      { label: 'Finish', value: 'Bush-Hammered', icon: 'finish' },
+      { label: 'Tile Dimensions', value: 'Made To Order', icon: 'dimensions' },
+      { label: 'Thickness variation', value: '+/- 20-50 mm', icon: 'thickness' },
+      { label: 'Availability', value: 'Enquire for availability', icon: 'availability' },
+    ],
+  }),
+  createProduct({
+    name: 'Viaza Beige Raw',
+    slug: 'viaza-beige-raw',
+    type: 'Viaza Limestone',
+    material: 'Limestone',
+    color: 'Luminous Beige',
+    finish: 'Raw',
+    applications: beigeApplications,
+    // Keep the catalogue preview image unchanged; these V3 assets are for the product page only.
+    image: '/images/products/v3/Viaza-Beige-Raw.png',
+    largeHeroImage: true,
+    applicationImage: '/images/products/v3/Viaza-Beige-Raw-2.png',
+    applicationEyebrow: 'Material presentation',
+    applicationTitle: 'A closer look at the raw finish.',
+    applicationDescription: 'Made-to-order VIAZA Limestone Beige tiles reveal the natural texture, soft tonal movement, and substantial profile of the material.',
+    applicationImageFit: 'contain',
+    detailHeading: 'VIAZA Limestone – Natural Finish',
+    description: 'In its raw state, VIAZA Limestone Beige reveals the authentic beauty of Moroccan natural stone. Its original texture, soft tonal variations, and timeless character make it an exceptional choice for architectural projects seeking purity, durability, and natural elegance.',
+    stoneDetails: [
+      { label: 'Material', value: 'Limestone', icon: 'material' },
+      { label: 'Collection origin', value: 'Morocco', icon: 'origin' },
+      { label: 'Finish', value: 'Raw', icon: 'finish' },
+      { label: 'Tile Dimensions', value: 'Made To Order', icon: 'dimensions' },
+      { label: 'Thickness variation', value: '+/- 20-50 mm', icon: 'thickness' },
+      { label: 'Availability', value: 'Enquire for availability', icon: 'availability' },
+    ],
+  }),
   createProduct({ name: 'Viaza Beige Polished', slug: 'viaza-beige-polished', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', finish: 'Polished', applications: beigeApplications, description: 'High-density Viaza Beige limestone in a polished finish that highlights its luminous colour and natural movement.' }),
   createProduct({ name: 'Viaza Beige Rustic', slug: 'viaza-beige-rustic', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', finish: 'Rustic', applications: beigeApplications, description: 'High-density Viaza Beige limestone with a naturally textured rustic finish and warm, timeless character.' }),
   createProduct({ name: 'Viaza Beige Light Bush-Ham', slug: 'viaza-beige-light-bush-ham', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', finish: 'Light Bush-Ham', applications: beigeApplications, description: 'High-density Viaza Beige limestone with a gently textured finish for soft grip and an elegant natural look.' }),

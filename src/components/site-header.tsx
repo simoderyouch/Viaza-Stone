@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
 import { type FormEvent, useEffect, useState } from 'react'
 import { LanguageSwitcher } from '@/components/language-switcher'
@@ -25,7 +25,9 @@ const collectionLinks = [
 
 export function SiteHeader() {
   const router = useRouter()
+  const pathname = usePathname()
   const { t } = useLocale()
+  const isCollectionPage = pathname.includes('/collections/')
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [collectionsOpen, setCollectionsOpen] = useState(false)
@@ -69,7 +71,7 @@ export function SiteHeader() {
     <header className="fixed inset-x-0 top-0 z-50 text-white">
       <nav
         aria-label="Primary navigation"
-        className={`hidden bg-[#282828]/[.65] backdrop-blur-[0.08px] transition-all duration-300 lg:block ${isScrolled ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}
+        className={`hidden ${isCollectionPage ? 'bg-black/95' : 'bg-[#282828]/[.65]'} backdrop-blur-[0.08px] transition-all duration-300 lg:block ${isScrolled ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}
       >
         <div className="mx-auto max-w-7xl ">
           <div className="grid h-[96px] grid-cols-[1fr_auto_1fr] items-center px-8">
@@ -92,7 +94,7 @@ export function SiteHeader() {
 
       <nav
         aria-label="Compact navigation"
-        className={`absolute inset-x-0 top-0 hidden h-[96px] bg-[#282828]/[.52] backdrop-blur-[0.08px] transition-transform duration-300 lg:block ${isScrolled ? 'translate-y-0' : '-translate-y-full'}`}
+        className={`absolute inset-x-0 top-0 hidden h-[96px] ${isCollectionPage ? 'bg-black/95' : 'bg-[#282828]/[.52]'} backdrop-blur-[0.08px] transition-transform duration-300 lg:block ${isScrolled ? 'translate-y-0' : '-translate-y-full'}`}
       >
         <div className="mx-auto flex h-full max-w-7xl items-center gap-10 px-8">
           <Link href="/" aria-label="Viaza Stone home" className="shrink-0">
@@ -108,7 +110,7 @@ export function SiteHeader() {
         </div>
       </nav>
 
-      <nav aria-label="Mobile navigation" className={`border-b border-white/15 transition-colors lg:hidden ${isScrolled || mobileOpen ? 'bg-[#282828]' : 'bg-black/40'}`}>
+      <nav aria-label="Mobile navigation" className={`border-b border-white/15 transition-colors lg:hidden ${isCollectionPage || isScrolled || mobileOpen ? 'bg-black/95' : 'bg-black/40'}`}>
         <div className="flex h-20 items-center justify-between px-5">
           <Link href="/" aria-label="Viaza Stone home">
             <Image src="/images/brand/viaza-stone-logo-white.png" alt="Viaza Stone" width={1992} height={521} priority className="h-auto w-44" />

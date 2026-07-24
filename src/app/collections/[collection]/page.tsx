@@ -41,9 +41,9 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
 
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-stone-900 px-5 pb-16 pt-42 lg:px-8 lg:pb-20 lg:pt-48">
+      <section className="relative isolate mt-20 overflow-hidden bg-stone-900 px-5 pb-16 pt-22 lg:mt-24 lg:px-8 lg:pb-20 lg:pt-28">
         <Image src={collection.image} alt={`${collection.title} natural stone`} fill priority sizes="100vw" className="object-cover" />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-linear-to-r from-black/60 via-black/60 via-40% to-transparent to-55%" />
         <div className="relative mx-auto max-w-7xl text-white">
           <p className="text-[0.7rem] font-bold tracking-[0.19em] text-[#d4c5aa] uppercase">{collection.eyebrow}</p>
           <h1 className="font-display mt-4 text-5xl sm:text-6xl">{collection.title}</h1>

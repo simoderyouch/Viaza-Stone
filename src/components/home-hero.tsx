@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { useState } from 'react'
 import { useLocale } from '@/components/locale-provider'
 
@@ -14,6 +14,7 @@ function getHeroMessageIndex(currentTime: number) {
 export function HomeHero() {
   const { scrollY } = useScroll()
   const { t } = useLocale()
+  const reduceMotion = useReducedMotion()
   const [messageIndex, setMessageIndex] = useState(0)
   const mediaScale = useTransform(scrollY, [0, 850], [1, 1.12])
   const contentY = useTransform(scrollY, [0, 700], [0, 92])
@@ -25,9 +26,17 @@ export function HomeHero() {
   }
 
   const heroMessages = [t('hero.message1'), t('hero.message2'), t('hero.message3')]
+  const contentVariants = {
+    hidden: {},
+    visible: { transition: { delayChildren: 0.12, staggerChildren: 0.14 } },
+  }
+  const itemVariants = {
+    hidden: { opacity: 0, y: 22 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const } },
+  }
 
   return (
-    <section className="relative isolate h-[97vh] min-h-160 overflow-hidden bg-stone-950">
+    <section className="relative isolate min-h-[100dvh] overflow-hidden bg-stone-950">
       <motion.div style={{ scale: mediaScale }} className="absolute -inset-8" aria-hidden="true">
         <video
           autoPlay
@@ -44,32 +53,33 @@ export function HomeHero() {
         <div className="absolute inset-0 bg-black/65" />
         <div className="absolute inset-0 bg-linear-to-r from-black/30 via-transparent to-black/10" />
       </motion.div>
-      <motion.div style={{ y: contentY, opacity: contentOpacity }} className="relative mx-auto flex h-full max-w-7xl items-center px-5 py-10 lg:px-8">
-        <div className="w-full max-w-2xl text-white">
-          <p className="text-[0.7rem] font-bold tracking-[0.19em] text-[#d4c5aa] uppercase">{t('hero.brand')}</p>
-          <div className="mt-5" aria-live="polite">
+      <motion.div style={{ y: contentY, opacity: contentOpacity }} className="relative mx-auto flex min-h-[100dvh] max-w-7xl items-center px-5 pb-16 pt-28 lg:px-8 lg:pb-20 lg:pt-32">
+        <motion.div
+          className="w-full max-w-4xl text-white"
+          variants={contentVariants}
+          initial={reduceMotion ? false : 'hidden'}
+          animate={reduceMotion ? undefined : 'visible'}
+        >
+          <motion.p variants={itemVariants} className="border-l border-[#d4c5aa] pl-4 text-[0.7rem] font-bold tracking-[0.22em] text-[#d4c5aa] uppercase">{t('hero.brand')}</motion.p>
+          <motion.div variants={itemVariants} className="mt-7" aria-live="polite">
             <AnimatePresence mode="wait">
               <motion.h1
                 key={messageIndex}
-                initial={{ opacity: 0, y: 18 }}
+                initial={reduceMotion || messageIndex === 0 ? false : { opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -18 }}
-                transition={{ duration: 0.55, ease: 'easeOut' }}
-                className="font-display max-w-2xl text-3xl leading-[1.12] tracking-[-0.018em] [text-shadow:0_6px_26px_rgba(0,0,0,0.55)] sm:text-4xl lg:text-[3.35rem]"
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                className="font-display max-w-4xl text-4xl leading-[1.02] tracking-[-0.035em] [text-shadow:0_8px_30px_rgba(0,0,0,0.5)] sm:text-5xl lg:text-[clamp(3.65rem,5.25vw,5.9rem)]"
               >
                 {heroMessages[messageIndex]}
               </motion.h1>
             </AnimatePresence>
-          </div>
-          <div className="mt-6 flex flex-wrap gap-3">
+          </motion.div>
+          <motion.div variants={itemVariants} className="mt-9 flex flex-wrap gap-3">
             <Link href="/contact" className="button-primary">{t('hero.contact')}</Link>
             <Link href="/catalogue" className="button-secondary text-white">{t('hero.explore')}</Link>
-          </div>
-        </div>
-      </motion.div>
-      <motion.div aria-hidden="true" initial={{ opacity: 0 }} animate={{ opacity: 0.9 }} transition={{ delay: 0.8, duration: 0.6 }} className="absolute bottom-6 left-7 hidden items-center gap-3 text-[0.62rem] font-light tracking-[0.16em] text-white uppercase lg:flex">
-        <span>{t('hero.scroll')}</span>
-        <motion.span animate={{ y: [0, 5, 0] }} transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}>↓</motion.span>
+          </motion.div>
+        </motion.div>
       </motion.div>
     </section>
   )

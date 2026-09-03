@@ -12,9 +12,9 @@ export const catalogueCategories = [
 export type ProductType = (typeof catalogueCategories)[number]['value']
 
 export const materialCollections = [
-  { name: 'Viaza Beige', href: '/collections/viaza-beige', tagline: 'Luminous tones. Timeless natural elegance.', image: '/images/products/applications/viaza-beige-polished.webp', description: 'A noble, robust Moroccan limestone with high density and weather resistance for refined interiors and exterior architecture.' },
-  { name: 'Viaza Grey', href: '/collections/viaza-grey', tagline: 'Refined grey tones. Strong architectural character.', image: '/images/products/applications/viaza-grey-polished.webp', description: 'A premium Moroccan limestone with sophisticated grey tones, low maintenance, and resistance to moisture and changing weather.' },
-  { name: 'Travertine', href: '/collections/travertine', tagline: 'The Essence of Earth.', image: '/images/products/applications/travertine-atlas.webp', description: 'Moroccan travertine shaped over millions of years, defined by warm tones, mineral structure, and natural individuality.' },
+  { name: 'Viaza Beige', href: '/collections/viaza-beige', tagline: 'Luminous tones. Timeless natural elegance.', image: '/images/collections/viaza-beige-category.jpeg', description: 'A noble, robust Moroccan limestone with high density and weather resistance for refined interiors and exterior architecture.', lightText: true },
+  { name: 'Viaza Grey', href: '/collections/viaza-grey', tagline: 'Refined grey tones. Strong architectural character.', image: '/images/collections/viaza-grey-category.png', description: 'A premium Moroccan limestone with sophisticated grey tones, low maintenance, and resistance to moisture and changing weather.', lightText: true },
+  { name: 'Travertine', href: '/collections/travertine', tagline: 'The Essence of Earth.', image: '/images/collections/travertine-category.jpeg', description: 'Moroccan travertine shaped over millions of years, defined by warm tones, mineral structure, and natural individuality.', lightText: true },
   { name: 'Moroccan Marble', href: '/collections/moroccan-marble', tagline: 'Sculpted by time. Designed for enduring spaces.', image: '/images/products/applications/limane-grey-purple.webp', description: 'Premium Moroccan marbles with distinctive mineral structures, organic patterns, rich pigmentation, and individual veining.' },
 ] as const
 

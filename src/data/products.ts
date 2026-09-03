@@ -320,11 +320,10 @@ const productDisplayOrder = [
 
 const productDisplayPriority = new Map(productDisplayOrder.map((slug, index) => [slug, index]))
 
-// A published product needs the complete visual story: main image, detail image,
-// and application image. Entries without a gallery image remain in the source
-// data until their full image set is ready, but are not shown on the website.
+// Viaza Limestone entries need the complete visual story before publishing.
+// Travertine and Moroccan Marble retain their existing two-image product pages.
 export const products = allProducts
-  .filter((product) => product.gallery.length > 0)
+  .filter((product) => product.gallery.length > 0 || product.type === 'Moroccan Marble')
   .sort((first, second) => (productDisplayPriority.get(first.slug) ?? Number.MAX_SAFE_INTEGER) - (productDisplayPriority.get(second.slug) ?? Number.MAX_SAFE_INTEGER))
 
 export function getProductBySlug(slug: string) {

@@ -3,10 +3,8 @@
 import { useMemo, useState } from 'react'
 import { CustomSelect } from '@/components/custom-select'
 import { ProductCard } from '@/components/product-card'
-import { catalogueCategories, type ProductType } from '@/data/collections'
+import { getAvailableCatalogueCategories, type ProductType } from '@/data/collections'
 import type { Product } from '@/data/products'
-
-const productTypes: Array<'All' | ProductType> = ['All', ...catalogueCategories.map((category) => category.value)]
 
 export function CatalogueBrowser({
   products,
@@ -19,6 +17,8 @@ export function CatalogueBrowser({
   initialType?: string
   initialQuery?: string
 }) {
+  const availableCategories = useMemo(() => getAvailableCatalogueCategories(products), [products])
+  const productTypes: Array<'All' | ProductType> = ['All', ...availableCategories.map((category) => category.value)]
   const validInitialType = productTypes.includes(initialType as ProductType) ? initialType as (typeof productTypes)[number] : 'All'
   const validInitialMaterial = ['All', ...products.map((product) => product.material)].includes(initialMaterial) ? initialMaterial : 'All'
   const [selectedType, setSelectedType] = useState<(typeof productTypes)[number]>(validInitialType)
@@ -57,7 +57,7 @@ export function CatalogueBrowser({
             onChange={(value) => setSelectedType(value as (typeof productTypes)[number])}
             options={[
               { value: 'All', label: 'All product types' },
-              ...catalogueCategories.map((category) => ({ value: category.value, label: category.label })),
+              ...availableCategories.map((category) => ({ value: category.value, label: category.label })),
             ]}
           />
         </div>

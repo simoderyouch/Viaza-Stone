@@ -8,10 +8,11 @@ import { type FormEvent, useEffect, useState } from 'react'
 import { LanguageSwitcher } from '@/components/language-switcher'
 import { useLocale } from '@/components/locale-provider'
 import {
-  materialCollections,
+  getAvailableMaterialCollections,
   primaryNavigation as primaryLinks,
   utilityNavigation,
 } from '@/data/collections'
+import { products } from '@/data/products'
 
 const floatingLinks = [
   ...primaryLinks,
@@ -19,7 +20,7 @@ const floatingLinks = [
 ]
 
 const collectionLinks = [
-  ...materialCollections.map(({ name, href }) => ({ label: name, href })),
+  ...getAvailableMaterialCollections(products).map(({ name, href }) => ({ label: name, href })),
   { label: 'All collections', href: '/catalogue' },
 ]
 

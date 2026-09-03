@@ -33,7 +33,7 @@ export const collectionPages = [
     title: 'Viaza Grey',
     description: 'A measured grey expression that brings calm, depth, and lasting architectural character to every space.',
     image: '/images/products/applications/viaza-grey-polished.webp',
-    productNamePrefix: 'Viaza Grey',
+    productNamePrefixes: ['Viaza Grey', 'Viaza Aldo', 'Viaza Blue'],
   },
   {
     slug: 'travertine',
@@ -57,6 +57,47 @@ export function getCollectionPage(slug: string) {
   return collectionPages.find((collection) => collection.slug === slug)
 }
 
+type CollectionProduct = {
+  name: string
+  material: string
+  type: ProductType
+}
+
+function hasProductsForCollection(
+  collection: (typeof collectionPages)[number],
+  products: readonly CollectionProduct[],
+) {
+  return products.some((product) => matchesCollectionProduct(collection, product))
+}
+
+export function matchesCollectionProduct(
+  collection: (typeof collectionPages)[number],
+  product: Pick<CollectionProduct, 'name' | 'material'>,
+) {
+  if ('productNamePrefixes' in collection) {
+    return collection.productNamePrefixes.some((prefix) => product.name.startsWith(prefix))
+  }
+
+  if ('productNamePrefix' in collection) {
+    return product.name.startsWith(collection.productNamePrefix)
+  }
+
+  return product.material === collection.material
+}
+
+export function getAvailableMaterialCollections(products: readonly CollectionProduct[]) {
+  return materialCollections.filter((materialCollection) => {
+    const collectionSlug = materialCollection.href.split('/').pop()
+    const collection = collectionPages.find((page) => page.slug === collectionSlug)
+
+    return collection ? hasProductsForCollection(collection, products) : false
+  })
+}
+
+export function getAvailableCatalogueCategories(products: readonly CollectionProduct[]) {
+  return catalogueCategories.filter((category) => products.some((product) => product.type === category.value))
+}
+
 export const primaryNavigation = [
   { href: '/catalogue', label: 'Collections' },
   { href: '/applications', label: 'Applications' },
@@ -67,12 +108,17 @@ export const utilityNavigation = [
   { href: '/contact', label: 'Contact / Request a Quote' },
 ] as const
 
-export const footerCollectionLinks = [
-  { href: '/catalogue?type=Viaza%20Limestone', label: 'Viaza Limestone' },
-  { href: '/catalogue?type=Moroccan%20Marble', label: 'Moroccan Marble' },
-  { href: '/catalogue?material=Travertine', label: 'Travertine' },
-  { href: '/catalogue', label: 'View Catalogue' },
-] as const
+export function getAvailableFooterCollectionLinks(products: readonly CollectionProduct[]) {
+  const availableTypes = new Set(getAvailableCatalogueCategories(products).map((category) => category.value))
+  const availableMaterials = new Set(products.map((product) => product.material))
+
+  return [
+    ...(availableTypes.has('Viaza Limestone') ? [{ href: '/catalogue?type=Viaza%20Limestone', label: 'Viaza Limestone' }] : []),
+    ...(availableTypes.has('Moroccan Marble') ? [{ href: '/catalogue?type=Moroccan%20Marble', label: 'Moroccan Marble' }] : []),
+    ...(availableMaterials.has('Travertine') ? [{ href: '/catalogue?material=Travertine', label: 'Travertine' }] : []),
+    { href: '/catalogue', label: 'View Catalogue' },
+  ]
+}
 
 export const footerCompanyLinks = [
   { href: '/about', label: 'Our Story' },

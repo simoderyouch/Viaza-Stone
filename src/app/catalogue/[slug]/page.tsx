@@ -10,6 +10,7 @@ import {
   IconRulerMeasure,
   IconSparkles,
 } from '@tabler/icons-react'
+import { ProductImageCarousel } from '@/components/product-image-carousel'
 import { ProductImageMagnifier } from '@/components/product-image-magnifier'
 import { ProductCard } from '@/components/product-card'
 import { getProductBySlug, products, type StoneDetailIcon } from '@/data/products'
@@ -46,6 +47,9 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
     .slice(0, 3)
   const descriptionParagraphs = Array.isArray(product.description) ? product.description : [product.description]
   const secondImage = product.gallery[0]
+  const additionalImages = product.gallery.slice(1)
+  const useApplicationCarousel = product.slug === 'viaza-beige-tumbled' && additionalImages.length > 0
+  const applicationImages = useApplicationCarousel ? [product.applicationImage, ...additionalImages] : []
   const secondImageFit = product.galleryImageFit ?? product.imageFit
   const hasThreeImageStory = Boolean(secondImage)
   const heroImage = hasThreeImageStory ? product.image : product.thumbnail
@@ -126,6 +130,19 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
         </div>
       </section>
 
+      {!useApplicationCarousel && additionalImages.map((image, index) => (
+        <section key={image} className="border-t border-stone-200 bg-white" aria-label={`${product.name} additional material view ${index + 1}`}>
+          <div className="relative min-h-[30rem] overflow-hidden bg-white sm:min-h-[40rem] lg:min-h-[52rem]">
+            <ProductImageMagnifier
+              src={image}
+              alt={`${product.name} additional material view ${index + 1}`}
+              sizes="100vw"
+              fit={product.galleryImageFit ?? product.imageFit}
+            />
+          </div>
+        </section>
+      ))}
+
       <section className="border-y border-stone-200 bg-white">
         <div className="grid lg:grid-cols-[minmax(22rem,0.8fr)_minmax(0,1.2fr)]">
           <div className="flex items-center px-6 py-12 sm:px-12 lg:px-20 lg:py-14">
@@ -137,12 +154,16 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
             </div>
           </div>
           <div className="relative aspect-[4/5] overflow-hidden bg-white lg:aspect-auto lg:min-h-[42rem]">
-            <ProductImageMagnifier
-              src={product.applicationImage}
-              alt={`${product.name} used in an architectural application`}
-              sizes="(max-width: 1024px) 100vw, 60vw"
-              fit={product.applicationImageFit}
-            />
+            {useApplicationCarousel ? (
+              <ProductImageCarousel images={applicationImages} alt={`${product.name} used in an architectural application`} imageFit={product.applicationImageFit} />
+            ) : (
+              <ProductImageMagnifier
+                src={product.applicationImage}
+                alt={`${product.name} used in an architectural application`}
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                fit={product.applicationImageFit}
+              />
+            )}
           </div>
         </div>
       </section>

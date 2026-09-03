@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ProductCard } from '@/components/product-card'
 import { SectionHeading } from '@/components/section-heading'
-import { getCollectionPage } from '@/data/collections'
+import { getCollectionPage, matchesCollectionProduct } from '@/data/collections'
 import { products } from '@/data/products'
 
 type CollectionPageProps = {
@@ -12,11 +12,7 @@ type CollectionPageProps = {
 }
 
 function getMatchingProducts(collection: NonNullable<ReturnType<typeof getCollectionPage>>) {
-  if ('productNamePrefix' in collection) {
-    return products.filter((product) => product.name.startsWith(collection.productNamePrefix))
-  }
-
-  return products.filter((product) => product.material === collection.material)
+  return products.filter((product) => matchesCollectionProduct(collection, product))
 }
 
 export async function generateMetadata({ params }: CollectionPageProps): Promise<Metadata> {
@@ -38,6 +34,8 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
   if (!collection) notFound()
 
   const collectionProducts = getMatchingProducts(collection)
+
+  if (collectionProducts.length === 0) notFound()
 
   return (
     <>

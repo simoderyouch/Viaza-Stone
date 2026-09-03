@@ -3,7 +3,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useLocale } from '@/components/locale-provider'
-import { footerCollectionLinks, footerCompanyLinks } from '@/data/collections'
+import { footerCompanyLinks, getAvailableFooterCollectionLinks } from '@/data/collections'
+import { products } from '@/data/products'
 
 export function Footer() {
   const { t } = useLocale()
@@ -23,7 +24,7 @@ export function Footer() {
             {t('footer.description')}
           </p>
         </div>
-        <FooterColumn title={t('footer.explore')} links={footerCollectionLinks} />
+        <FooterColumn title={t('footer.explore')} links={getAvailableFooterCollectionLinks(products)} />
         <FooterColumn title={t('footer.company')} links={footerCompanyLinks} />
         <div>
           <h2 className="text-[0.68rem] font-bold tracking-[0.18em] text-white uppercase">{t('footer.connect')}</h2>

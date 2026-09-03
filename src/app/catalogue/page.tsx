@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ProductCard } from '@/components/product-card'
 import { SectionHeading } from '@/components/section-heading'
-import { collectionPages, materialCollections } from '@/data/collections'
+import { collectionPages, getAvailableMaterialCollections, matchesCollectionProduct } from '@/data/collections'
 import { products } from '@/data/products'
 
 export const metadata: Metadata = {
@@ -34,15 +34,13 @@ export default function CataloguePage() {
             description="Explore the complete Viaza Stone range by material type, then open a surface to view its finishes, applications, and enquiry details."
           />
           <div className="mt-12 space-y-18">
-            {materialCollections.map((materialCollection) => {
+            {getAvailableMaterialCollections(products).map((materialCollection) => {
               const collectionSlug = materialCollection.href.split('/').pop()
               const collection = collectionPages.find((page) => page.slug === collectionSlug)
 
               if (!collection) return null
 
-              const collectionProducts = 'productNamePrefix' in collection
-                ? products.filter((product) => product.name.startsWith(collection.productNamePrefix))
-                : products.filter((product) => product.material === collection.material)
+              const collectionProducts = products.filter((product) => matchesCollectionProduct(collection, product))
 
               return (
                 <section key={materialCollection.name} className="border-t border-stone-200 pt-8 sm:pt-10">

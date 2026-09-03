@@ -5,7 +5,8 @@ import { HomeHero } from '@/components/home-hero'
 import { MaterialCard } from '@/components/material-card'
 import { ParallaxFrame, ScrollProgress, ScrollReveal } from '@/components/motion-effects'
 import { SectionHeading } from '@/components/section-heading'
-import { materialCollections } from '@/data/collections'
+import { getAvailableMaterialCollections } from '@/data/collections'
+import { products } from '@/data/products'
 
 const experienceSteps = [
   { number: '01', title: 'Define', text: 'Start with the setting, design direction, application, and quantity you need.', image: '/images/showcase/1.jpg' },
@@ -92,7 +93,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-[1800px]">
           <ScrollReveal><SectionHeading eyebrow="Material library" title="Find the character of your project" centered /></ScrollReveal>
           <div className="mt-11 grid gap-5 md:grid-cols-2">
-            {materialCollections.map((material, index) => (
+            {getAvailableMaterialCollections(products).map((material, index) => (
               <ScrollReveal key={material.name} delay={index * 0.07} hover className="h-full"><MaterialCard {...material} index={index + 1} className="min-h-[32rem] sm:min-h-[36rem]" /></ScrollReveal>
             ))}
           </div>

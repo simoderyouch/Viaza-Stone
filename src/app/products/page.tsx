@@ -5,7 +5,7 @@ import { MaterialCard } from '@/components/material-card'
 import { ScrollReveal } from '@/components/motion-effects'
 import { ProductCard } from '@/components/product-card'
 import { SectionHeading } from '@/components/section-heading'
-import { materialCollections } from '@/data/collections'
+import { getAvailableMaterialCollections } from '@/data/collections'
 import { products } from '@/data/products'
 
 export const metadata: Metadata = {
@@ -44,7 +44,7 @@ export default function ProductsPage() {
         <div className="mx-auto max-w-7xl">
           <ScrollReveal><SectionHeading eyebrow="Find your material" title="Start with the character of the stone" description="Every material carries a different scale, texture, and visual rhythm. Use the collection as a starting point, then build the exact finish and format around the project." centered /></ScrollReveal>
           <div className="mt-11 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {materialCollections.map((material) => (
+            {getAvailableMaterialCollections(products).map((material) => (
               <ScrollReveal key={material.name} hover className="h-full"><MaterialCard
                 key={material.name}
                 {...material}

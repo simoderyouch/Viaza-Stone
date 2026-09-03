@@ -302,10 +302,30 @@ const allProducts: Product[] = [
   createProduct({ name: 'Atlas Absolute Black', slug: 'atlas-absolute-black', type: 'Moroccan Marble', material: 'Marble', color: 'Absolute Black', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan marble with an absolute black colour direction.' }),
 ]
 
+const productDisplayOrder = [
+  'viaza-beige-raw',
+  'viaza-beige-polished',
+  'viaza-beige-bush-hammered',
+  'viaza-beige-rustic',
+  'viaza-beige-split-face',
+  'viaza-beige-zola',
+  'viaza-beige-tumbled',
+  'viaza-grey-polished',
+  'viaza-grey-light-bush-ham',
+  'viaza-grey-rustic',
+  'viaza-grey-rustic-aldo',
+  'viaza-grey-tuda-light',
+  'viaza-grey-rustic-tuda',
+]
+
+const productDisplayPriority = new Map(productDisplayOrder.map((slug, index) => [slug, index]))
+
 // A published product needs the complete visual story: main image, detail image,
 // and application image. Entries without a gallery image remain in the source
 // data until their full image set is ready, but are not shown on the website.
-export const products = allProducts.filter((product) => product.gallery.length > 0)
+export const products = allProducts
+  .filter((product) => product.gallery.length > 0)
+  .sort((first, second) => (productDisplayPriority.get(first.slug) ?? Number.MAX_SAFE_INTEGER) - (productDisplayPriority.get(second.slug) ?? Number.MAX_SAFE_INTEGER))
 
 export function getProductBySlug(slug: string) {
   return products.find((product) => product.slug === slug)

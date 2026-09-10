@@ -164,9 +164,9 @@ export default function HomePage() {
         <div className="grid lg:h-svh lg:grid-cols-2">
           <ScrollReveal distance={28} className="flex items-center px-5 py-16 sm:px-10 lg:px-16 lg:py-10 xl:px-24">
             <div className="max-w-xl">
-              <p className="eyebrow text-[#d4c5aa]">Volubilis Travertine</p>
-              <h2 className="font-display mt-3 text-4xl leading-tight sm:text-5xl">A wall of luxury, sculpted in Volubilis Travertine.</h2>
-              <div className="mt-7 space-y-5 text-sm leading-7 text-stone-300 sm:text-base">
+              <p className="eyebrow text-xs text-[#d4c5aa] sm:text-sm">Volubilis Travertine</p>
+              <h2 className="font-display mt-4 text-5xl leading-[0.98] sm:text-6xl xl:text-5xl">A wall of luxury, sculpted in Volubilis Travertine.</h2>
+              <div className="mt-8 space-y-6 text-base leading-7 text-stone-300 sm:text-xl sm:leading-8">
                 <p>This Volubilis Travertine wall cladding transforms the hotel lobby into a prestigious, warm, and contemporary space. The architectural composition, created using panels of varying dimensions and carefully arranged veining, highlights the natural richness and distinctive character of the stone.</p>
                 <p>The projecting elements, enhanced by subtle indirect lighting, create a striking interplay of depth, light, and shadow. The travertine’s elegant beige-brown tones harmonize beautifully with the crystal chandelier and refined furnishings, offering guests a luxurious and authentic first impression.</p>
                 <p>Noble, durable, and timeless, Volubilis Travertine is an exceptional choice for five-star hotel lobbies, prestigious reception areas, and high-end architectural projects.</p>

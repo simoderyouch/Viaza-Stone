@@ -160,17 +160,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#292b2c] px-5 py-16 text-white lg:px-8 lg:py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-          <ScrollReveal distance={28}>
-            <p className="eyebrow text-[#d4c5aa]">Stone in motion</p>
-            <h2 className="font-display mt-3 max-w-xl text-4xl leading-tight sm:text-5xl">See the material in its natural rhythm.</h2>
-            <p className="mt-6 max-w-lg leading-7 text-stone-300">From first selection to the finished architectural surface, every project begins with the character of the stone itself.</p>
-            <Link href="/contact" className="button-secondary mt-8 border-white text-white">Discuss your project</Link>
+      <section className="overflow-hidden bg-[#292b2c] text-white">
+        <div className="grid lg:h-svh lg:grid-cols-2">
+          <ScrollReveal distance={28} className="flex items-center px-5 py-16 sm:px-10 lg:px-16 lg:py-10 xl:px-24">
+            <div className="max-w-xl">
+              <p className="eyebrow text-[#d4c5aa]">Volubilis Travertine</p>
+              <h2 className="font-display mt-3 text-4xl leading-tight sm:text-5xl">A wall of luxury, sculpted in Volubilis Travertine.</h2>
+              <div className="mt-7 space-y-5 text-sm leading-7 text-stone-300 sm:text-base">
+                <p>This Volubilis Travertine wall cladding transforms the hotel lobby into a prestigious, warm, and contemporary space. The architectural composition, created using panels of varying dimensions and carefully arranged veining, highlights the natural richness and distinctive character of the stone.</p>
+                <p>The projecting elements, enhanced by subtle indirect lighting, create a striking interplay of depth, light, and shadow. The travertine’s elegant beige-brown tones harmonize beautifully with the crystal chandelier and refined furnishings, offering guests a luxurious and authentic first impression.</p>
+                <p>Noble, durable, and timeless, Volubilis Travertine is an exceptional choice for five-star hotel lobbies, prestigious reception areas, and high-end architectural projects.</p>
+              </div>
+            </div>
           </ScrollReveal>
-          <ScrollReveal distance={40} className="mx-auto w-full max-w-md">
-            <div className="aspect-[9/16] overflow-hidden bg-black shadow-2xl">
-              <video autoPlay loop muted playsInline preload="metadata" className="h-full w-full object-cover" aria-label="Viaza Stone in motion">
+          <ScrollReveal distance={40} className="relative min-h-svh overflow-hidden lg:min-h-0">
+            <div className="absolute inset-0 bg-black">
+              <video autoPlay loop muted playsInline preload="metadata" className="absolute inset-0 h-full w-full object-cover object-center" aria-label="Viaza Stone in motion">
                 <source src="/videos/viaza-stone-in-motion.mp4" type="video/mp4" />
               </video>
             </div>

@@ -32,19 +32,24 @@ const viazaPillars = [
 
 const projectApplications = [
   {
-    title: 'Hotels & resorts',
-    text: 'Natural stone finishes for welcoming, durable hospitality environments.',
-    image: '/images/applications/08_page_21_moroccan_interior_flooring.webp',
+    title: 'Flooring & terraces',
+    text: 'Durable natural stone for refined interiors, outdoor living, pool surrounds, and detailed thresholds.',
+    image: '/images/applications/projects/luxury-interior-flooring.png',
   },
   {
-    title: 'Villas & residences',
-    text: 'Material character for kitchens, bathrooms, living spaces, and exterior details.',
-    image: '/images/applications/05_page_19_staircase_green_interior.webp',
+    title: 'Travertine / Volubilis',
+    text: 'Warm mineral movement for interior features, exterior cladding, and expressive architecture.',
+    image: '/images/applications/projects/stone-architecture-facade.png',
   },
   {
-    title: 'Facades & outdoor spaces',
-    text: 'Stone solutions for walls, paving, landscape, and architectural exterior work.',
-    image: '/images/applications/11_page_24_crazy_paving_poolside.webp',
+    title: 'Interior walls & features',
+    text: 'Tactile stone surfaces for feature walls, fireplaces, hospitality interiors, and illuminated details.',
+    image: '/images/applications/projects/interior-stone-tile-wall.png',
+  },
+  {
+    title: 'Facades & exteriors',
+    text: 'Long-lasting stone cladding for residential, commercial, and cultural architecture.',
+    image: '/images/applications/projects/cinema-stone-facade.jpeg',
   },
 ]
 
@@ -140,7 +145,7 @@ export default function HomePage() {
       <section className="bg-[#e8e6df] px-5 py-16 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <ScrollReveal><SectionHeading eyebrow="Applications" title="Stone for spaces that need to perform beautifully" description="Viaza Stone supports material-led projects across residential, hospitality, commercial, and exterior applications." centered /></ScrollReveal>
-          <div className="mt-11 grid gap-5 md:grid-cols-3">
+          <div className="mt-11 grid gap-5 md:grid-cols-2">
             {projectApplications.map((application, index) => (
               <ScrollReveal key={application.title} delay={index * 0.1} hover className="h-full"><article className="group relative min-h-105 overflow-hidden bg-stone-900">
                 <Image src={application.image} alt="" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition duration-500 group-hover:scale-105" />
@@ -152,6 +157,24 @@ export default function HomePage() {
               </article></ScrollReveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="bg-[#292b2c] px-5 py-16 text-white lg:px-8 lg:py-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+          <ScrollReveal distance={28}>
+            <p className="eyebrow text-[#d4c5aa]">Stone in motion</p>
+            <h2 className="font-display mt-3 max-w-xl text-4xl leading-tight sm:text-5xl">See the material in its natural rhythm.</h2>
+            <p className="mt-6 max-w-lg leading-7 text-stone-300">From first selection to the finished architectural surface, every project begins with the character of the stone itself.</p>
+            <Link href="/contact" className="button-secondary mt-8 border-white text-white">Discuss your project</Link>
+          </ScrollReveal>
+          <ScrollReveal distance={40} className="mx-auto w-full max-w-md">
+            <div className="aspect-[9/16] overflow-hidden bg-black shadow-2xl">
+              <video autoPlay loop muted playsInline preload="metadata" className="h-full w-full object-cover" aria-label="Viaza Stone in motion">
+                <source src="/videos/viaza-stone-in-motion.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 

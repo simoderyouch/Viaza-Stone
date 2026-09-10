@@ -22,7 +22,7 @@ export const applicationGroups: ApplicationGroupDetails[] = [
   },
   {
     id: 'travertine',
-    title: 'Travertine',
+    title: 'Travertine / Volubilis',
     description: 'Travertine brings warm mineral movement and tactile character to interior walls, hospitality features, exterior cladding, and monumental architecture.',
   },
   {

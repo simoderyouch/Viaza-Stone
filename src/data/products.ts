@@ -245,7 +245,7 @@ const allProducts: Product[] = [
     stoneDetails: extractedStoneDetails('Tumbled'),
   }),
   createProduct({
-    name: 'Crazy Paving', slug: 'viaza-beige-crazy-paving', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', finish: 'Crazy Paving', applications: beigeApplications,
+    name: 'Crazy Paving', slug: 'viaza-beige-crazy-paving', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', collectionSlug: 'viaza-beige', finish: 'Crazy Paving', applications: beigeApplications,
     image: '/images/products/extracted-2026-09-10/crazy-paving/detail.png',
     imageFit: 'contain', imageClassName: 'p-12 sm:p-16 lg:p-20',
     thumbnail: '/images/products/extracted-2026-09-10/crazy-paving/detail.png',

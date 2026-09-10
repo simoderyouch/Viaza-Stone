@@ -2,11 +2,11 @@ import type { Locale } from '@/i18n/config'
 import type { Product } from '@/data/products'
 
 const frenchFinishes: Record<string, string> = {
-  'Bush-Hammered': 'bouchardée', Raw: 'brute', Polished: 'polie', Rustic: 'rustique', 'Light Bush-Ham': 'bouchardée légère', Zola: 'Zola', Striated: 'striée', 'Tumbled LBR': 'vieillie LBR', Tumbled: 'vieillie', 'Atlas-TMR': 'Atlas-TMR', 'Sandblasted-BRP': 'sablée BRP', 'Rustic-Aldo': 'rustique Aldo', 'Tuda Light': 'Tuda clair', 'Rustic Tuda': 'rustique Tuda', 'Cosmic Tuda': 'Cosmic Tuda', 'Aldo-BHB': 'Aldo-BHB', 'Grey-TMR': 'gris TMR', 'Grey Atlas-TBR': 'gris Atlas-TBR', 'Enquire for available finishes': 'finition à définir selon disponibilité',
+  'Bush-Hammered': 'bouchardée', Raw: 'brute', Polished: 'polie', Rustic: 'rustique', 'Light Bush-Ham': 'bouchardée légère', Zola: 'Zola', Striated: 'striée', 'Tumbled LBR': 'vieillie LBR', Tumbled: 'vieillie', 'Crazy Paving': 'pavage irrégulier', 'Atlas-TMR': 'Atlas-TMR', 'Sandblasted-BRP': 'sablée BRP', 'Rustic-Aldo': 'rustique Aldo', 'Tuda Light': 'Tuda clair', 'Rustic Tuda': 'rustique Tuda', 'Cosmic Tuda': 'Cosmic Tuda', 'Aldo-BHB': 'Aldo-BHB', 'Grey-TMR': 'gris TMR', 'Grey Atlas-TBR': 'gris Atlas-TBR', 'Enquire for available finishes': 'finition à définir selon disponibilité',
 }
 
 const arabicFinishes: Record<string, string> = {
-  'Bush-Hammered': 'مطرقة خشنة', Raw: 'طبيعية', Polished: 'مصقولة', Rustic: 'ريفية', 'Light Bush-Ham': 'مطرقة خفيفة', Zola: 'زولا', Striated: 'مخططة', 'Tumbled LBR': 'معتّقة LBR', Tumbled: 'معتّقة', 'Atlas-TMR': 'أطلس TMR', 'Sandblasted-BRP': 'سفع رملي BRP', 'Rustic-Aldo': 'ريفية ألدو', 'Tuda Light': 'تودا فاتح', 'Rustic Tuda': 'تودا ريفي', 'Cosmic Tuda': 'تودا كوزميك', 'Aldo-BHB': 'ألدو BHB', 'Grey-TMR': 'رمادي TMR', 'Grey Atlas-TBR': 'رمادي أطلس TBR', 'Enquire for available finishes': 'التشطيبات حسب التوفر',
+  'Bush-Hammered': 'مطرقة خشنة', Raw: 'طبيعية', Polished: 'مصقولة', Rustic: 'ريفية', 'Light Bush-Ham': 'مطرقة خفيفة', Zola: 'زولا', Striated: 'مخططة', 'Tumbled LBR': 'معتّقة LBR', Tumbled: 'معتّقة', 'Crazy Paving': 'رصف عشوائي', 'Atlas-TMR': 'أطلس TMR', 'Sandblasted-BRP': 'سفع رملي BRP', 'Rustic-Aldo': 'ريفية ألدو', 'Tuda Light': 'تودا فاتح', 'Rustic Tuda': 'تودا ريفي', 'Cosmic Tuda': 'تودا كوزميك', 'Aldo-BHB': 'ألدو BHB', 'Grey-TMR': 'رمادي TMR', 'Grey Atlas-TBR': 'رمادي أطلس TBR', 'Enquire for available finishes': 'التشطيبات حسب التوفر',
 }
 
 const frenchApplications: Record<string, string> = {
@@ -19,14 +19,14 @@ const arabicApplications: Record<string, string> = {
 
 function translatedDescription(product: Product, locale: Exclude<Locale, 'en'>, finish: string) {
   if (locale === 'fr') {
-    if (product.name.startsWith('Viaza Beige')) return `Un calcaire marocain Viaza Beige, dense et lumineux, proposé ici dans une finition ${finish} pour apporter chaleur, relief et tenue durable aux projets intérieurs comme extérieurs.`
-    if (product.name.startsWith('Viaza Grey')) return `Un calcaire marocain Viaza Grey à la tonalité minérale équilibrée, proposé dans une finition ${finish} pour une écriture architecturale sobre et durable.`
+    if (product.collectionSlug === 'viaza-beige' || product.slug.startsWith('viaza-beige')) return `Un calcaire marocain Viaza Beige, dense et lumineux, proposé ici dans une finition ${finish} pour apporter chaleur, relief et tenue durable aux projets intérieurs comme extérieurs.`
+    if (product.collectionSlug === 'viaza-grey' || product.name.startsWith('Viaza Grey')) return `Un calcaire marocain Viaza Grey à la tonalité minérale équilibrée, proposé dans une finition ${finish} pour une écriture architecturale sobre et durable.`
     if (product.material === 'Travertine') return `Un travertin marocain aux nuances chaudes et à la texture vivante, sélectionné pour apporter une présence naturelle et intemporelle aux espaces.`
     return `Un marbre marocain à la personnalité minérale affirmée, sélectionné pour ses veines, sa profondeur de couleur et son caractère architectural.`
   }
 
-  if (product.name.startsWith('Viaza Beige')) return `حجر جيري مغربي من فيازا بيج، كثيف ومضيء، بهذه اللمسة ${finish} ليمنح الدفء والعمق والمتانة للمشاريع الداخلية والخارجية.`
-  if (product.name.startsWith('Viaza Grey')) return `حجر جيري مغربي من فيازا غراي بدرجة معدنية متوازنة، بهذه اللمسة ${finish} لتعبير معماري هادئ يدوم طويلاً.`
+  if (product.collectionSlug === 'viaza-beige' || product.slug.startsWith('viaza-beige')) return `حجر جيري مغربي من فيازا بيج، كثيف ومضيء، بهذه اللمسة ${finish} ليمنح الدفء والعمق والمتانة للمشاريع الداخلية والخارجية.`
+  if (product.collectionSlug === 'viaza-grey' || product.name.startsWith('Viaza Grey')) return `حجر جيري مغربي من فيازا غراي بدرجة معدنية متوازنة، بهذه اللمسة ${finish} لتعبير معماري هادئ يدوم طويلاً.`
   if (product.material === 'Travertine') return 'ترافرتين مغربي بدرجات دافئة وملمس حي، مختار ليمنح المساحات حضورًا طبيعيًا خالدًا.'
   return 'رخام مغربي بطابع معدني مميز، مختار لعروقه وعمق ألوانه وحضوره المعماري.'
 }

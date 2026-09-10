@@ -73,6 +73,7 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
               priority
               sizes={hasThreeImageStory ? '(max-width: 1024px) 100vw, 58vw' : '(max-width: 1024px) 100vw, 58vw'}
               fit={heroImageFit}
+              imageClassName={product.imageClassName}
               noTranslate
             />
           </div>
@@ -115,6 +116,7 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
                 alt={`${product.name} material detail`}
                 sizes="(max-width: 1024px) 100vw, 54vw"
                 fit={secondImageFit}
+                imageClassName={product.galleryImageClassName}
               />
             </div>
           )}

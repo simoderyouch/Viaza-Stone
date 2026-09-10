@@ -27,7 +27,7 @@ export async function ProductCard({ product, compact = false }: { product: Produ
             alt={localizedProduct.name}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
-            className="object-cover transition duration-500 group-hover:scale-105"
+            className={`${product.thumbnailFit === 'contain' ? 'object-contain' : 'object-cover'} ${product.thumbnailImageClassName ?? ''} transition duration-500 group-hover:scale-105`}
           />
         </div>
         <div className="p-5">

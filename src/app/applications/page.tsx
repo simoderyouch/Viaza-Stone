@@ -8,7 +8,7 @@ import { getRequestLocale } from '@/i18n/server'
 
 export const metadata: Metadata = {
   title: 'Applications',
-  description: 'Explore Viaza Stone applications across flooring, paving, wall cladding, bathrooms, and exterior facades.',
+  description: 'Explore Viaza Stone applications across flooring, terraces, interior wall cladding, and exterior facades.',
 }
 
 export default async function ApplicationsPage() {
@@ -19,7 +19,7 @@ export default async function ApplicationsPage() {
   return (
     <>
       <section className="relative isolate overflow-hidden bg-stone-900 px-5 pb-16 pt-42 lg:px-8 lg:pb-20 lg:pt-48">
-        <Image src="/images/applications/06_page_20_indoor_outdoor_flooring.webp" alt="Natural stone in an indoor-outdoor architectural setting" fill priority sizes="100vw" className="object-cover" />
+        <Image src="/images/applications/projects/luxury-interior-flooring.png" alt="Limestone flooring in a luxury interior" fill priority sizes="100vw" className="object-cover" />
         <div className="absolute inset-0 bg-black/65" />
         <div className="relative mx-auto max-w-7xl text-white">
           <p className="text-[0.7rem] font-bold tracking-[0.19em] text-[#d4c5aa] uppercase">{copy.eyebrow}</p>
@@ -29,7 +29,7 @@ export default async function ApplicationsPage() {
       </section>
 
       {copy.groups.map((group, groupIndex) => {
-        const groupImages = images.filter((image) => image.group === ['Flooring & stairs', 'Crazy paving', 'Walls & facades'][groupIndex])
+        const groupImages = images.filter((image) => image.group === group.id)
 
         return (
           <section key={group.title} className={groupIndex % 2 === 0 ? 'bg-white px-5 py-18 lg:px-8' : 'bg-[#e8e6df] px-5 py-18 lg:px-8'}>

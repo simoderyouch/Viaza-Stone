@@ -9,6 +9,7 @@ type ProductImageMagnifierProps = {
   sizes: string
   priority?: boolean
   fit?: 'contain' | 'cover'
+  imageClassName?: string
   noTranslate?: boolean
 }
 
@@ -18,6 +19,7 @@ export function ProductImageMagnifier({
   sizes,
   priority = false,
   fit = 'cover',
+  imageClassName,
   noTranslate = false,
 }: ProductImageMagnifierProps) {
   const lensRef = useRef<HTMLDivElement>(null)
@@ -57,7 +59,7 @@ export function ProductImageMagnifier({
         fill
         priority={priority}
         sizes={sizes}
-        className={fit === 'contain' ? 'object-contain' : 'object-cover'}
+        className={`${fit === 'contain' ? 'object-contain' : 'object-cover'} ${imageClassName ?? ''}`}
       />
       <div
         ref={lensRef}

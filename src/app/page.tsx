@@ -17,9 +17,9 @@ const experienceSteps = [
 ]
 
 const inspirationImages = [
-  { src: '/images/showcase/389_1781628581.jpg', alt: 'Taj Mahal quartzite in a kitchen' },
-  { src: '/images/showcase/ns-featured-06.jpg', alt: 'Cloudy White natural stone interior' },
-  { src: '/images/showcase/ns-featured-03.jpg', alt: 'Luce Di Luna natural stone interior' },
+  { src: '/images/showcase/viaza-stone-context-01.png', alt: 'Natural stone flooring in a warm living space', width: 1254, height: 1254, showFullImage: true },
+  { src: '/images/showcase/viaza-stone-context-02.jpeg', alt: 'Stone coffee tables in a contemporary interior', width: 800, height: 800, showFullImage: true },
+  { src: '/images/showcase/viaza-stone-context-03.png', alt: 'Natural stone cladding on a contemporary facade', width: 1170, height: 1515 },
   { src: '/images/showcase/05-saratoga-inspiration.jpg', alt: 'Saratoga natural stone interior' },
 ]
 
@@ -114,8 +114,17 @@ export default function HomePage() {
           </div>
           <div className="grid gap-5">
             {inspirationImages.map((image, index) => (
-              <ScrollReveal key={image.src} className="relative aspect-[1.28] overflow-hidden sm:aspect-[1.42]" distance={52}>
-                {index === 0 ? (
+              <ScrollReveal key={image.src} className={image.showFullImage ? 'overflow-hidden' : 'relative aspect-[1.28] overflow-hidden sm:aspect-[1.42]'} distance={52}>
+                {image.showFullImage && image.width && image.height ? (
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    width={image.width}
+                    height={image.height}
+                    sizes="(max-width: 1024px) 100vw, 64vw"
+                    className="block h-auto w-full transition duration-700 hover:scale-105"
+                  />
+                ) : index === 0 ? (
                   <ParallaxFrame className="h-full w-full" distance={48}>
                     <Image src={image.src} alt={image.alt} fill sizes="(max-width: 1024px) 100vw, 64vw" className="object-cover" />
                   </ParallaxFrame>

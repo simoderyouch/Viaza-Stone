@@ -9,13 +9,18 @@ export type Product = {
   material: string
   color: string
   origin: string
+  collectionSlug?: 'viaza-beige' | 'viaza-grey'
   image: string
   imageFit?: 'cover' | 'contain'
+  imageClassName?: string
   largeHeroImage?: boolean
   thumbnail: string
+  thumbnailFit?: 'cover' | 'contain'
+  thumbnailImageClassName?: string
   applicationImage: string
   gallery: string[]
   galleryImageFit?: 'cover' | 'contain'
+  galleryImageClassName?: string
   detailHeading?: string
   stoneDetails?: { label: string; value: string; icon: StoneDetailIcon }[]
   applicationEyebrow?: string
@@ -66,14 +71,19 @@ function createProduct({
   type,
   material,
   color,
+  collectionSlug,
   description,
   finish,
   applications,
   image,
   largeHeroImage,
+  imageClassName,
   thumbnail,
+  thumbnailFit,
+  thumbnailImageClassName,
   gallery,
   galleryImageFit,
+  galleryImageClassName,
   applicationImage: productApplicationImage,
   applicationEyebrow,
   applicationTitle,
@@ -88,15 +98,20 @@ function createProduct({
   type: ProductType
   material: string
   color: string
+  collectionSlug?: Product['collectionSlug']
   description: Product['description']
   finish: string
   applications: string[]
   image?: string
   imageFit?: Product['imageFit']
+  imageClassName?: string
   largeHeroImage?: boolean
   thumbnail?: string
+  thumbnailFit?: Product['thumbnailFit']
+  thumbnailImageClassName?: string
   gallery?: string[]
   galleryImageFit?: Product['galleryImageFit']
+  galleryImageClassName?: string
   applicationImage?: string
   applicationEyebrow?: string
   applicationTitle?: string
@@ -105,9 +120,11 @@ function createProduct({
   detailHeading?: string
   stoneDetails?: Product['stoneDetails']
 }): Product {
-  const selectionNote = name.startsWith('Viaza Beige')
+  const isViazaBeige = name.startsWith('Viaza Beige') || collectionSlug === 'viaza-beige'
+  const isViazaGrey = name.startsWith('Viaza Grey') || collectionSlug === 'viaza-grey'
+  const selectionNote = isViazaBeige
     ? 'Viaza Beige is a noble, robust Moroccan limestone prized for luminous tones, timeless elegance, high density, and excellent weather resistance. Confirm the selected sample, finish, and format before final approval.'
-    : name.startsWith('Viaza Grey')
+    : isViazaGrey
       ? 'Viaza Grey is a premium Moroccan limestone recognised for durable refined grey tones, resistance to moisture and changing weather, and low-maintenance performance. Confirm the selected sample, finish, and format before final approval.'
       : 'Every premium Moroccan stone is shaped by geological forces over millions of years. Natural pigment, mineral structure, veining, and tone vary from slab to slab; confirm the selected material before final approval.'
 
@@ -118,13 +135,18 @@ function createProduct({
     material,
     color,
     origin: type === 'Viaza Limestone' ? 'Taza, Morocco' : 'Morocco',
+    collectionSlug,
     image: image ?? detailImage(slug),
     imageFit,
+    imageClassName,
     largeHeroImage,
     thumbnail: thumbnail ?? thumbnailImage(slug),
+    thumbnailFit,
+    thumbnailImageClassName,
     applicationImage: productApplicationImage ?? applicationImage(slug),
     gallery: gallery ?? [],
     galleryImageFit,
+    galleryImageClassName,
     applicationEyebrow,
     applicationTitle,
     applicationDescription,
@@ -223,6 +245,18 @@ const allProducts: Product[] = [
     stoneDetails: extractedStoneDetails('Tumbled'),
   }),
   createProduct({
+    name: 'Crazy Paving', slug: 'viaza-beige-crazy-paving', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', finish: 'Crazy Paving', applications: beigeApplications,
+    image: '/images/products/extracted-2026-09-10/crazy-paving/detail.png',
+    imageFit: 'contain', imageClassName: 'p-12 sm:p-16 lg:p-20',
+    thumbnail: '/images/products/extracted-2026-09-10/crazy-paving/detail.png',
+    thumbnailFit: 'contain', thumbnailImageClassName: 'p-8',
+    gallery: ['/images/products/extracted-2026-09-10/crazy-paving/detail.png'], galleryImageFit: 'contain', galleryImageClassName: 'p-12 sm:p-16 lg:p-20',
+    applicationImage: '/images/products/extracted-2026-09-10/crazy-paving/application.png', applicationImageFit: 'cover',
+    detailHeading: 'VIAZA Limestone – Crazy Paving',
+    description: 'Viaza Beige Crazy Paving brings the natural irregularity of limestone into exterior spaces. Each piece is defined by an organic shape, softly textured surface, and luminous beige variation, creating a relaxed yet enduring finish for terraces, courtyards, pool surroundings, and landscaped paths. The result feels crafted by nature while offering the strength and timeless character of Moroccan limestone.',
+    stoneDetails: extractedStoneDetails('Crazy Paving'),
+  }),
+  createProduct({
     name: 'Viaza Beige Split-Face', slug: 'viaza-beige-split-face', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', finish: 'Split-Face', applications: beigeApplications,
     image: extractedProductImage('beige-split-face', 'main.jpg'), imageFit: 'contain',
     thumbnail: extractedProductImage('beige-split-face', 'detail.jpg'),
@@ -240,6 +274,18 @@ const allProducts: Product[] = [
     applicationImage: extractedProductImage('grey-polished', 'application.jpeg'), applicationImageFit: 'contain', detailHeading: 'VIAZA Limestone Grey – Polished Finish',
     description: 'The polished finish brings out the refined character of VIAZA Limestone Grey, transforming its naturally balanced grey tones into a smooth and sophisticated architectural surface. Through precise polishing, the stone develops an elegant sheen that enhances its subtle mineral variations, reveals the depth of its natural details, and interacts beautifully with surrounding light. Its sleek surface creates a sense of continuity and refinement while remaining durable and easy to maintain when properly sealed. Combining the authentic character of Moroccan limestone with a contemporary and prestigious appearance, this finish is particularly suited to elegant interior floors, wall cladding, staircases, reception areas, and distinctive architectural spaces where natural stone and modern sophistication come together.',
     stoneDetails: extractedStoneDetails('Polished'),
+  }),
+  createProduct({
+    name: 'Crazy Paving', slug: 'viaza-grey-crazy-paving', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', collectionSlug: 'viaza-grey', finish: 'Crazy Paving', applications: greyApplications,
+    image: '/images/products/extracted-2026-09-10/grey-crazy-paving/detail.png',
+    imageFit: 'contain', imageClassName: 'p-12 sm:p-16 lg:p-20',
+    thumbnail: '/images/products/extracted-2026-09-10/grey-crazy-paving/detail.png',
+    thumbnailFit: 'contain', thumbnailImageClassName: 'p-8',
+    gallery: ['/images/products/extracted-2026-09-10/grey-crazy-paving/detail.png'], galleryImageFit: 'contain', galleryImageClassName: 'p-12 sm:p-16 lg:p-20',
+    applicationImage: '/images/products/extracted-2026-09-10/grey-crazy-paving/application.png', applicationImageFit: 'cover',
+    detailHeading: 'VIAZA Limestone Grey – Crazy Paving',
+    description: 'Viaza Grey Crazy Paving brings the organic rhythm of irregular limestone pieces into architectural spaces. Its refined grey tones, natural texture, and varied silhouettes create a composed yet expressive surface for floors, corridors, courtyards, terraces, and landscape settings. The result balances authentic material character with the quiet permanence of Moroccan limestone.',
+    stoneDetails: extractedStoneDetails('Crazy Paving'),
   }),
   createProduct({
     name: 'Viaza Grey Aged', slug: 'viaza-grey-rustic', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', finish: 'Aged', applications: greyApplications,
@@ -310,7 +356,9 @@ const productDisplayOrder = [
   'viaza-beige-split-face',
   'viaza-beige-zola',
   'viaza-beige-tumbled',
+  'viaza-beige-crazy-paving',
   'viaza-grey-polished',
+  'viaza-grey-crazy-paving',
   'viaza-grey-light-bush-ham',
   'viaza-grey-rustic',
   'viaza-grey-rustic-aldo',

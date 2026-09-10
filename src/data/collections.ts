@@ -25,7 +25,7 @@ export const collectionPages = [
     title: 'Viaza Limestone Beige',
     description: 'A touch of golden beige, makes your space a meeting place of warmth and luxury.',
     image: '/images/viaza-biege-header-image.jpeg',
-    productNamePrefix: 'Viaza Beige',
+    productNamePrefixes: ['Viaza Beige'],
   },
   {
     slug: 'viaza-grey',
@@ -61,6 +61,7 @@ type CollectionProduct = {
   name: string
   material: string
   type: ProductType
+  collectionSlug?: string
 }
 
 function hasProductsForCollection(
@@ -72,14 +73,12 @@ function hasProductsForCollection(
 
 export function matchesCollectionProduct(
   collection: (typeof collectionPages)[number],
-  product: Pick<CollectionProduct, 'name' | 'material'>,
+  product: Pick<CollectionProduct, 'name' | 'material' | 'collectionSlug'>,
 ) {
+  if (product.collectionSlug) return product.collectionSlug === collection.slug
+
   if ('productNamePrefixes' in collection) {
     return collection.productNamePrefixes.some((prefix) => product.name.startsWith(prefix))
-  }
-
-  if ('productNamePrefix' in collection) {
-    return product.name.startsWith(collection.productNamePrefix)
   }
 
   return product.material === collection.material

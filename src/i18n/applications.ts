@@ -5,7 +5,7 @@ const copy = {
   en: {
     eyebrow: 'Application gallery',
     title: 'Natural stone for every architectural surface.',
-    description: 'From timeless limestone flooring and Crazy Paving to wall cladding and enduring facades, Viaza Stone adapts naturally to interior and exterior architecture.',
+    description: 'From refined limestone flooring and terraces to expressive interior walls and enduring facades, Viaza Stone adapts naturally to every architectural surface.',
     ctaEyebrow: 'Project enquiry',
     ctaTitle: 'Have a stone application in mind?',
     cta: 'Contact / Request a Quote',
@@ -14,27 +14,27 @@ const copy = {
   fr: {
     eyebrow: 'Galerie d’applications',
     title: 'La pierre naturelle au service de chaque surface architecturale.',
-    description: 'Des sols en calcaire et du Crazy Paving aux habillages muraux et façades durables, Viaza Stone s’intègre naturellement aux projets intérieurs comme extérieurs.',
+    description: 'Des sols et terrasses en calcaire aux murs intérieurs expressifs et façades durables, Viaza Stone s’intègre naturellement à chaque surface architecturale.',
     ctaEyebrow: 'Demande de projet',
     ctaTitle: 'Vous avez une application pierre en tête ?',
     cta: 'Contact / Demander un devis',
     groups: [
-      { title: 'Sols & escaliers', description: 'Une beauté intemporelle pensée pour durer. Le calcaire Viaza apporte des tonalités naturelles raffinées, une texture organique et une réelle profondeur aux sols, terrasses, escaliers et abords de piscine.' },
-      { title: 'Crazy Paving', description: 'Une irrégularité naturelle, une composition sans limite. Les pièces de pierre aux formes libres créent des surfaces singulières, riches de relief et profondément liées au paysage.' },
-      { title: 'Murs & façades', description: 'Faire de la pierre naturelle une surface architecturale. Les revêtements Viaza donnent texture, profondeur et caractère durable aux intérieurs, salles de bains, murs signatures et élévations extérieures.' },
+      { id: 'flooring', title: 'Sols & terrasses', description: 'La pierre naturelle apporte un caractère durable aux intérieurs raffinés, espaces d’accueil, terrasses, abords de piscine et seuils soigneusement détaillés.' },
+      { id: 'interior-walls', title: 'Murs intérieurs & éléments signatures', description: 'Le travertin, le calcaire et les pierres texturées apportent profondeur aux murs signatures, cheminées, espaces hôteliers et détails architecturaux éclairés.' },
+      { id: 'facades', title: 'Façades & extérieurs', description: 'Le parement en pierre donne aux architectures résidentielles, commerciales et culturelles une présence extérieure durable, façonnée par la texture, l’échelle et les tons naturels.' },
     ],
   },
   ar: {
     eyebrow: 'معرض التطبيقات',
     title: 'حجر طبيعي لكل سطح معماري.',
-    description: 'من أرضيات الحجر الجيري الخالدة والرصف الحر إلى كسوة الجدران والواجهات المتينة، تتكيف فيازا ستون بسلاسة مع العمارة الداخلية والخارجية.',
+    description: 'من أرضيات وتراسات الحجر الجيري الراقية إلى الجدران الداخلية التعبيرية والواجهات المتينة، تتكيف فيازا ستون مع كل سطح معماري.',
     ctaEyebrow: 'استفسار عن مشروع',
     ctaTitle: 'هل لديك تطبيق حجري في ذهنك؟',
     cta: 'تواصل معنا / اطلب عرض سعر',
     groups: [
-      { title: 'الأرضيات والسلالم', description: 'جمال خالد صُمم ليدوم. يمنح حجر فيازا الجيري درجات طبيعية راقية وملمسًا عضويًا وعمقًا ماديًا للأرضيات والتراسات والسلالم ومحيط المسابح.' },
-      { title: 'الرصف الحر', description: 'عفوية طبيعية وتكوين بلا حدود. تصنع قطع الحجر غير المنتظمة أسطحًا فريدة، غنية بالشكل والملمس ومرتبطة أصالةً بالطبيعة.' },
-      { title: 'الجدران والواجهات', description: 'تحويل الحجر الطبيعي إلى سطح معماري. تضيف كسوات فيازا الملمس والعمق والطابع الدائم إلى المساحات الداخلية والحمامات والجدران المميزة والواجهات الخارجية.' },
+      { id: 'flooring', title: 'الأرضيات والتراسات', description: 'تضيف الأرضيات الحجرية طابعًا متينًا إلى المساحات الداخلية الراقية والضيافة والتراسات ومحيط المسابح وتفاصيل المداخل.' },
+      { id: 'interior-walls', title: 'الجدران الداخلية والعناصر المميزة', description: 'يمنح الترافرتين والحجر الجيري والحجر المزخرف عمقًا للجدران المميزة والمدافئ والمساحات الفندقية والتفاصيل المعمارية المضاءة.' },
+      { id: 'facades', title: 'الواجهات والمساحات الخارجية', description: 'تمنح الكسوة الحجرية العمارة السكنية والتجارية والثقافية حضورًا خارجيًا دائمًا، يتشكل بالملمس والمقياس والدرجات الطبيعية.' },
     ],
   },
 } as const
@@ -46,8 +46,8 @@ export function getApplicationsCopy(locale: Locale) {
 export function getLocalizedApplicationImages(locale: Locale) {
   if (locale === 'en') return applicationImages
   const labels = locale === 'fr'
-    ? ['Sol de salon contemporain', 'Sol en dalles de pierre', 'Sol géométrique en pierre', 'Escalier en pierre sombre', 'Escalier dans un intérieur végétal', 'Sol en pierre intérieur-extérieur', 'Sol de salon en pierre', 'Sol d’un intérieur marocain', 'Sol de cour de riad', 'Couloir en Crazy Paving', 'Bord de piscine en Crazy Paving', 'Mur intérieur en pierre', 'Façade extérieure contemporaine', 'Façade en pierre massive', 'Habillage mural intérieur', 'Habillage mural de salle de bains', 'Habillage sombre de salle de bains', 'Mur signature avec baignoire', 'Habillage de bibliothèque', 'Façade de cinéma en pierre']
-    : ['أرضية غرفة معيشة عصرية', 'أرضية من بلاط الحجر', 'أرضية حجرية هندسية', 'درج من الحجر الداكن', 'درج في مساحة خضراء', 'أرضية حجرية داخلية وخارجية', 'أرضية غرفة معيشة حجرية', 'أرضية داخل مغربي', 'أرضية فناء رياض', 'ممر رصف حر', 'رصف حر بجانب المسبح', 'جدار حجري داخلي مميز', 'واجهة خارجية عصرية', 'واجهة حجرية كتلية', 'كسوة جدارية داخلية', 'كسوة جدار حمام', 'كسوة حمام داكنة', 'جدار مميز مع حوض استحمام', 'كسوة جدار مكتبة', 'واجهة سينما حجرية']
+    ? ['Sol en calcaire dans un intérieur raffiné', 'Sol en calcaire dans un espace commercial', 'Détail de sol en pierre vieillie', 'Terrasse repas en calcaire', 'Terrasse en calcaire vieilli', 'Terrasse de piscine en pierre naturelle', 'Seuil de porte en calcaire', 'Habillage intérieur en travertin', 'Mur en travertin éclairé', 'Mur signature d’hôtel', 'Mur de cheminée en pierre texturée', 'Mur intérieur en carreaux de pierre', 'Façade de cinéma en pierre', 'Habillage extérieur en travertin', 'Architecture contemporaine revêtue de pierre', 'Résidence habillée de pierre', 'Extérieur commercial en pierre', 'Façade en pierre grise']
+    : ['أرضية من الحجر الجيري في مساحة راقية', 'أرضية من الحجر الجيري في مساحة تجارية', 'تفاصيل أرضية من حجر معتق', 'تراس لتناول الطعام من الحجر الجيري', 'تراس من الحجر الجيري المعتق', 'تراس مسبح من الحجر الطبيعي', 'تفاصيل عتبة من الحجر الجيري', 'كسوة داخلية من الترافرتين', 'جدار ترافرتين مضاء', 'جدار مميز في فندق', 'مدفأة من حجر مزخرف', 'جدار داخلي من بلاطات الحجر', 'واجهة سينما حجرية', 'كسوة خارجية من الترافرتين', 'عمارة معاصرة مكسوة بالحجر', 'منزل مكسو بالحجر', 'واجهة تجارية حجرية', 'واجهة من الحجر الرمادي']
 
   return applicationImages.map((image, index) => ({ ...image, title: labels[index] }))
 }

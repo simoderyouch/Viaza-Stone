@@ -31,16 +31,16 @@ export function ApplicationGallery({ images }: { images: ApplicationImage[] }) {
 
   return (
     <>
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-10 grid gap-6 sm:grid-cols-2">
         {images.map((application, index) => (
           <button
             key={application.image}
             type="button"
             onClick={() => setSelectedIndex(index)}
-            className="group relative aspect-[4/3] overflow-hidden bg-stone-900 text-left"
+            className="group relative aspect-[5/4] overflow-hidden bg-stone-900 text-left"
             aria-label={`View ${application.title} larger`}
           >
-            <Image src={application.image} alt={application.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition duration-500 group-hover:scale-105" />
+            <Image src={application.image} alt={application.title} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover transition duration-500 group-hover:scale-105" />
           </button>
         ))}
       </div>

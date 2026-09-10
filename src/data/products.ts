@@ -358,12 +358,12 @@ const productDisplayOrder = [
   'viaza-beige-tumbled',
   'viaza-beige-crazy-paving',
   'viaza-grey-polished',
-  'viaza-grey-crazy-paving',
   'viaza-grey-light-bush-ham',
   'viaza-grey-rustic',
   'viaza-grey-rustic-aldo',
   'viaza-grey-tuda-light',
   'viaza-grey-rustic-tuda',
+  'viaza-grey-crazy-paving',
 ]
 
 const productDisplayPriority = new Map(productDisplayOrder.map((slug, index) => [slug, index]))

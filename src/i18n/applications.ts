@@ -20,6 +20,7 @@ const copy = {
     cta: 'Contact / Demander un devis',
     groups: [
       { id: 'flooring', title: 'Sols & terrasses', description: 'La pierre naturelle apporte un caractère durable aux intérieurs raffinés, espaces d’accueil, terrasses, abords de piscine et seuils soigneusement détaillés.' },
+      { id: 'travertine', title: 'Travertin', description: 'Le travertin apporte un mouvement minéral chaleureux et un caractère tactile aux murs intérieurs, éléments hôteliers, habillages extérieurs et architectures monumentales.' },
       { id: 'interior-walls', title: 'Murs intérieurs & éléments signatures', description: 'Le travertin, le calcaire et les pierres texturées apportent profondeur aux murs signatures, cheminées, espaces hôteliers et détails architecturaux éclairés.' },
       { id: 'facades', title: 'Façades & extérieurs', description: 'Le parement en pierre donne aux architectures résidentielles, commerciales et culturelles une présence extérieure durable, façonnée par la texture, l’échelle et les tons naturels.' },
     ],
@@ -33,6 +34,7 @@ const copy = {
     cta: 'تواصل معنا / اطلب عرض سعر',
     groups: [
       { id: 'flooring', title: 'الأرضيات والتراسات', description: 'تضيف الأرضيات الحجرية طابعًا متينًا إلى المساحات الداخلية الراقية والضيافة والتراسات ومحيط المسابح وتفاصيل المداخل.' },
+      { id: 'travertine', title: 'الترافرتين', description: 'يمنح الترافرتين حركة معدنية دافئة وطابعًا ملمسيًا للجدران الداخلية والعناصر الفندقية والكسوات الخارجية والعمارة المميزة.' },
       { id: 'interior-walls', title: 'الجدران الداخلية والعناصر المميزة', description: 'يمنح الترافرتين والحجر الجيري والحجر المزخرف عمقًا للجدران المميزة والمدافئ والمساحات الفندقية والتفاصيل المعمارية المضاءة.' },
       { id: 'facades', title: 'الواجهات والمساحات الخارجية', description: 'تمنح الكسوة الحجرية العمارة السكنية والتجارية والثقافية حضورًا خارجيًا دائمًا، يتشكل بالملمس والمقياس والدرجات الطبيعية.' },
     ],

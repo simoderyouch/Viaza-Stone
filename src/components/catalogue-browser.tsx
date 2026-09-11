@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 import { CustomSelect } from '@/components/custom-select'
 import { ProductCard } from '@/components/product-card'
-import { getAvailableCatalogueCategories, type ProductType } from '@/data/collections'
+import { collectionPages, getAvailableCatalogueCategories, matchesCollectionProduct, type ProductType } from '@/data/collections'
 import type { Product } from '@/data/products'
 
 export function CatalogueBrowser({
@@ -23,12 +23,23 @@ export function CatalogueBrowser({
   const validInitialMaterial = ['All', ...products.map((product) => product.material)].includes(initialMaterial) ? initialMaterial : 'All'
   const [selectedType, setSelectedType] = useState<(typeof productTypes)[number]>(validInitialType)
   const [selectedMaterial, setSelectedMaterial] = useState(validInitialMaterial)
+  const [selectedCollection, setSelectedCollection] = useState('All')
+  const [selectedColor, setSelectedColor] = useState('All')
+  const [selectedFinish, setSelectedFinish] = useState('All')
+  const [selectedApplication, setSelectedApplication] = useState('All')
   const [query, setQuery] = useState(initialQuery)
 
   const materials = useMemo(
     () => ['All', ...Array.from(new Set(products.map((product) => product.material)))],
     [products],
   )
+  const availableCollections = useMemo(
+    () => collectionPages.filter((collection) => products.some((product) => matchesCollectionProduct(collection, product))),
+    [products],
+  )
+  const colors = useMemo(() => ['All', ...Array.from(new Set(products.map((product) => product.color)))], [products])
+  const finishes = useMemo(() => ['All', ...Array.from(new Set(products.flatMap((product) => product.finishes)))], [products])
+  const applications = useMemo(() => ['All', ...Array.from(new Set(products.flatMap((product) => product.applications)))], [products])
 
   const filteredProducts = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
@@ -36,20 +47,27 @@ export function CatalogueBrowser({
     return products.filter((product) => {
       const matchingType = selectedType === 'All' || product.type === selectedType
       const matchingMaterial = selectedMaterial === 'All' || product.material === selectedMaterial
+      const collection = collectionPages.find((item) => item.slug === selectedCollection)
+      const matchingCollection = selectedCollection === 'All' || Boolean(collection && matchesCollectionProduct(collection, product))
+      const matchingColor = selectedColor === 'All' || product.color === selectedColor
+      const matchingFinish = selectedFinish === 'All' || product.finishes.includes(selectedFinish)
+      const matchingApplication = selectedApplication === 'All' || product.applications.includes(selectedApplication)
       const matchingQuery =
         !normalizedQuery ||
-        [product.name, product.material, product.color, product.origin]
+        [product.name, product.material, product.color, product.origin, ...product.finishes, ...product.applications]
           .join(' ')
           .toLowerCase()
           .includes(normalizedQuery)
 
-      return matchingType && matchingMaterial && matchingQuery
+      return matchingType && matchingMaterial && matchingCollection && matchingColor && matchingFinish && matchingApplication && matchingQuery
     })
-  }, [products, query, selectedMaterial, selectedType])
+  }, [products, query, selectedApplication, selectedCollection, selectedColor, selectedFinish, selectedMaterial, selectedType])
+
+  const hasActiveFilters = selectedType !== 'All' || selectedMaterial !== 'All' || selectedCollection !== 'All' || selectedColor !== 'All' || selectedFinish !== 'All' || selectedApplication !== 'All' || Boolean(query)
 
   return (
     <div>
-      <div className="grid gap-4 border-y border-stone-200 py-5 md:grid-cols-[1fr_1fr_1.4fr]">
+      <div className="sticky top-20 z-20 grid gap-4 border-y border-stone-200 bg-[#f7f5f0]/95 py-5 backdrop-blur md:grid-cols-2 xl:top-24 xl:grid-cols-4">
         <div className="block">
           <span className="mb-2 block text-[0.65rem] font-bold tracking-[0.14em] text-stone-600 uppercase">Product type</span>
           <CustomSelect
@@ -62,6 +80,17 @@ export function CatalogueBrowser({
           />
         </div>
         <div className="block">
+          <span className="mb-2 block text-[0.65rem] font-bold tracking-[0.14em] text-stone-600 uppercase">Collection</span>
+          <CustomSelect
+            value={selectedCollection}
+            onChange={setSelectedCollection}
+            options={[
+              { value: 'All', label: 'All collections' },
+              ...availableCollections.map((collection) => ({ value: collection.slug, label: collection.title })),
+            ]}
+          />
+        </div>
+        <div className="block">
           <span className="mb-2 block text-[0.65rem] font-bold tracking-[0.14em] text-stone-600 uppercase">Material</span>
           <CustomSelect
             value={selectedMaterial}
@@ -69,7 +98,19 @@ export function CatalogueBrowser({
             options={materials.map((material) => ({ value: material, label: material }))}
           />
         </div>
-        <label className="block">
+        <div className="block">
+          <span className="mb-2 block text-[0.65rem] font-bold tracking-[0.14em] text-stone-600 uppercase">Colour</span>
+          <CustomSelect value={selectedColor} onChange={setSelectedColor} options={colors.map((color) => ({ value: color, label: color === 'All' ? 'All colours' : color }))} />
+        </div>
+        <div className="block">
+          <span className="mb-2 block text-[0.65rem] font-bold tracking-[0.14em] text-stone-600 uppercase">Finish</span>
+          <CustomSelect value={selectedFinish} onChange={setSelectedFinish} options={finishes.map((finish) => ({ value: finish, label: finish === 'All' ? 'All finishes' : finish }))} />
+        </div>
+        <div className="block">
+          <span className="mb-2 block text-[0.65rem] font-bold tracking-[0.14em] text-stone-600 uppercase">Application</span>
+          <CustomSelect value={selectedApplication} onChange={setSelectedApplication} options={applications.map((application) => ({ value: application, label: application === 'All' ? 'All applications' : application }))} />
+        </div>
+        <label className="block xl:col-span-2">
           <span className="mb-2 block text-[0.65rem] font-bold tracking-[0.14em] text-stone-600 uppercase">Search catalogue</span>
           <input
             type="search"
@@ -85,12 +126,16 @@ export function CatalogueBrowser({
         <p className="text-sm text-stone-600">
           Showing <strong className="text-[#292b2c]">{filteredProducts.length}</strong> of {products.length} surfaces
         </p>
-        {(selectedType !== 'All' || selectedMaterial !== 'All' || query) && (
+        {hasActiveFilters && (
           <button
             type="button"
             onClick={() => {
               setSelectedType('All')
               setSelectedMaterial('All')
+              setSelectedCollection('All')
+              setSelectedColor('All')
+              setSelectedFinish('All')
+              setSelectedApplication('All')
               setQuery('')
             }}
             className="border border-stone-300 px-2.5 py-1 text-[0.56rem] font-bold tracking-[0.12em] text-[#282828] uppercase transition hover:border-[#282828] hover:bg-[#f7f5f0]"

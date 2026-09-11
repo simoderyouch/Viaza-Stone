@@ -2,11 +2,11 @@ import type { Locale } from '@/i18n/config'
 import type { Product } from '@/data/products'
 
 const frenchFinishes: Record<string, string> = {
-  'Bush-Hammered': 'bouchardée', Raw: 'brute', Polished: 'polie', Rustic: 'rustique', 'Light Bush-Ham': 'bouchardée légère', Zola: 'Zola', Striated: 'striée', 'Tumbled LBR': 'vieillie LBR', Tumbled: 'vieillie', 'Crazy Paving': 'pavage irrégulier', 'Atlas-TMR': 'Atlas-TMR', 'Sandblasted-BRP': 'sablée BRP', 'Rustic-Aldo': 'rustique Aldo', 'Tuda Light': 'Tuda clair', 'Rustic Tuda': 'rustique Tuda', 'Cosmic Tuda': 'Cosmic Tuda', 'Aldo-BHB': 'Aldo-BHB', 'Grey-TMR': 'gris TMR', 'Grey Atlas-TBR': 'gris Atlas-TBR', 'Enquire for available finishes': 'finition à définir selon disponibilité',
+  'Bush-Hammered': 'bouchardée', Raw: 'brute', Polished: 'polie', Rustic: 'rustique', 'Light Bush-Ham': 'bouchardée légère', 'Light Bush-Hammered': 'bouchardée légère', Zola: 'Zola', Striated: 'striée', 'Tumbled LBR': 'vieillie LBR', Tumbled: 'vieillie', 'Crazy Paving': 'pavage irrégulier', 'Atlas-TMR': 'Atlas-TMR', 'Sandblasted-BRP': 'sablée BRP', 'Rustic-Aldo': 'rustique Aldo', 'Tuda Light': 'Tuda clair', 'Rustic Tuda': 'rustique Tuda', 'Cosmic Tuda': 'Cosmic Tuda', 'Aldo-BHB': 'Aldo-BHB', 'Grey-TMR': 'gris TMR', 'Grey Atlas-TBR': 'gris Atlas-TBR', 'Enquire for available finishes': 'finition à définir selon disponibilité',
 }
 
 const arabicFinishes: Record<string, string> = {
-  'Bush-Hammered': 'مطرقة خشنة', Raw: 'طبيعية', Polished: 'مصقولة', Rustic: 'ريفية', 'Light Bush-Ham': 'مطرقة خفيفة', Zola: 'زولا', Striated: 'مخططة', 'Tumbled LBR': 'معتّقة LBR', Tumbled: 'معتّقة', 'Crazy Paving': 'رصف عشوائي', 'Atlas-TMR': 'أطلس TMR', 'Sandblasted-BRP': 'سفع رملي BRP', 'Rustic-Aldo': 'ريفية ألدو', 'Tuda Light': 'تودا فاتح', 'Rustic Tuda': 'تودا ريفي', 'Cosmic Tuda': 'تودا كوزميك', 'Aldo-BHB': 'ألدو BHB', 'Grey-TMR': 'رمادي TMR', 'Grey Atlas-TBR': 'رمادي أطلس TBR', 'Enquire for available finishes': 'التشطيبات حسب التوفر',
+  'Bush-Hammered': 'مطرقة خشنة', Raw: 'طبيعية', Polished: 'مصقولة', Rustic: 'ريفية', 'Light Bush-Ham': 'مطرقة خفيفة', 'Light Bush-Hammered': 'مطرقة خفيفة', Zola: 'زولا', Striated: 'مخططة', 'Tumbled LBR': 'معتّقة LBR', Tumbled: 'معتّقة', 'Crazy Paving': 'رصف عشوائي', 'Atlas-TMR': 'أطلس TMR', 'Sandblasted-BRP': 'سفع رملي BRP', 'Rustic-Aldo': 'ريفية ألدو', 'Tuda Light': 'تودا فاتح', 'Rustic Tuda': 'تودا ريفي', 'Cosmic Tuda': 'تودا كوزميك', 'Aldo-BHB': 'ألدو BHB', 'Grey-TMR': 'رمادي TMR', 'Grey Atlas-TBR': 'رمادي أطلس TBR', 'Enquire for available finishes': 'التشطيبات حسب التوفر',
 }
 
 const frenchApplications: Record<string, string> = {

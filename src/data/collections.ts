@@ -4,6 +4,10 @@ export const catalogueCategories = [
     description: 'A curated collection of Moroccan limestone sourced from the mountains surrounding the historic city of Taza.',
   },
   {
+    value: 'Travertine', label: 'Travertine', href: '/catalogue?type=Travertine',
+    description: 'Moroccan travertine with warm mineral movement and an expressive natural structure.',
+  },
+  {
     value: 'Moroccan Marble', label: 'Moroccan Marble', href: '/catalogue?type=Moroccan%20Marble',
     description: 'The Essence of Earth: premium Moroccan travertines and marbles shaped by time across the Atlas Mountains and ancient landscapes.',
   },
@@ -12,8 +16,8 @@ export const catalogueCategories = [
 export type ProductType = (typeof catalogueCategories)[number]['value']
 
 export const materialCollections = [
-  { name: 'Viaza Beige', href: '/collections/viaza-beige', tagline: 'Luminous tones. Timeless natural elegance.', image: '/images/collections/viaza-beige-category.jpeg', description: 'A noble, robust Moroccan limestone with high density and weather resistance for refined interiors and exterior architecture.', lightText: true },
-  { name: 'Viaza Grey', href: '/collections/viaza-grey', tagline: 'Refined grey tones. Strong architectural character.', image: '/images/collections/viaza-grey-category.png', description: 'A premium Moroccan limestone with sophisticated grey tones, low maintenance, and resistance to moisture and changing weather.', lightText: true },
+  { name: 'Viaza Beige', href: '/collections/viaza-beige', tagline: 'Luminous tones. Timeless natural elegance.', image: '/images/collections/viaza-beige-category.jpeg', description: 'A Moroccan limestone with luminous beige tones and natural variation for refined interiors and exterior architecture.', lightText: true },
+  { name: 'Viaza Grey', href: '/collections/viaza-grey', tagline: 'Refined grey tones. Strong architectural character.', image: '/images/collections/viaza-grey-category.png', description: 'A Moroccan limestone with sophisticated grey tones and expressive mineral variation for contemporary architecture.', lightText: true },
   { name: 'Travertine', href: '/collections/travertine', tagline: 'The Essence of Earth.', image: '/images/collections/travertine-category.jpeg', description: 'Moroccan travertine shaped over millions of years, defined by warm tones, mineral structure, and natural individuality.', lightText: true },
   { name: 'Moroccan Marble', href: '/collections/moroccan-marble', tagline: 'Sculpted by time. Designed for enduring spaces.', image: '/images/products/applications/limane-grey-purple.webp', description: 'Premium Moroccan marbles with distinctive mineral structures, organic patterns, rich pigmentation, and individual veining.' },
 ] as const
@@ -109,12 +113,11 @@ export const utilityNavigation = [
 
 export function getAvailableFooterCollectionLinks(products: readonly CollectionProduct[]) {
   const availableTypes = new Set(getAvailableCatalogueCategories(products).map((category) => category.value))
-  const availableMaterials = new Set(products.map((product) => product.material))
 
   return [
     ...(availableTypes.has('Viaza Limestone') ? [{ href: '/catalogue?type=Viaza%20Limestone', label: 'Viaza Limestone' }] : []),
+    ...(availableTypes.has('Travertine') ? [{ href: '/catalogue?type=Travertine', label: 'Travertine' }] : []),
     ...(availableTypes.has('Moroccan Marble') ? [{ href: '/catalogue?type=Moroccan%20Marble', label: 'Moroccan Marble' }] : []),
-    ...(availableMaterials.has('Travertine') ? [{ href: '/catalogue?material=Travertine', label: 'Travertine' }] : []),
     { href: '/catalogue', label: 'View Catalogue' },
   ]
 }

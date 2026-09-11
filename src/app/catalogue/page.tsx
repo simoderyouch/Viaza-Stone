@@ -1,17 +1,22 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ProductCard } from '@/components/product-card'
+import { CatalogueBrowser } from '@/components/catalogue-browser'
 import { SectionHeading } from '@/components/section-heading'
-import { collectionPages, getAvailableMaterialCollections, matchesCollectionProduct } from '@/data/collections'
 import { products } from '@/data/products'
 
 export const metadata: Metadata = {
   title: 'Catalogue',
-  description: 'Search the Viaza Stone collection of Taza limestone and premium Moroccan marble.',
+  description: 'Browse the Viaza Stone catalogue of Moroccan limestone, travertine, and marble surfaces.',
 }
 
-export default function CataloguePage() {
+export default async function CataloguePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ type?: string; material?: string; q?: string }>
+}) {
+  const { type, material, q } = await searchParams
+
   return (
     <>
       <section className="relative isolate overflow-hidden bg-stone-900 px-5 pb-16 pt-42 lg:px-8 lg:pb-20 lg:pt-48">
@@ -33,28 +38,8 @@ export default function CataloguePage() {
             title="Find your own finish"
             description="Explore the complete Viaza Stone range by material type, then open a surface to view its finishes, applications, and enquiry details."
           />
-          <div className="mt-12 space-y-18">
-            {getAvailableMaterialCollections(products).map((materialCollection) => {
-              const collectionSlug = materialCollection.href.split('/').pop()
-              const collection = collectionPages.find((page) => page.slug === collectionSlug)
-
-              if (!collection) return null
-
-              const collectionProducts = products.filter((product) => matchesCollectionProduct(collection, product))
-
-              return (
-                <section key={materialCollection.name} className="border-t border-stone-200 pt-8 sm:pt-10">
-                  <div className="max-w-2xl">
-                    <p className="text-[0.7rem] font-bold tracking-[0.19em] text-[#a0937b] uppercase">Collection</p>
-                    <h2 className="font-display mt-3 text-3xl leading-tight text-[#292b2c] sm:text-4xl">{materialCollection.name}</h2>
-                    <p className="mt-3 leading-7 text-stone-600">{materialCollection.description}</p>
-                  </div>
-                  <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-                    {collectionProducts.map((product) => <ProductCard key={product.slug} product={product} />)}
-                  </div>
-                </section>
-              )
-            })}
+          <div className="mt-12">
+            <CatalogueBrowser products={products} initialType={type} initialMaterial={material} initialQuery={q} />
           </div>
         </div>
       </section>

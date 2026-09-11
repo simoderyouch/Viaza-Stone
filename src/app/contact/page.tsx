@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { ContactForm } from '@/components/contact-form'
 
@@ -17,9 +18,7 @@ export default async function ContactPage({
   return (
     <>
       <section className="relative isolate overflow-hidden bg-stone-900 px-5 pb-16 pt-42 lg:px-8 lg:pb-20 lg:pt-48">
-        <video autoPlay muted loop playsInline preload="metadata" poster="/images/hero/viaza-bathroom-hero.jpg" className="absolute inset-0 size-full object-cover" aria-hidden="true">
-          <source src="/images/hero/viaza-bathroom-hero.mp4" type="video/mp4" />
-        </video>
+        <Image src="/images/hero/viaza-bathroom-hero.jpg" alt="" fill priority sizes="100vw" className="object-cover" aria-hidden="true" />
         <div className="absolute inset-0 bg-black/62" />
         <div className="relative mx-auto max-w-7xl text-white">
           <p className="text-[0.7rem] font-bold tracking-[0.19em] text-[#d4c5aa] uppercase">Contact & request a quote</p>
@@ -48,9 +47,12 @@ export default async function ContactPage({
                 <p className="mt-2 text-sm text-stone-600">For a quote, include quantities, drawing references, project timing, and the final delivery location.</p>
               </div>
               <div className="border-b border-stone-300 pb-6">
-                <h3 className="font-semibold">Email the brief</h3>
-                <p className="mt-2 text-sm text-stone-600">Prefer to write directly or attach drawings and references?</p>
-                <a href="mailto:hello@viazastone.com" className="mt-3 inline-block text-base text-[#282828]">hello@viazastone.com</a>
+                <h3 className="font-semibold">Contact us directly</h3>
+                <p className="mt-2 text-sm text-stone-600">Prefer to write directly, attach references, or discuss your enquiry by phone?</p>
+                <div className="mt-3 space-y-2">
+                  <a href="mailto:hello@viazastone.com" className="block w-fit text-base text-[#282828] underline-offset-4 hover:underline">hello@viazastone.com</a>
+                  <a href="tel:+212665256463" className="block w-fit text-base text-[#282828] underline-offset-4 hover:underline">+212 665 256 463</a>
+                </div>
               </div>
               <div>
                 <h3 className="font-semibold">Plan your project</h3>

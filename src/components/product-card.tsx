@@ -1,16 +1,20 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { useLocale } from '@/components/locale-provider'
 import { localizeProduct } from '@/i18n/products'
-import { getRequestLocale } from '@/i18n/server'
 import type { Product } from '@/data/products'
 
-export async function ProductCard({ product, compact = false }: { product: Product; compact?: boolean }) {
-  const locale = await getRequestLocale()
+export function ProductCard({ product, compact = false }: { product: Product; compact?: boolean }) {
+  const { locale } = useLocale()
   const localizedProduct = localizeProduct(product, locale)
   const viewLabel = locale === 'fr' ? 'Voir la pierre' : locale === 'ar' ? 'عرض الحجر' : 'View material'
   const typeLabel = product.type === 'Viaza Limestone'
     ? (locale === 'fr' ? 'Calcaire Viaza' : locale === 'ar' ? 'حجر فيازا الجيري' : product.type)
-    : (locale === 'fr' ? 'Marbre marocain' : locale === 'ar' ? 'رخام مغربي' : product.type)
+    : product.type === 'Travertine'
+      ? (locale === 'fr' ? 'Travertin' : locale === 'ar' ? 'ترافرتين' : product.type)
+      : (locale === 'fr' ? 'Marbre marocain' : locale === 'ar' ? 'رخام مغربي' : product.type)
   const materialLabel = product.material === 'Limestone'
     ? (locale === 'fr' ? 'Calcaire' : locale === 'ar' ? 'حجر جيري' : product.material)
     : product.material === 'Travertine'

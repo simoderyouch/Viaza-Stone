@@ -32,13 +32,22 @@ export function Footer() {
           <a href="mailto:hello@viazastone.com" className="mt-3 block text-sm text-stone-300 hover:text-white">
             hello@viazastone.com
           </a>
+          <a href="tel:+212665256463" className="mt-2 block text-sm text-stone-300 hover:text-white">
+            +212 665 256 463
+          </a>
           <Link href="/contact" className="button-secondary mt-6 border-stone-500 text-white hover:border-white">
             {t('footer.getInTouch')}
           </Link>
         </div>
       </div>
       <div className="border-t border-stone-700 px-5 py-5 text-center text-xs text-stone-400">
-        © {new Date().getFullYear()} Viaza Stone. {t('footer.rights')}
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 sm:flex-row">
+          <span>© {new Date().getFullYear()} Viaza Stone. {t('footer.rights')}</span>
+          <span className="flex gap-5">
+            <Link href="/privacy" className="transition hover:text-white">{t('footer.privacy')}</Link>
+            <Link href="/terms" className="transition hover:text-white">{t('footer.terms')}</Link>
+          </span>
+        </div>
       </div>
     </footer>
   )

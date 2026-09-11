@@ -28,6 +28,10 @@ export default async function ApplicationsPage() {
         </div>
       </section>
 
+      <aside className="border-b border-stone-200 bg-[#f7f5f0] px-5 py-5 lg:px-8" aria-label="Image usage note">
+        <p className="mx-auto max-w-7xl text-sm leading-6 text-stone-600">{copy.notice}</p>
+      </aside>
+
       {copy.groups.map((group, groupIndex) => {
         const groupImages = images.filter((image) => image.group === group.id)
 

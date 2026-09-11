@@ -138,6 +138,15 @@ html[dir='rtl'] .font-display {
   background: #0f0f0f;
 }
 
+.button-primary.button-light {
+  background: #d4c5aa;
+  color: var(--blue);
+}
+
+.button-primary.button-light:hover {
+  background: white;
+}
+
 .button-secondary {
   border: 1px solid currentColor;
   color: inherit;

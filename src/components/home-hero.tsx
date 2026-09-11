@@ -43,12 +43,13 @@ export function HomeHero() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
+          poster="/images/hero/cover-landing.webp"
           onLoadedMetadata={(event) => updateHeroMessage(event.currentTarget.currentTime)}
           onTimeUpdate={(event) => updateHeroMessage(event.currentTarget.currentTime)}
           className="size-full object-cover"
         >
-          <source src="/images/hero/video.mp4" type="video/mp4" />
+          <source src="/images/hero/video-optimized.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/65" />
         <div className="absolute inset-0 bg-linear-to-r from-black/30 via-transparent to-black/10" />

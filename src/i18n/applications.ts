@@ -3,18 +3,20 @@ import { applicationGroups, applicationImages } from '@/data/applications'
 
 const copy = {
   en: {
-    eyebrow: 'Application gallery',
+    eyebrow: 'Design inspiration',
     title: 'Natural stone for every architectural surface.',
     description: 'From refined limestone flooring and terraces to expressive interior walls and enduring facades, Viaza Stone adapts naturally to every architectural surface.',
+    notice: 'These images illustrate possible stone applications. A project is identified as a Viaza Stone supply reference only when that relationship is explicitly stated.',
     ctaEyebrow: 'Project enquiry',
     ctaTitle: 'Have a stone application in mind?',
     cta: 'Contact / Request a Quote',
     groups: applicationGroups,
   },
   fr: {
-    eyebrow: 'Galerie d’applications',
+    eyebrow: 'Inspiration architecturale',
     title: 'La pierre naturelle au service de chaque surface architecturale.',
     description: 'Des sols et terrasses en calcaire aux murs intérieurs expressifs et façades durables, Viaza Stone s’intègre naturellement à chaque surface architecturale.',
+    notice: 'Ces images illustrent des possibilités d’application de la pierre. Un projet est présenté comme une référence fournie par Viaza Stone uniquement lorsque cette relation est explicitement indiquée.',
     ctaEyebrow: 'Demande de projet',
     ctaTitle: 'Vous avez une application pierre en tête ?',
     cta: 'Contact / Demander un devis',
@@ -26,9 +28,10 @@ const copy = {
     ],
   },
   ar: {
-    eyebrow: 'معرض التطبيقات',
+    eyebrow: 'إلهام معماري',
     title: 'حجر طبيعي لكل سطح معماري.',
     description: 'من أرضيات وتراسات الحجر الجيري الراقية إلى الجدران الداخلية التعبيرية والواجهات المتينة، تتكيف فيازا ستون مع كل سطح معماري.',
+    notice: 'توضح هذه الصور إمكانات استخدام الحجر. ولا يُعرض أي مشروع على أنه من توريد فيازا ستون إلا عندما يُذكر ذلك بوضوح.',
     ctaEyebrow: 'استفسار عن مشروع',
     ctaTitle: 'هل لديك تطبيق حجري في ذهنك؟',
     cta: 'تواصل معنا / اطلب عرض سعر',

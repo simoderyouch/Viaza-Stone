@@ -10,7 +10,7 @@ import { products } from '@/data/products'
 
 export const metadata: Metadata = {
   title: 'Products',
-  description: 'Explore Viaza Stone: Moroccan limestone sourced from Taza and a premium collection of Moroccan marbles for architecture.',
+  description: 'Explore the Viaza Stone collection of Moroccan limestone, travertine, and marble for architectural projects.',
 }
 
 const applicationGroups = [
@@ -56,7 +56,7 @@ export default function ProductsPage() {
 
       <section className="bg-[#e8e6df] px-5 py-18 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <ScrollReveal><SectionHeading eyebrow="Project uses" title="Made to work across the whole project" description="From intimate interiors to durable exterior details, the material direction changes with the space, climate, and intended use." centered /></ScrollReveal>
+          <ScrollReveal><SectionHeading eyebrow="Project uses" title="Made to work across the whole project" description="From intimate interiors to exterior details, the material direction changes with the space, climate, and intended use." centered /></ScrollReveal>
           <div className="mt-11 grid gap-5 md:grid-cols-3">
             {applicationGroups.map((group, index) => (
               <ScrollReveal key={group.title} delay={index * 0.08} hover className="h-full"><article className="h-full overflow-hidden bg-[#f7f5f0]">

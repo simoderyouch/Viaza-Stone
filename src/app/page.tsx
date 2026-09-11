@@ -33,7 +33,7 @@ const viazaPillars = [
 const projectApplications = [
   {
     title: 'Flooring & terraces',
-    text: 'Durable natural stone for refined interiors, outdoor living, pool surrounds, and detailed thresholds.',
+    text: 'Natural stone for refined interiors, outdoor living, pool surrounds, and detailed thresholds.',
     image: '/images/applications/projects/luxury-interior-flooring.png',
   },
   {
@@ -48,22 +48,16 @@ const projectApplications = [
   },
   {
     title: 'Facades & exteriors',
-    text: 'Long-lasting stone cladding for residential, commercial, and cultural architecture.',
+    text: 'Natural stone cladding for residential, commercial, and cultural architecture.',
     image: '/images/applications/projects/cinema-stone-facade.jpeg',
   },
 ]
 
-const specificationServices = [
-  { number: '01', title: 'Material selection', text: 'Select the right stone, color variation, finish, and application for your brief.' },
-  { number: '02', title: 'Custom finishing', text: 'Plan formats and surface treatments to suit the intended architectural result.' },
-  { number: '03', title: 'Packing & shipment', text: 'Coordinate a clear export path from order confirmation to project delivery.' },
-]
-
 const finishes = [
-  { title: 'Polished', text: 'A reflective finish that brings out colour, depth, and natural movement.', image: '/images/finishes/polished-stone.png' },
-  { title: 'Raw', text: 'An untreated finish that preserves the stone’s authentic natural texture.', image: '/images/finishes/raw-stone.png' },
-  { title: 'Brushed & textured', text: 'Tactile surface character for exterior and architectural applications.', image: '/images/finishes/brushed-textured-stone.png' },
-  { title: 'Custom formats', text: 'Tiles, slabs, cladding, stairs, and project-specific cuts.', image: '/images/finishes/custom-formats-stone.png' },
+  { title: 'Raw', text: 'An untreated finish that preserves the stone’s authentic natural texture.', image: '/images/finishes/raw-stone-v2.png' },
+  { title: 'Polished', text: 'A reflective finish that brings out colour, depth, and natural movement.', image: '/images/finishes/polished-stone-v2.png' },
+  { title: 'Brushed & textured', text: 'Tactile surface character for exterior and architectural applications.', image: '/images/finishes/brushed-textured-stone-v2.png' },
+  { title: 'Custom formats', text: 'Tiles, slabs, cladding, stairs, and project-specific cuts.', image: '/images/finishes/custom-formats-stone-v2.png' },
 ]
 
 const exportSteps = [
@@ -71,13 +65,6 @@ const exportSteps = [
   { number: '02', title: 'Confirm the selection', text: 'Align on the appropriate stone, color variation, and technical specification.' },
   { number: '03', title: 'Prepare the order', text: 'Coordinate cutting, finishing, quality review, and protective packing.' },
   { number: '04', title: 'Plan dispatch', text: 'Organize the shipment details and supporting information for your order.' },
-]
-
-const whyViaza = [
-  { title: 'Material-led sourcing', text: 'A curated focus on natural stone chosen for its architectural potential.' },
-  { title: 'Custom project support', text: 'Specification guidance from the first material conversation onward.' },
-  { title: 'Export-minded process', text: 'A clear workflow for international buyers and project teams.' },
-  { title: 'Direct communication', text: 'Responsive support for enquiries, samples, and project details.' },
 ]
 
 const faqItems = [
@@ -169,39 +156,19 @@ export default function HomePage() {
               <div className="mt-8 space-y-6 text-base leading-7 text-stone-300 sm:text-xl sm:leading-8">
                 <p>This Volubilis Travertine wall cladding transforms the hotel lobby into a prestigious, warm, and contemporary space. The architectural composition, created using panels of varying dimensions and carefully arranged veining, highlights the natural richness and distinctive character of the stone.</p>
                 <p>The projecting elements, enhanced by subtle indirect lighting, create a striking interplay of depth, light, and shadow. The travertine’s elegant beige-brown tones harmonize beautifully with the crystal chandelier and refined furnishings, offering guests a luxurious and authentic first impression.</p>
-                <p>Noble, durable, and timeless, Volubilis Travertine is an exceptional choice for five-star hotel lobbies, prestigious reception areas, and high-end architectural projects.</p>
+                <p>Noble and timeless, Volubilis Travertine brings a distinctive material presence to five-star hotel lobbies, prestigious reception areas, and high-end architectural projects.</p>
               </div>
             </div>
           </ScrollReveal>
-          <ScrollReveal distance={40} className="relative min-h-svh overflow-hidden lg:min-h-0">
-            <div className="absolute inset-0 bg-black">
-              <video autoPlay loop muted playsInline preload="metadata" className="absolute inset-0 h-full w-full object-cover object-center" aria-label="Viaza Stone in motion">
-                <source src="/videos/viaza-stone-in-motion.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <section className="bg-white px-5 py-18 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          <ScrollReveal>
-            <SectionHeading
-              eyebrow="Made for specification"
-              title="A clearer route from material to project"
-              description="Whether you are sourcing for a single villa or a larger development, Viaza Stone helps organize the material decisions that matter."
+          <ScrollReveal distance={40} className="relative aspect-[9/16] overflow-hidden bg-black sm:aspect-[4/5] lg:aspect-auto lg:min-h-0">
+            <Image
+              src="/images/applications/projects/volubilis-travertine-lobby.webp"
+              alt="Volubilis Travertine wall installation in a hotel lobby"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-center"
             />
-            <Link href="/contact" className="button-primary mt-8">Discuss your project</Link>
           </ScrollReveal>
-          <div className="grid gap-px bg-stone-200 sm:grid-cols-3">
-            {specificationServices.map((service, index) => (
-              <ScrollReveal key={service.number} delay={index * 0.1} hover className="h-full"><article className="h-full bg-[#f7f5f0] p-7">
-                <span className="font-display text-3xl text-stone-500">{service.number}</span>
-                <h3 className="mt-6 text-lg font-semibold">{service.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-stone-600">{service.text}</p>
-              </article></ScrollReveal>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -244,7 +211,7 @@ export default function HomePage() {
               ))}
             </div>
             <div className="mt-9 flex flex-wrap gap-3">
-              <Link href="/catalogue" className="button-primary">Request catalogue</Link>
+              <Link href="/catalogue" className="button-primary">Explore catalogue</Link>
               <Link href="/contact" className="button-secondary">Contact / Request a Quote</Link>
             </div>
           </ScrollReveal>
@@ -252,13 +219,13 @@ export default function HomePage() {
       </section>
 
       <section className="bg-white px-5 py-18 lg:px-8">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-[1680px]">
           <ScrollReveal><SectionHeading eyebrow="Finishes & formats" title="Specify every surface detail" description="Choose a finish and format that supports the material, the setting, and the architectural intent of your project." centered /></ScrollReveal>
           <div className="mt-11 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
             {finishes.map((finish, index) => (
               <ScrollReveal key={finish.title} delay={index * 0.07} hover className="h-full"><article className="h-full overflow-hidden border border-stone-200 bg-[#f7f5f0]">
                 <div className="relative aspect-[4/3]">
-                  <Image src={finish.image} alt={`${finish.title} stone finish`} fill sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw" className="object-cover" />
+                  <Image src={finish.image} alt={`${finish.title} stone finish`} fill sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw" className="object-cover object-center" />
                 </div>
                 <div className="p-6">
                   <h3 className="font-display text-2xl">{finish.title}</h3>
@@ -286,23 +253,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-18 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <ScrollReveal><SectionHeading eyebrow="Why Viaza Stone" title="A more confident way to source stone" centered /></ScrollReveal>
-          <div className="mt-11 grid gap-px bg-stone-200 sm:grid-cols-2 lg:grid-cols-4">
-            {whyViaza.map((reason, index) => (
-              <ScrollReveal key={reason.title} delay={index * 0.08} hover className="h-full"><article className="h-full bg-white p-7">
-                <span className="font-display text-3xl text-stone-400">0{index + 1}</span>
-                <h3 className="mt-6 text-lg font-semibold">{reason.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-stone-600">{reason.text}</p>
-              </article></ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="relative isolate overflow-hidden px-5 py-22 text-white lg:px-8">
-        <Image src="/images/products/v2/detail/viaza-grey-polished.webp" alt="Viaza Grey polished stone sample" fill loading="eager" sizes="100vw" className="object-cover" />
+        <Image
+          src="/images/showcase/viaza-stone-context-01.png"
+          alt="Natural stone flooring in a warm architectural interior"
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+        />
         <div className="absolute inset-0 bg-black/75" />
         <ScrollReveal className="relative mx-auto max-w-2xl text-center" distance={18}>
           <p className="text-[0.7rem] font-bold tracking-[0.19em] text-[#d4c5aa] uppercase">Material samples</p>
@@ -328,7 +286,7 @@ export default function HomePage() {
             <h2 className="font-display text-4xl sm:text-5xl">Have a project in mind?</h2>
             <p className="mt-3 text-lg text-stone-300">Let&apos;s turn the brief into a material direction.</p>
           </div>
-          <Link href="/contact" className="button-primary">Talk to Viaza Stone</Link>
+          <Link href="/contact" className="button-primary button-light">Talk to Viaza Stone</Link>
         </div>
       </section>
     </>

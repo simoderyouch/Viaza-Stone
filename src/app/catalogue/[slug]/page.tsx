@@ -127,6 +127,12 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
               <dl className={`mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2 ${secondImage ? '' : 'lg:grid-cols-3'}`}>
                 {displayStoneDetails.map((detail) => <DetailItem key={detail.label} {...detail} />)}
               </dl>
+              <div className="mt-10 border-t border-stone-200 pt-7">
+                <h3 className="text-sm font-bold tracking-[0.14em] text-[#292b2c] uppercase">Selection & technical confirmation</h3>
+                <p className="mt-3 text-sm leading-6 text-stone-600">{product.note}</p>
+                <p className="mt-4 text-sm leading-6 text-stone-600"><strong className="text-[#292b2c]">Suggested applications:</strong> {product.applications.join(', ')}.</p>
+                <Link href={`/contact?material=${encodeURIComponent(product.name)}&enquiry=Technical%20documentation`} className="button-secondary mt-6 w-fit">Request technical documentation</Link>
+              </div>
             </div>
           </div>
         </div>

@@ -61,7 +61,7 @@ const extractedStoneDetails = (finish: string): NonNullable<Product['stoneDetail
   { label: 'Collection origin', value: 'Morocco', icon: 'origin' },
   { label: 'Finish', value: finish, icon: 'finish' },
   { label: 'Tile Dimensions', value: 'Made To Order', icon: 'dimensions' },
-  { label: 'Thickness variation', value: '+/-  20-50 mm', icon: 'thickness' },
+  { label: 'Available thickness range', value: '20–50 mm · confirm for selected format', icon: 'thickness' },
   { label: 'Availability', value: 'Enquire for availability', icon: 'availability' },
 ]
 
@@ -123,9 +123,9 @@ function createProduct({
   const isViazaBeige = name.startsWith('Viaza Beige') || collectionSlug === 'viaza-beige'
   const isViazaGrey = name.startsWith('Viaza Grey') || collectionSlug === 'viaza-grey'
   const selectionNote = isViazaBeige
-    ? 'Viaza Beige is a noble, robust Moroccan limestone prized for luminous tones, timeless elegance, high density, and excellent weather resistance. Confirm the selected sample, finish, and format before final approval.'
+    ? 'Viaza Beige is a Moroccan limestone with luminous tones and natural mineral variation. Confirm the selected sample, finish, dimensions, intended application, and current technical documentation before final approval.'
     : isViazaGrey
-      ? 'Viaza Grey is a premium Moroccan limestone recognised for durable refined grey tones, resistance to moisture and changing weather, and low-maintenance performance. Confirm the selected sample, finish, and format before final approval.'
+      ? 'Viaza Grey is a Moroccan limestone with refined grey tones and natural mineral variation. Confirm the selected sample, finish, dimensions, intended application, and current technical documentation before final approval.'
       : 'Every premium Moroccan stone is shaped by geological forces over millions of years. Natural pigment, mineral structure, veining, and tone vary from slab to slab; confirm the selected material before final approval.'
 
   return {
@@ -178,8 +178,8 @@ const allProducts: Product[] = [
     applicationImage: extractedProductImage('beige-bush-hammered', 'application.png'),
     applicationImageFit: 'contain',
     detailHeading: 'VIAZA Limestone – Bush-Hammered Finish',
-    description: 'The Bush-Hammered finish reveals the bold and enduring character of VIAZA Limestone Beige through a finely textured surface that combines natural beauty with architectural performance. The carefully crafted relief enriches the stone with depth and character while preserving its authentic limestone appearance. Its textured finish provides excellent slip resistance and exceptional durability, making it particularly suitable for high-traffic areas and outdoor environments. Balancing refined aesthetics with lasting functionality, this finish is an excellent choice for plazas, walkways, staircases, façades, terraces, and contemporary architectural projects where texture, safety, and timeless elegance come together.',
-    stoneDetails: extractedStoneDetails('BUSH-HAMMRED'),
+    description: 'The Bush-Hammered finish reveals the bold character of VIAZA Limestone Beige through a finely textured surface. Its carefully worked relief adds depth while preserving the authentic limestone appearance. It can be considered for plazas, walkways, staircases, façades, terraces, and architectural projects where a tactile surface is desired; confirm application-specific performance against current technical documentation.',
+    stoneDetails: extractedStoneDetails('Bush-Hammered'),
   }),
   createProduct({
     name: 'Viaza Beige Raw',
@@ -196,7 +196,7 @@ const allProducts: Product[] = [
     applicationImage: extractedProductImage('beige-raw', 'application.png'),
     applicationImageFit: 'contain',
     detailHeading: 'VIAZA Limestone – Natural Finish',
-    description: 'In its raw state, VIAZA Limestone Beige reveals the authentic beauty of Moroccan natural stone. Its original texture, soft tonal variations, and timeless character make it an exceptional choice for architectural projects seeking purity, durability, and natural elegance.',
+    description: 'In its raw state, VIAZA Limestone Beige reveals the authentic beauty of Moroccan natural stone. Its original texture, soft tonal variations, and timeless character make it an exceptional choice for architectural projects seeking purity and natural elegance. Confirm the selected format and application against current technical documentation.',
     stoneDetails: extractedStoneDetails('Raw'),
   }),
   createProduct({
@@ -204,7 +204,7 @@ const allProducts: Product[] = [
     image: extractedProductImage('beige-polished', 'main.png'), imageFit: 'contain',
     gallery: [extractedProductImage('beige-polished', 'detail.png')], galleryImageFit: 'contain',
     applicationImage: extractedProductImage('beige-polished', 'application.png'), applicationImageFit: 'contain',
-    description: 'The polished finish transforms VIAZA Limestone Beige into a refined and luminous architectural surface. Through meticulous polishing, the stone gains a smooth touch and an elegant sheen that intensifies its warm beige tones, reveals its subtle natural details, and enhances the surrounding light. When properly sealed, its smooth surface also facilitates routine maintenance and provides greater comfort for interior applications. Combining visual depth, durability, and timeless sophistication, it is particularly suited to prestigious floors, wall coverings, staircases, and decorative features.',
+    description: 'The polished finish transforms VIAZA Limestone Beige into a refined and luminous architectural surface. Through meticulous polishing, the stone gains a smooth touch and an elegant sheen that intensifies its warm beige tones, reveals subtle natural details, and responds beautifully to surrounding light. It can be considered for interior floors, wall coverings, staircases, and decorative features, subject to confirmation of the selected format and application requirements.',
     detailHeading: 'VIAZA Limestone – Polished Finish',
     stoneDetails: extractedStoneDetails('Polished'),
   }),
@@ -213,11 +213,11 @@ const allProducts: Product[] = [
     image: extractedProductImage('beige-rustic', 'main.png'), imageFit: 'contain',
     gallery: [extractedProductImage('beige-rustic', 'detail.png')], galleryImageFit: 'contain',
     applicationImage: extractedProductImage('beige-rustic', 'application.png'), applicationImageFit: 'contain',
-    description: 'The  Aged  enhances VIAZA Limestone Beige with a naturally weathered appearance, celebrating the authentic character of Moroccan limestone. Carefully treated to soften its edges and gently texture its surface, the stone acquires a warm, timeworn aesthetic that highlights its subtle tonal variations and natural depth. Its matte finish creates a welcoming atmosphere while offering excellent slip resistance, making it an ideal choice for both indoor and outdoor applications. Combining timeless charm, durability, and architectural authenticity, it is perfectly suited for terraces, courtyards, pool surrounds, heritage restorations, and elegant contemporary spaces seeking a genuine natural character.',
+    description: 'The Rustic finish enhances VIAZA Limestone Beige with a naturally weathered appearance that celebrates the authentic character of Moroccan limestone. Its softened edges and gently textured surface create a warm, timeworn aesthetic that highlights subtle tonal variation and natural depth. The matte surface is suited to indoor and outdoor architectural applications, including terraces, courtyards, pool surrounds, heritage restorations, and contemporary spaces seeking a genuine natural character. Confirm application-specific performance requirements against the selected sample and current technical documentation.',
     detailHeading: 'VIAZA Limestone – RUSTIC Finish',
     stoneDetails: extractedStoneDetails('RUSTIC'),
   }),
-  createProduct({ name: 'Viaza Beige Light Bush-Ham', slug: 'viaza-beige-light-bush-ham', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', finish: 'Light Bush-Ham', applications: beigeApplications, description: 'High-density Viaza Beige limestone with a gently textured finish for soft grip and an elegant natural look.' }),
+  createProduct({ name: 'Viaza Beige Light Bush-Hammered', slug: 'viaza-beige-light-bush-ham', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', finish: 'Light Bush-Hammered', applications: beigeApplications, description: 'Viaza Beige limestone with a gently textured finish and an elegant natural appearance.' }),
   createProduct({
     name: 'Viaza Beige Zola', slug: 'viaza-beige-zola', type: 'Viaza Limestone', material: 'Limestone', color: 'Greige Beige', finish: 'Zola', applications: beigeApplications,
     image: extractedProductImage('beige-zola', 'main.png'), imageFit: 'contain',
@@ -241,7 +241,7 @@ const allProducts: Product[] = [
     galleryImageFit: 'contain',
     applicationImage: extractedProductImage('beige-tumbled', 'application.png'), applicationImageFit: 'contain',
     detailHeading: 'VIAZA Limestone – Tumbled Finish',
-    description: 'The Tumbled finish brings a soft, naturally aged character to VIAZA Limestone Beige, creating a surface that evokes the charm and authenticity of time-worn stone. Through a carefully controlled tumbling process, the edges are gently softened and the surface acquires subtle variations that enhance the limestone’s natural texture without losing its distinctive beige tones. This finish offers a warm, understated appearance while providing good slip resistance and durability, making it particularly well suited to both indoor and outdoor settings. Combining traditional character with architectural versatility, the Tumbled finish is an excellent choice for courtyards, terraces, pathways, pool surrounds, patios, and heritage-inspired projects where natural warmth, authenticity, and timeless elegance are essential.',
+    description: 'The Tumbled finish brings a soft, naturally aged character to VIAZA Limestone Beige. Through a carefully controlled tumbling process, the edges are gently softened and the surface acquires subtle variation without losing its distinctive beige tones. It can be considered for courtyards, terraces, pathways, pool surrounds, patios, and heritage-inspired projects, with application-specific performance confirmed against current technical documentation.',
     stoneDetails: extractedStoneDetails('Tumbled'),
   }),
   createProduct({
@@ -256,23 +256,23 @@ const allProducts: Product[] = [
     description: 'Viaza Beige Crazy Paving brings the natural irregularity of limestone into exterior spaces. Each piece is defined by an organic shape, softly textured surface, and luminous beige variation, creating a relaxed yet enduring finish for terraces, courtyards, pool surroundings, and landscaped paths. The result feels crafted by nature while offering the strength and timeless character of Moroccan limestone.',
     stoneDetails: extractedStoneDetails('Crazy Paving'),
   }),
+  createProduct({ name: 'Viaza Beige Atlas-TMR', slug: 'viaza-beige-atlas-tmr', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', finish: 'Atlas-TMR', applications: beigeApplications, description: 'Viaza Beige limestone in the architectural Atlas-TMR finish.' }),
+  createProduct({ name: 'Viaza Beige Sandblasted-BRP', slug: 'viaza-beige-sandblasted-brp', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', finish: 'Sandblasted-BRP', applications: beigeApplications, image: '/images/products/v2/detail/viaza-beige-sandblasted-brp.png', thumbnail: '/images/products/v2/thumb/viaza-beige-sandblasted-brp.png', description: 'Viaza Beige limestone in a sandblasted finish with a refined textured surface.' }),
   createProduct({
     name: 'Viaza Beige Split-Face', slug: 'viaza-beige-split-face', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', finish: 'Split-Face', applications: beigeApplications,
     image: extractedProductImage('beige-split-face', 'main.jpg'), imageFit: 'contain',
     thumbnail: extractedProductImage('beige-split-face', 'detail.jpg'),
-    gallery: [extractedProductImage('beige-split-face', 'detail.jpg')], galleryImageFit: 'contain',
-    applicationImage: extractedProductImage('beige-split-face', 'application.jpeg'), applicationImageFit: 'contain',
+    gallery: [extractedProductImage('beige-split-face', 'application.jpeg')], galleryImageFit: 'contain',
+    applicationImage: extractedProductImage('beige-split-face', 'detail.jpg'), applicationImageFit: 'contain',
     detailHeading: 'VIAZA Limestone – Split-Face Finish',
-    description: 'The Split-Face finish brings out the raw and expressive character of VIAZA Limestone Beige through a naturally fractured surface rich in texture, depth, and subtle relief. Each piece reveals unique irregularities and tonal variations, emphasizing the authentic mineral identity of the stone and giving every installation a distinctive architectural presence. Its rugged texture creates a striking interplay of light and shadow while offering excellent durability for both interior and exterior applications. Combining natural strength with timeless aesthetics, this finish is particularly suited for façades, feature walls, boundary walls, fireplaces, landscaping, and architectural projects seeking a bold yet authentic connection to natural stone.',
+    description: 'The Split-Face finish brings out the raw and expressive character of VIAZA Limestone Beige through a naturally fractured surface rich in texture, depth, and subtle relief. Each piece reveals unique irregularities and tonal variations, emphasizing the authentic mineral identity of the stone and giving every installation a distinctive architectural presence. Its rugged texture creates a striking interplay of light and shadow. The finish can be considered for façades, feature walls, boundary walls, fireplaces, landscaping, and architectural projects seeking a bold connection to natural stone, subject to confirmation of application-specific performance.',
     stoneDetails: extractedStoneDetails('Split-Face'),
   }),
-  createProduct({ name: 'Viaza Beige Atlas-TMR', slug: 'viaza-beige-atlas-tmr', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', finish: 'Atlas-TMR', applications: beigeApplications, description: 'High-density Viaza Beige limestone in the Atlas-TMR finish.' }),
-  createProduct({ name: 'Viaza Beige Sandblasted-BRP', slug: 'viaza-beige-sandblasted-brp', type: 'Viaza Limestone', material: 'Limestone', color: 'Luminous Beige', finish: 'Sandblasted-BRP', applications: beigeApplications, image: '/images/products/v2/detail/viaza-beige-sandblasted-brp.png', thumbnail: '/images/products/v2/thumb/viaza-beige-sandblasted-brp.png', description: 'High-density Viaza Beige limestone in a sandblasted finish with a refined textured surface.' }),
   createProduct({
     name: 'Viaza Grey Polished', slug: 'viaza-grey-polished', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', finish: 'Polished', applications: greyApplications,
     image: extractedProductImage('grey-polished', 'main.jpg'), imageFit: 'contain', gallery: [extractedProductImage('grey-polished', 'detail.png')], galleryImageFit: 'contain',
     applicationImage: extractedProductImage('grey-polished', 'application.jpeg'), applicationImageFit: 'contain', detailHeading: 'VIAZA Limestone Grey – Polished Finish',
-    description: 'The polished finish brings out the refined character of VIAZA Limestone Grey, transforming its naturally balanced grey tones into a smooth and sophisticated architectural surface. Through precise polishing, the stone develops an elegant sheen that enhances its subtle mineral variations, reveals the depth of its natural details, and interacts beautifully with surrounding light. Its sleek surface creates a sense of continuity and refinement while remaining durable and easy to maintain when properly sealed. Combining the authentic character of Moroccan limestone with a contemporary and prestigious appearance, this finish is particularly suited to elegant interior floors, wall cladding, staircases, reception areas, and distinctive architectural spaces where natural stone and modern sophistication come together.',
+    description: 'The polished finish brings out the refined character of VIAZA Limestone Grey, transforming its balanced grey tones into a smooth architectural surface. Precise polishing creates an elegant sheen that enhances subtle mineral variation and interacts beautifully with surrounding light. It can be considered for interior floors, wall cladding, staircases, reception areas, and distinctive architectural spaces, subject to confirmation of the selected format and application requirements.',
     stoneDetails: extractedStoneDetails('Polished'),
   }),
   createProduct({
@@ -298,7 +298,7 @@ const allProducts: Product[] = [
     name: 'Viaza Grey Light Bush-Hammered', slug: 'viaza-grey-light-bush-ham', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', finish: 'Light Bush-Hammered', applications: greyApplications,
     image: extractedProductImage('grey-light-bush-hammered', 'main.jpg'), imageFit: 'contain', gallery: [extractedProductImage('grey-light-bush-hammered', 'detail.png')], galleryImageFit: 'contain',
     applicationImage: extractedProductImage('grey-light-bush-hammered', 'application.jpg'), applicationImageFit: 'contain', detailHeading: 'VIAZA Limestone Grey – Light Bush-Hammered Finish',
-    description: 'The Light Bush-Hammered finish enhances the natural character of VIAZA Limestone Grey through a finely textured surface that adds subtle depth while preserving the stone’s soft grey tones and authentic mineral variations. The delicate mechanical treatment creates a refined relief, giving the surface a more tactile and naturally matte appearance without overwhelming its original character. Its lightly textured finish improves grip and provides excellent durability, making it particularly suitable for areas where aesthetics and functionality must work together. Combining understated texture, architectural versatility, and the timeless appeal of Moroccan limestone, this finish is an excellent choice for terraces, walkways, pool surrounds, façades, staircases, and contemporary spaces seeking a refined yet naturally textured surface.',
+    description: 'The Light Bush-Hammered finish enhances VIAZA Limestone Grey through a finely textured surface that adds subtle depth while preserving the stone’s soft grey tones and mineral variation. The delicate mechanical treatment creates a refined relief and naturally matte appearance. It can be considered for terraces, walkways, pool surrounds, façades, staircases, and contemporary spaces, with application-specific performance confirmed against current technical documentation.',
     stoneDetails: extractedStoneDetails('Light Bush-Hammered'),
   }),
   createProduct({
@@ -319,7 +319,7 @@ const allProducts: Product[] = [
     description: [
       'Deep blue-grey hues and a distinctive mineral character give VIAZA Blue Tuda a remarkably contemporary identity. Naturally nuanced, its surface shifts subtly between cooler and deeper tones, creating visual movement while retaining the understated elegance of authentic Moroccan stone.',
       'Its architectural strength lies in this balance between character and simplicity. Blue Tuda can define a space without overpowering it, bringing depth to modern interiors, sophisticated façades, and outdoor environments. Its mineral palette pairs naturally with wood, glass, concrete, and metal, offering architects considerable freedom in combining materials and creating contrasts.',
-      'Elegant, durable, and expressive, VIAZA Blue Tuda lends itself beautifully to floors, façades, wall cladding, staircases, terraces, and bespoke architectural elements. A stone with a strong identity, designed for projects where natural material becomes an essential part of the architectural expression.',
+      'Elegant and expressive, VIAZA Blue Tuda can be considered for floors, façades, wall cladding, staircases, terraces, and bespoke architectural elements, subject to the requirements of the selected application.',
     ],
     stoneDetails: extractedStoneDetails('honed'),
   }),
@@ -334,12 +334,12 @@ const allProducts: Product[] = [
     ],
     stoneDetails: extractedStoneDetails('Rustic'),
   }),
-  createProduct({ name: 'Viaza Grey Cosmic Tuda', slug: 'viaza-grey-cosmic-tuda', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', finish: 'Cosmic Tuda', applications: greyApplications, description: 'Durable Viaza Grey limestone in the distinctive Cosmic Tuda finish.' }),
-  createProduct({ name: 'Viaza Grey Aldo-BHB', slug: 'viaza-grey-aldo-bhb', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', finish: 'Aldo-BHB', applications: greyApplications, description: 'Durable Viaza Grey limestone in the Aldo-BHB finish.' }),
-  createProduct({ name: 'Viaza Grey-TMR', slug: 'viaza-grey-tmr', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', finish: 'Grey-TMR', applications: greyApplications, description: 'Durable Viaza Grey limestone in the Grey-TMR finish.' }),
-  createProduct({ name: 'Viaza Grey Atlas-TBR', slug: 'viaza-grey-atlas-tbr', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', finish: 'Grey Atlas-TBR', applications: greyApplications, description: 'Durable Viaza Grey limestone in the Grey Atlas-TBR finish.' }),
-  createProduct({ name: 'Travertine Atlas', slug: 'travertine-atlas', type: 'Moroccan Marble', material: 'Travertine', color: 'Warm Beige', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan travertine with a warm, natural stone character.' }),
-  createProduct({ name: 'Travertine Desert', slug: 'travertine-desert', type: 'Moroccan Marble', material: 'Travertine', color: 'Desert Beige', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan travertine with a warm desert-toned expression.' }),
+  createProduct({ name: 'Viaza Grey Cosmic Tuda', slug: 'viaza-grey-cosmic-tuda', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', finish: 'Cosmic Tuda', applications: greyApplications, description: 'Viaza Grey limestone in the distinctive Cosmic Tuda finish.' }),
+  createProduct({ name: 'Viaza Grey Aldo-BHB', slug: 'viaza-grey-aldo-bhb', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', finish: 'Aldo-BHB', applications: greyApplications, description: 'Viaza Grey limestone in the Aldo-BHB finish.' }),
+  createProduct({ name: 'Viaza Grey-TMR', slug: 'viaza-grey-tmr', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', finish: 'Grey-TMR', applications: greyApplications, description: 'Viaza Grey limestone in the Grey-TMR finish.' }),
+  createProduct({ name: 'Viaza Grey Atlas-TBR', slug: 'viaza-grey-atlas-tbr', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', finish: 'Grey Atlas-TBR', applications: greyApplications, description: 'Viaza Grey limestone in the Grey Atlas-TBR finish.' }),
+  createProduct({ name: 'Travertine Atlas', slug: 'travertine-atlas', type: 'Travertine', material: 'Travertine', color: 'Warm Beige', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan travertine with a warm, natural stone character.' }),
+  createProduct({ name: 'Travertine Desert', slug: 'travertine-desert', type: 'Travertine', material: 'Travertine', color: 'Desert Beige', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan travertine with a warm desert-toned expression.' }),
   createProduct({ name: 'Yellow Atlantic', slug: 'yellow-atlantic', type: 'Moroccan Marble', material: 'Marble', color: 'Golden Yellow', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan marble with a naturally warm golden-yellow palette.' }),
   createProduct({ name: 'Limane Grey-Purple', slug: 'limane-grey-purple', type: 'Moroccan Marble', material: 'Marble', color: 'Grey & Purple', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan marble with a distinctive grey-purple colour direction.' }),
   createProduct({ name: 'Limane Grey-Lido', slug: 'limane-grey-lido', type: 'Moroccan Marble', material: 'Marble', color: 'Grey', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan marble with a calm, refined grey expression.' }),
@@ -353,10 +353,10 @@ const productDisplayOrder = [
   'viaza-beige-polished',
   'viaza-beige-bush-hammered',
   'viaza-beige-rustic',
-  'viaza-beige-split-face',
   'viaza-beige-zola',
   'viaza-beige-tumbled',
   'viaza-beige-crazy-paving',
+  'viaza-beige-split-face',
   'viaza-grey-polished',
   'viaza-grey-light-bush-ham',
   'viaza-grey-rustic',
@@ -371,7 +371,7 @@ const productDisplayPriority = new Map(productDisplayOrder.map((slug, index) => 
 // Viaza Limestone entries need the complete visual story before publishing.
 // Travertine and Moroccan Marble retain their existing two-image product pages.
 export const products = allProducts
-  .filter((product) => product.gallery.length > 0 || product.type === 'Moroccan Marble')
+  .filter((product) => product.gallery.length > 0 || product.type !== 'Viaza Limestone')
   .sort((first, second) => (productDisplayPriority.get(first.slug) ?? Number.MAX_SAFE_INTEGER) - (productDisplayPriority.get(second.slug) ?? Number.MAX_SAFE_INTEGER))
 
 export function getProductBySlug(slug: string) {

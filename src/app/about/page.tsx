@@ -55,7 +55,7 @@ export default function AboutPage() {
 
       <section className="bg-[#e8e6df] px-5 py-18 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <ScrollReveal><SectionHeading eyebrow="What guides us" title="Noble material for noble client." centered /></ScrollReveal>
+          <ScrollReveal><SectionHeading eyebrow="What guides us" title="Noble Moroccan stone for distinguished architectural projects." centered /></ScrollReveal>
           <div className="mt-11 grid gap-6 md:grid-cols-3">
             {values.map((value, index) => (
               <ScrollReveal key={value.title} delay={index * 0.1} hover className="h-full"><article className="h-full border-t-2 border-[#282828] bg-[#f7f5f0] p-7">

@@ -31,24 +31,28 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-[#0f0f0f]/80" />
         <div className="relative mx-auto max-w-7xl text-white">
           <p className="text-[0.7rem] font-bold tracking-[0.19em] text-[#d4c5aa] uppercase">About Viaza Stone</p>
-          <h1 className="font-display mt-4 max-w-3xl text-5xl leading-tight sm:text-6xl">Moroccan natural stone, selected for exceptional architecture.</h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-stone-100">Viaza Stone curates, processes, and distributes Morocco&apos;s finest natural stone for architectural, construction, and interior design projects.</p>
+          <h1 className="font-display mt-4 max-w-4xl text-5xl leading-tight sm:text-6xl">Moroccan Natural Stone, The ideal choice for your exceptional projects</h1>
         </div>
       </section>
 
       <section className="px-5 py-18 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-          <ScrollReveal><SectionHeading eyebrow="Our approach" title="Authentic Moroccan craftsmanship, aligned with modern architecture." /></ScrollReveal>
-          <ScrollReveal delay={0.08} className="max-w-2xl space-y-5 text-base leading-8 text-stone-700">
-            <p>
-              By collaborating with leading Moroccan quarries, we carefully source high-grade stone selected to meet the requirements of international construction, architecture, and interior design projects.
-            </p>
-            <p>
-              We create a reliable bridge between Morocco&apos;s stone-working heritage and contemporary architectural standards. Our expertise spans elegant flooring, refined wall cladding, exterior facades, terraces, pool surroundings, landscaping, and bespoke large-scale stonework.
-            </p>
-            <p>
-              Our team supports each project through the selection of suitable materials, finishes, formats, and natural stone solutions. Exceptional spaces begin with exceptional materials.
-            </p>
+        <div className="mx-auto grid max-w-7xl items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+          <ScrollReveal>
+            <div className="aspect-[4/3] w-full bg-black" aria-label="Image placeholder" role="img" />
+          </ScrollReveal>
+          <ScrollReveal delay={0.08} className="max-w-2xl">
+            <SectionHeading eyebrow="Our approach" title="Authentic Moroccan craftsmanship, aligned with modern architecture." />
+            <div className="mt-7 space-y-5 text-base leading-8 text-stone-700">
+              <p>
+                By collaborating with leading Moroccan quarries, we carefully source high-grade stone selected to meet the requirements of international construction, architecture, and interior design projects.
+              </p>
+              <p>
+                We create a reliable bridge between Morocco&apos;s stone-working heritage and contemporary architectural standards. Our expertise spans elegant flooring, refined wall cladding, exterior facades, terraces, pool surroundings, landscaping, and bespoke large-scale stonework.
+              </p>
+              <p>
+                Our team supports each project through the selection of suitable materials, finishes, formats, and natural stone solutions. Exceptional spaces begin with exceptional materials.
+              </p>
+            </div>
           </ScrollReveal>
         </div>
       </section>

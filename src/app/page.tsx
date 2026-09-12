@@ -56,8 +56,8 @@ const projectApplications = [
 const finishes = [
   { title: 'Raw', text: 'An untreated finish that preserves the stone’s authentic natural texture.', image: '/images/finishes/raw-stone-v2.png' },
   { title: 'Polished', text: 'A reflective finish that brings out colour, depth, and natural movement.', image: '/images/finishes/polished-stone-v2.png' },
-  { title: 'Brushed & textured', text: 'Tactile surface character for exterior and architectural applications.', image: '/images/finishes/brushed-textured-stone-v2.png' },
-  { title: 'Custom formats', text: 'Tiles, slabs, cladding, stairs, and project-specific cuts.', image: '/images/finishes/custom-formats-stone-v2.png' },
+  { title: 'Tiles', text: 'Precision-cut natural stone tiles for floors, walls, and architectural surfaces.', image: '/images/finishes/Tiles.jpeg' },
+  { title: 'Special Features', text: 'Bespoke stone elements crafted for distinctive architectural details and focal points.', image: '/images/finishes/Special Finish.jpeg' },
 ]
 
 const exportSteps = [

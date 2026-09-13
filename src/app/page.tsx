@@ -54,8 +54,8 @@ const projectApplications = [
 ]
 
 const finishes = [
-  { title: 'Raw', text: 'An untreated finish that preserves the stone’s authentic natural texture.', image: '/images/finishes/raw-stone-v2.png' },
-  { title: 'Polished', text: 'A reflective finish that brings out colour, depth, and natural movement.', image: '/images/finishes/polished-stone-v2.png' },
+  { title: 'Various Sizes and Finishes', text: 'Natural stone supplied in a considered range of formats and surface finishes for each project.', image: '/images/finishes/various-sizes-and-finishes.jpeg' },
+  { title: 'Handmade', text: 'Hand-finished stonework shaped with care by skilled craftspeople.', image: '/images/finishes/handmade.png' },
   { title: 'Tiles', text: 'Precision-cut natural stone tiles for floors, walls, and architectural surfaces.', image: '/images/finishes/Tiles.jpeg' },
   { title: 'Special Features', text: 'Bespoke stone elements crafted for distinctive architectural details and focal points.', image: '/images/finishes/Special Finish.jpeg' },
 ]

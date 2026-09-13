@@ -161,13 +161,18 @@ export default function HomePage() {
             </div>
           </ScrollReveal>
           <ScrollReveal distance={40} className="relative aspect-[9/16] overflow-hidden bg-black sm:aspect-[4/5] lg:aspect-auto lg:min-h-0">
-            <Image
-              src="/images/applications/projects/volubilis-travertine-lobby.webp"
-              alt="Volubilis Travertine wall installation in a hotel lobby"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-center"
-            />
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              poster="/images/applications/projects/volubilis-travertine-lobby.webp"
+              aria-label="Volubilis Travertine wall installation in a hotel lobby"
+              className="absolute inset-0 h-full w-full object-cover object-center"
+            >
+              <source src="/videos/viaza-stone-in-motion-optimized.mp4" type="video/mp4" />
+            </video>
           </ScrollReveal>
         </div>
       </section>

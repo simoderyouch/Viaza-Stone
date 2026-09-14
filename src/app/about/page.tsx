@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import { ParallaxFrame, ScrollReveal } from '@/components/motion-effects'
 import { SectionHeading } from '@/components/section-heading'
 
@@ -86,7 +85,19 @@ export default function AboutPage() {
 
       <section className="px-5 py-18 lg:px-8 lg:py-24">
         <div className="mx-auto max-w-7xl">
-          <ScrollReveal><SectionHeading eyebrow="Viaza quarry" title="A responsibility as enduring as the stone." description="In the heart of the Taza mountains, our quarry brings Morocco’s natural heritage together with advanced extraction technologies and disciplined site management." centered /></ScrollReveal>
+          <ScrollReveal>
+            <div className="relative aspect-[16/8] overflow-hidden sm:aspect-[16/7]">
+              <Image src="/images/about-cut-stone-blocks.png" alt="Freshly cut natural stone blocks at the Viaza quarry" fill sizes="(max-width: 1280px) 100vw, 80rem" className="object-cover" />
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.08} className="mt-12">
+            <div className="mx-auto max-w-4xl text-center">
+              <p className="text-[0.7rem] font-bold tracking-[0.2em] text-[#9f8660] uppercase">At the source</p>
+              <h2 className="font-display mt-4 text-5xl leading-none text-[#292b2c] sm:text-6xl lg:text-7xl">Viaza quarry</h2>
+              <p className="mt-8 text-xl leading-8 text-[#292b2c] sm:text-2xl">A responsibility as enduring as the stone.</p>
+              <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-stone-600">In the heart of the Taza mountains, our quarry brings Morocco’s natural heritage together with advanced extraction technologies and disciplined site management.</p>
+            </div>
+          </ScrollReveal>
           <div className="mt-12 grid gap-px bg-stone-300 md:grid-cols-3">
             {quarryPrinciples.map((principle, index) => (
               <ScrollReveal key={principle.title} delay={index * 0.1} className="h-full">
@@ -101,16 +112,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-[#292b2c] px-5 py-18 text-white lg:px-8 lg:py-24">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+      <section className="bg-[#292b2c] px-5 py-0 text-white lg:px-8">
+        <div className="mx-auto max-w-6xl border-y border-white/15 py-12 lg:grid lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:py-16">
           <ScrollReveal>
-            <div className="relative aspect-[1.3/1] overflow-hidden">
-              <Image src="/images/about-cut-stone-blocks.png" alt="Freshly cut natural stone blocks at the quarry" fill sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" />
-            </div>
+            <p className="text-[0.7rem] font-bold tracking-[0.22em] text-[#d4c5aa] uppercase">Our long-term vision</p>
           </ScrollReveal>
-          <ScrollReveal delay={0.1}>
-            <SectionHeading eyebrow="Our long-term vision" title="Protect our people. Preserve our land." description="At VIAZA, extracting a noble natural stone comes with an equally important responsibility: to respect the generations to come." inverse />
-            <Link href="/contact" className="button-secondary mt-8 text-white">Discuss a project</Link>
+          <ScrollReveal delay={0.08} className="mt-8 lg:mt-0">
+            <h2 className="font-display text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">Protect our people. Preserve our land.</h2>
+            <p className="mt-7 max-w-2xl text-base leading-8 text-stone-300 sm:text-lg">At VIAZA, extracting a noble natural stone comes with an equally important responsibility: to respect the generations to come.</p>
           </ScrollReveal>
         </div>
       </section>

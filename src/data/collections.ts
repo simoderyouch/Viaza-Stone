@@ -95,7 +95,7 @@ export function matchesCollectionProduct(
   collection: (typeof collectionPages)[number],
   product: Pick<CollectionProduct, 'name' | 'material' | 'type' | 'collectionSlug'>,
 ) {
-  if (product.type === 'Blocs & Slabs') return 'type' in collection && collection.type === 'Blocs & Slabs'
+  if (product.type === 'Blocs & Slabs') return collection.slug === 'blocs-slabs'
 
   if (product.collectionSlug) return product.collectionSlug === collection.slug
 
@@ -103,7 +103,7 @@ export function matchesCollectionProduct(
     return collection.productNamePrefixes.some((prefix) => product.name.startsWith(prefix))
   }
 
-  if ('type' in collection) return product.type === collection.type
+  if ('type' in collection) return false
 
   return product.material === collection.material
 }

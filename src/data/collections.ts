@@ -95,6 +95,8 @@ export function matchesCollectionProduct(
   collection: (typeof collectionPages)[number],
   product: Pick<CollectionProduct, 'name' | 'material' | 'type' | 'collectionSlug'>,
 ) {
+  if (product.type === 'Blocs & Slabs') return 'type' in collection && collection.type === 'Blocs & Slabs'
+
   if (product.collectionSlug) return product.collectionSlug === collection.slug
 
   if ('productNamePrefixes' in collection) {

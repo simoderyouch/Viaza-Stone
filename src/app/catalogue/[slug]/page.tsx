@@ -41,9 +41,12 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
 
   if (!product) notFound()
 
-  const relatedProducts = products
+  const relatedProductPool = product.type === 'Blocs & Slabs'
+    ? products
+    : products.filter((item) => item.type !== 'Blocs & Slabs')
+  const relatedProducts = relatedProductPool
     .filter((item) => item.material === product.material && item.slug !== product.slug)
-    .concat(products.filter((item) => item.type === product.type && item.slug !== product.slug && item.material !== product.material))
+    .concat(relatedProductPool.filter((item) => item.type === product.type && item.slug !== product.slug && item.material !== product.material))
     .slice(0, 3)
   const descriptionParagraphs = Array.isArray(product.description) ? product.description : [product.description]
   const secondImage = product.gallery[0]

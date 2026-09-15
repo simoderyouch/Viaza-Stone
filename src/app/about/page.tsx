@@ -23,6 +23,15 @@ const quarryPrinciples = [
   },
 ]
 
+const viazaAdvantages = [
+  { title: 'Direct quarry access', text: 'Better control over quality and supply.' },
+  { title: 'Authentic Moroccan limestone', text: 'Selected for its natural beauty and architectural character.' },
+  { title: 'Consistent quality control', text: 'From block extraction to finished stone.' },
+  { title: 'Custom formats', text: 'Multiple finishes and dimensions adapted to each project.' },
+  { title: 'Reliable export capability', text: 'Production and delivery support for projects of different scales.' },
+  { title: 'Professional support', text: 'A responsive team for architects, designers, contractors, distributors, and stone professionals.' },
+]
+
 export default function AboutPage() {
   return (
     <>
@@ -120,6 +129,32 @@ export default function AboutPage() {
           <ScrollReveal delay={0.08} className="mt-8 lg:mt-0">
             <h2 className="font-display text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">Protect our people. Preserve our land.</h2>
             <p className="mt-7 max-w-2xl text-base leading-8 text-stone-300 sm:text-lg">At VIAZA, extracting a noble natural stone comes with an equally important responsibility: to respect the generations to come.</p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <section className="bg-[#f5f5f2] px-5 py-18 lg:px-8 lg:py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:gap-20">
+          <ScrollReveal>
+            <p className="text-[0.7rem] font-bold tracking-[0.2em] text-[#8d8067] uppercase">Why work with Viaza Stone?</p>
+            <h2 className="font-display mt-5 max-w-md text-5xl leading-tight text-[#292b2c] sm:text-6xl">Natural stone, from the source to the project.</h2>
+          </ScrollReveal>
+          <ScrollReveal delay={0.08}>
+            <div className="max-w-3xl space-y-5 text-base leading-8 text-stone-700">
+              <p>At VIAZA Stone, we believe natural stone is more than a material — it is the foundation of lasting architecture.</p>
+              <p>Rooted in Morocco and connected directly to the source, VIAZA combines quarry expertise, careful stone selection, modern production, and reliable service to supply Moroccan natural stone for architectural projects worldwide.</p>
+              <p>Our signature VIAZA Beige and VIAZA Grey limestones, extracted from our own quarry in Taza, offer distinctive natural character, elegant tones, and exceptional versatility for both interior and exterior applications.</p>
+            </div>
+            <p className="mt-10 text-[0.7rem] font-bold tracking-[0.18em] text-[#292b2c] uppercase">Working with VIAZA means choosing</p>
+            <ul className="mt-5 grid gap-x-8 md:grid-cols-2">
+              {viazaAdvantages.map((advantage) => (
+                <li key={advantage.title} className="border-t border-stone-300 py-5">
+                  <h3 className="text-base font-semibold text-[#292b2c]">{advantage.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-stone-600">{advantage.text}</p>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-10 border-t border-stone-300 pt-7 text-lg leading-8 text-[#292b2c]">From the quarry to the final project, our goal is simple: to deliver authentic Moroccan stone with quality, reliability, and long-term value.</p>
           </ScrollReveal>
         </div>
       </section>

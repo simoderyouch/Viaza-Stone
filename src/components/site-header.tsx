@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { type FormEvent, useEffect, useState } from 'react'
 import { LanguageSwitcher } from '@/components/language-switcher'
 import { useLocale } from '@/components/locale-provider'
+import { ThemeToggle } from '@/components/theme-toggle'
 import {
   getAvailableMaterialCollections,
   primaryNavigation as primaryLinks,
@@ -34,12 +35,18 @@ export function SiteHeader() {
   const [collectionsOpen, setCollectionsOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
     const updateHeader = () => setIsScrolled(window.scrollY > 96)
     updateHeader()
     window.addEventListener('scroll', updateHeader, { passive: true })
     return () => window.removeEventListener('scroll', updateHeader)
+  }, [])
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => setIsDark(document.documentElement.classList.contains('dark')))
+    return () => window.cancelAnimationFrame(frame)
   }, [])
 
   useEffect(() => {
@@ -68,6 +75,13 @@ export function SiteHeader() {
     setSearchOpen(false)
   }
 
+  function toggleTheme() {
+    const nextIsDark = !isDark
+    document.documentElement.classList.toggle('dark', nextIsDark)
+    localStorage.setItem('viaza-theme', nextIsDark ? 'dark' : 'light')
+    setIsDark(nextIsDark)
+  }
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 text-white">
       <nav
@@ -85,6 +99,7 @@ export function SiteHeader() {
             <div className="flex items-center justify-center gap-7 text-[15px] font-light leading-[20px]">
               {floatingLinks.slice(2).map((link) => <NavLink key={link.label} href={link.href}>{link.label}</NavLink>)}
               <LanguageSwitcher />
+              <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
               <button type="button" aria-label={t('nav.search')} onClick={() => setSearchOpen(true)} className="transition hover:text-[#d4c5aa]">
                 <SearchIcon />
               </button>
@@ -106,6 +121,7 @@ export function SiteHeader() {
               <li key={link.label}><HeaderNavigationLink href={link.href}>{link.label}</HeaderNavigationLink></li>
             ))}
             <li><LanguageSwitcher /></li>
+            <li><ThemeToggle isDark={isDark} onToggle={toggleTheme} /></li>
             <li><button type="button" aria-label={t('nav.search')} onClick={() => setSearchOpen(true)} className="transition hover:text-[#d4c5aa]"><SearchIcon /></button></li>
           </ul>
         </div>
@@ -116,20 +132,23 @@ export function SiteHeader() {
           <Link href="/" aria-label="Viaza Stone home">
             <Image src="/images/brand/viaza-stone-logo-white.png" alt="Viaza Stone" width={1992} height={521} priority className="h-auto w-44" />
           </Link>
-          <button
-            type="button"
-            aria-label={mobileOpen ? t('nav.closeMenu') : t('nav.openMenu')}
-            aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen((open) => !open)}
-            className="grid size-10 place-items-center border border-white/60"
-          >
-              <span className="sr-only">{t('nav.openMenu')}</span>
-            <span className="grid gap-1.5">
-              <span className={`h-px w-5 bg-white transition ${mobileOpen ? 'translate-y-[7px] rotate-45' : ''}`} />
-              <span className={`h-px w-5 bg-white transition ${mobileOpen ? 'opacity-0' : ''}`} />
-              <span className={`h-px w-5 bg-white transition ${mobileOpen ? '-translate-y-[7px] -rotate-45' : ''}`} />
-            </span>
-          </button>
+          <div className="flex items-center gap-3">
+            <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
+            <button
+              type="button"
+              aria-label={mobileOpen ? t('nav.closeMenu') : t('nav.openMenu')}
+              aria-expanded={mobileOpen}
+              onClick={() => setMobileOpen((open) => !open)}
+              className="grid size-10 place-items-center border border-white/60"
+            >
+                <span className="sr-only">{t('nav.openMenu')}</span>
+              <span className="grid gap-1.5">
+                <span className={`h-px w-5 bg-white transition ${mobileOpen ? 'translate-y-[7px] rotate-45' : ''}`} />
+                <span className={`h-px w-5 bg-white transition ${mobileOpen ? 'opacity-0' : ''}`} />
+                <span className={`h-px w-5 bg-white transition ${mobileOpen ? '-translate-y-[7px] -rotate-45' : ''}`} />
+              </span>
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -211,6 +230,7 @@ export function SiteHeader() {
               </motion.ul>
               <div className="border-t border-white/15 px-6 py-4">
                 <LanguageSwitcher compact />
+                <div className="mt-3"><ThemeToggle isDark={isDark} onToggle={toggleTheme} compact /></div>
               </div>
               <div className="border-t border-white/15 bg-white/5 p-6">
                 <p className="text-sm leading-6 text-stone-300">{t('footer.connectCopy')}</p>

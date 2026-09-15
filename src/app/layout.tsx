@@ -8,6 +8,14 @@ import { localeDetails } from '@/i18n/config'
 import { getRequestLocale } from '@/i18n/server'
 import './globals.css'
 
+const themeScript = `(() => {
+  try {
+    const savedTheme = localStorage.getItem('viaza-theme')
+    const useDarkTheme = savedTheme ? savedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
+    document.documentElement.classList.toggle('dark', useDarkTheme)
+  } catch {}
+})()`
+
 export const metadata: Metadata = {
   title: {
     default: 'Viaza Stone | Moroccan Limestone & Marble',
@@ -25,6 +33,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
   return (
     <html lang={locale} dir={localeDetails[locale].direction} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
         <LocaleProvider locale={locale}>
           <SiteHeader />

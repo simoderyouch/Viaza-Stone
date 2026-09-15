@@ -23,7 +23,6 @@ export type Product = {
   galleryImageFit?: 'cover' | 'contain'
   galleryImageClassName?: string
   detailHeading?: string
-  descriptionHeading?: string
   stoneDetails?: { label: string; value: string; icon: StoneDetailIcon }[]
   technicalSheet?: TechnicalSpecification[]
   applicationEyebrow?: string
@@ -80,19 +79,6 @@ const viazaLimestoneTechnicalSheet: TechnicalSpecification[] = [
   { label: 'Frost resistance', value: 'At least 240 cycles' },
   { label: 'Typical block dimensions', value: '200–300 cm L × 120–180 cm H × 100–180 cm W' },
 ]
-const viazaStoneDescription = [
-  'At VIAZA Stone, we believe natural stone is more than a material — it is the foundation of lasting architecture.',
-  'Rooted in Morocco and connected directly to the source, VIAZA combines quarry expertise, careful stone selection, modern production and reliable service to supply Moroccan natural stone for architectural projects worldwide.',
-  'Our signature VIAZA Beige and VIAZA Grey limestones, extracted from our own quarry in Taza, offer distinctive natural character, elegant tones and exceptional versatility for both interior and exterior applications.',
-  'Working with VIAZA means choosing:',
-  '• Direct quarry access for better control over quality and supply.',
-  '• Authentic Moroccan limestone, selected for its natural beauty and architectural character.',
-  '• Consistent quality control, from block extraction to finished stone.',
-  '• Multiple finishes and custom dimensions adapted to each project\'s requirements.',
-  '• Reliable production and export capabilities for projects of different scales.',
-  '• Professional support, with a team committed to architects, designers, contractors, distributors and stone professionals.',
-  'From the quarry to the final project, our goal is simple: to deliver authentic Moroccan stone with quality, reliability and long-term value.',
-]
 
 const extractedProductImage = (product: string, file: string) => `/images/products/extracted-2026-09-02/${product}/${file}`
 
@@ -139,7 +125,6 @@ function createProduct({
   applicationDescription,
   applicationImageFit,
   detailHeading,
-  descriptionHeading,
   stoneDetails,
   imageFit,
 }: {
@@ -170,7 +155,6 @@ function createProduct({
   applicationDescription?: string
   applicationImageFit?: Product['applicationImageFit']
   detailHeading?: string
-  descriptionHeading?: string
   stoneDetails?: Product['stoneDetails']
 }): Product {
   const isViazaBeige = name.startsWith('Viaza Beige') || collectionSlug === 'viaza-beige'
@@ -208,7 +192,6 @@ function createProduct({
     applicationDescription,
     applicationImageFit,
     detailHeading,
-    descriptionHeading,
     stoneDetails,
     technicalSheet: type === 'Viaza Limestone' ? viazaLimestoneTechnicalSheet : undefined,
     description,
@@ -398,12 +381,12 @@ const allProducts: Product[] = [
   createProduct({ name: 'Viaza Grey Atlas-TBR', slug: 'viaza-grey-atlas-tbr', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', finish: 'Grey Atlas-TBR', applications: greyApplications, description: 'Viaza Grey limestone in the Grey Atlas-TBR finish.' }),
   createProduct({ name: 'Travertine Atlas', slug: 'travertine-atlas', type: 'Travertine', material: 'Travertine', color: 'Warm Beige', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan travertine with a warm, natural stone character.' }),
   createProduct({ name: 'Travertine Desert', slug: 'travertine-desert', type: 'Travertine', material: 'Travertine', color: 'Desert Beige', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan travertine with a warm desert-toned expression.' }),
-  createProduct({ name: 'Yellow Atlantic', slug: 'yellow-atlantic', type: 'Moroccan Marble', material: 'Marble', color: 'Golden Yellow', finish: 'Enquire for available finishes', applications: marbleApplications, descriptionHeading: 'Why work with Viaza Stone?', description: viazaStoneDescription }),
-  createProduct({ name: 'Limane Grey-Purple', slug: 'limane-grey-purple', type: 'Moroccan Marble', material: 'Marble', color: 'Grey & Purple', finish: 'Enquire for available finishes', applications: marbleApplications, descriptionHeading: 'Why work with Viaza Stone?', description: viazaStoneDescription }),
-  createProduct({ name: 'Limane Grey-Lido', slug: 'limane-grey-lido', type: 'Moroccan Marble', material: 'Marble', color: 'Grey', finish: 'Enquire for available finishes', applications: marbleApplications, descriptionHeading: 'Why work with Viaza Stone?', description: viazaStoneDescription }),
-  createProduct({ name: 'Grey Flifel', slug: 'grey-flifel', type: 'Moroccan Marble', material: 'Marble', color: 'Grey', finish: 'Enquire for available finishes', applications: marbleApplications, descriptionHeading: 'Why work with Viaza Stone?', description: viazaStoneDescription }),
-  createProduct({ name: 'Atlas Black', slug: 'atlas-black', type: 'Moroccan Marble', material: 'Marble', color: 'Black', finish: 'Enquire for available finishes', applications: marbleApplications, descriptionHeading: 'Why work with Viaza Stone?', description: viazaStoneDescription }),
-  createProduct({ name: 'Atlas Absolute Black', slug: 'atlas-absolute-black', type: 'Moroccan Marble', material: 'Marble', color: 'Absolute Black', finish: 'Enquire for available finishes', applications: marbleApplications, descriptionHeading: 'Why work with Viaza Stone?', description: viazaStoneDescription }),
+  createProduct({ name: 'Yellow Atlantic', slug: 'yellow-atlantic', type: 'Moroccan Marble', material: 'Marble', color: 'Golden Yellow', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan marble with a naturally warm golden-yellow palette.' }),
+  createProduct({ name: 'Limane Grey-Purple', slug: 'limane-grey-purple', type: 'Moroccan Marble', material: 'Marble', color: 'Grey & Purple', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan marble with a distinctive grey-purple colour direction.' }),
+  createProduct({ name: 'Limane Grey-Lido', slug: 'limane-grey-lido', type: 'Moroccan Marble', material: 'Marble', color: 'Grey', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan marble with a calm, refined grey expression.' }),
+  createProduct({ name: 'Grey Flifel', slug: 'grey-flifel', type: 'Moroccan Marble', material: 'Marble', color: 'Grey', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan marble with an architectural grey tone.' }),
+  createProduct({ name: 'Atlas Black', slug: 'atlas-black', type: 'Moroccan Marble', material: 'Marble', color: 'Black', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan black marble for strong, dramatic material statements.' }),
+  createProduct({ name: 'Atlas Absolute Black', slug: 'atlas-absolute-black', type: 'Moroccan Marble', material: 'Marble', color: 'Absolute Black', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan marble with an absolute black colour direction.' }),
   createProduct({
     name: 'Viaza Beige', slug: 'viaza-beige-blocks-slabs', type: 'Blocs & Slabs', material: 'Limestone', color: 'Natural Beige', finish: 'Natural block', formats: ['Blocks', 'Slabs'], applications: beigeApplications,
     image: '/images/products/blocs-slabs/viaza-beige/block-01.webp', imageFit: 'contain', thumbnail: '/images/products/blocs-slabs/viaza-beige/block-01.webp', thumbnailFit: 'contain', gallery: [
@@ -430,7 +413,7 @@ const allProducts: Product[] = [
   }),
   createProduct({
     name: 'Travertine', slug: 'travertine-blocks-slabs', type: 'Blocs & Slabs', material: 'Travertine', color: 'Natural Beige', finish: 'Natural block', formats: ['Blocks', 'Slabs'], applications: marbleApplications,
-    image: '/images/products/blocs-slabs/travertine/block-01.webp', imageFit: 'contain', thumbnail: '/images/products/blocs-slabs/travertine/block-01.webp', thumbnailFit: 'contain', gallery: ['/images/products/blocs-slabs/travertine/block-02.webp','/images/products/blocs-slabs/travertine/block-03.webp', '/images/products/blocs-slabs/travertine/block-04.webp'], galleryImageFit: 'contain', applicationImage: '/images/products/blocs-slabs/travertine/block-03.webp', applicationImageFit: 'contain', disableImageZoom: true, detailHeading: 'Travertine',
+    image: '/images/products/blocs-slabs/travertine/block-01.webp', imageFit: 'contain', thumbnail: '/images/products/blocs-slabs/travertine/block-04.webp', thumbnailFit: 'contain', gallery: ['/images/products/blocs-slabs/travertine/block-02.webp','/images/products/blocs-slabs/travertine/block-03.webp', '/images/products/blocs-slabs/travertine/block-04.webp'], galleryImageFit: 'contain', applicationImage: '/images/products/blocs-slabs/travertine/block-03.webp', applicationImageFit: 'contain', disableImageZoom: true, detailHeading: 'Travertine',
     description: 'Travertine in block and slab formats.', stoneDetails: blockAndSlabDetails('Travertine'),
   }),
 ]

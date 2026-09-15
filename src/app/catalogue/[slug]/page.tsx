@@ -99,7 +99,7 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
             <p className="mt-8 text-[0.68rem] font-bold tracking-[0.19em] text-[#292b2c] uppercase">{product.type}</p>
             <h1 data-no-translate className="font-display mt-4 text-5xl leading-[1.02] text-[#292b2c] sm:text-6xl lg:text-7xl">{product.name}</h1>
             <p className="mt-5 text-lg leading-8 text-stone-600">{product.color} {product.material.toLowerCase()} in a {product.finishes.join(', ').toLowerCase()} finish.</p>
-            {!hasThreeImageStory && !product.descriptionHeading && (
+            {!hasThreeImageStory && (
               <div className="mt-6 space-y-4 text-base leading-7 text-stone-700">
                 {descriptionParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </div>
@@ -173,14 +173,6 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
                 </details>
               )}
               <p className="mt-7 text-sm leading-6 text-stone-600"><strong className="text-[#292b2c]">Suggested applications:</strong> {product.applications.join(', ')}.</p>
-              {product.descriptionHeading && (
-                <div className="mt-10 border-t border-stone-200 pt-8">
-                  <p className="text-[0.68rem] font-bold tracking-[0.16em] text-[#8d8067] uppercase">{product.descriptionHeading}</p>
-                  <div className="mt-5 space-y-4 text-base leading-7 text-stone-700">
-                    {descriptionParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>

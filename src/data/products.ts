@@ -30,6 +30,7 @@ export type Product = {
   applicationDescription?: string
   applicationImageFit?: 'cover' | 'contain'
   description: string | string[]
+  materialIntroduction?: string[]
   availability: string
   finishes: string[]
   formats: string[]
@@ -60,6 +61,12 @@ const applicationImage = (slug: string) => `/images/products/applications/${slug
 const beigeApplications = ['Flooring', 'Wall cladding', 'Terrace landscaping', 'Exterior facades', 'Refined interiors']
 const greyApplications = ['Building facades', 'Wall cladding', 'Flooring', 'Gardens', 'Walkways', 'Swimming pool surroundings']
 const marbleApplications = ['Feature walls', 'Flooring', 'Architectural interiors']
+const volubilisTravertineIntroduction = [
+  'Volubilis Travertine is a distinctive Moroccan natural stone characterized by its warm beige-to-brown tones, natural veining, and porous structure. Its characteristic cavities can be left open for an authentic appearance or filled to create a smoother, more uniform surface.',
+  'Durable, versatile, and easy to fabricate, it can be produced in various formats, thicknesses, and finishes, including honed, polished, brushed, aged, and textured surfaces.',
+  'Its natural character and technical versatility make it suitable for a wide range of interior and exterior architectural applications, including flooring, wall cladding, façades, bathrooms, hotel interiors, staircases, terraces, patios, and bespoke architectural elements.',
+  'Combining durability, versatility, and timeless aesthetics, VIAZA Volubilis Travertine is an excellent solution for residential, commercial, and hospitality projects seeking the authentic character of Moroccan natural stone.',
+]
 const viazaLimestoneTechnicalSheet: TechnicalSpecification[] = [
   { label: 'Stone type', value: 'Chemical sedimentary rock' },
   { label: 'Primary composition', value: 'Recrystallised calcite (approx. 98.5% CaCO₃)' },
@@ -195,6 +202,7 @@ function createProduct({
     stoneDetails,
     technicalSheet: type === 'Viaza Limestone' ? viazaLimestoneTechnicalSheet : undefined,
     description,
+    materialIntroduction: material === 'Travertine' ? volubilisTravertineIntroduction : undefined,
     availability: 'Enquire for availability',
     finishes: [finish],
     formats,
@@ -379,7 +387,22 @@ const allProducts: Product[] = [
   createProduct({ name: 'Viaza Grey Aldo-BHB', slug: 'viaza-grey-aldo-bhb', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', finish: 'Aldo-BHB', applications: greyApplications, description: 'Viaza Grey limestone in the Aldo-BHB finish.' }),
   createProduct({ name: 'Viaza Grey-TMR', slug: 'viaza-grey-tmr', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', finish: 'Grey-TMR', applications: greyApplications, description: 'Viaza Grey limestone in the Grey-TMR finish.' }),
   createProduct({ name: 'Viaza Grey Atlas-TBR', slug: 'viaza-grey-atlas-tbr', type: 'Viaza Limestone', material: 'Limestone', color: 'Refined Grey', finish: 'Grey Atlas-TBR', applications: greyApplications, description: 'Viaza Grey limestone in the Grey Atlas-TBR finish.' }),
-  createProduct({ name: 'Travertine Atlas', slug: 'travertine-atlas', type: 'Travertine', material: 'Travertine', color: 'Warm Beige', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan travertine with a warm, natural stone character.' }),
+  createProduct({
+    name: 'Travertine Atlas',
+    slug: 'travertine-atlas',
+    type: 'Travertine',
+    material: 'Travertine',
+    color: 'Warm Beige',
+    finish: 'Enquire for available finishes',
+    applications: marbleApplications,
+    description: 'Premium Moroccan travertine with a warm, natural stone character.',
+    gallery: [
+      '/images/products/premium/travertine-atlas/application-01.jpeg',
+      '/images/products/premium/travertine-atlas/application-02.jpeg',
+      '/images/products/premium/travertine-atlas/application-03.jpeg',
+    ],
+    galleryImageFit: 'contain',
+  }),
   createProduct({ name: 'Travertine Desert', slug: 'travertine-desert', type: 'Travertine', material: 'Travertine', color: 'Desert Beige', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan travertine with a warm desert-toned expression.' }),
   createProduct({ name: 'Yellow Atlantic', slug: 'yellow-atlantic', type: 'Moroccan Marble', material: 'Marble', color: 'Golden Yellow', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan marble with a naturally warm golden-yellow palette.' }),
   createProduct({ name: 'Limane Grey-Purple', slug: 'limane-grey-purple', type: 'Moroccan Marble', material: 'Marble', color: 'Grey & Purple', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan marble with a distinctive grey-purple colour direction.' }),

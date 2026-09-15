@@ -50,6 +50,7 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
     .slice(0, 3)
   const descriptionParagraphs = Array.isArray(product.description) ? product.description : [product.description]
   const secondImage = product.gallery[0]
+  const materialDetailsImage = product.slug === 'travertine-atlas' ? undefined : secondImage
   const additionalImages = product.gallery.slice(1)
   const isBlocksAndSlabs = product.type === 'Blocs & Slabs'
   const isMoroccanMarble = product.type === 'Moroccan Marble'
@@ -58,12 +59,14 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
     ? blockApplicationImages.length > 1
       ? blockApplicationImages
       : Array.from(new Set([product.image, ...product.gallery]))
+    : product.slug === 'travertine-atlas'
+      ? product.gallery
     : product.slug === 'viaza-beige-tumbled'
       ? [product.applicationImage, ...additionalImages]
       : []
   const useApplicationCarousel = isBlocksAndSlabs
     ? applicationImages.length > 1
-    : product.slug === 'viaza-beige-tumbled' && additionalImages.length > 0
+    : (product.slug === 'viaza-beige-tumbled' || product.slug === 'travertine-atlas') && applicationImages.length > 1
   const secondImageFit = product.galleryImageFit ?? product.imageFit
   const hasThreeImageStory = Boolean(secondImage)
   const heroImage = hasThreeImageStory ? product.image : product.thumbnail
@@ -127,11 +130,11 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
       )}
 
       <section id="stone-details" className="bg-white" aria-labelledby="stone-details-heading">
-        <div className={`grid ${secondImage ? 'lg:grid-cols-[minmax(0,1.08fr)_minmax(24rem,0.92fr)]' : ''}`}>
-          {secondImage && (
+        <div className={`grid ${materialDetailsImage ? 'lg:grid-cols-[minmax(0,1.08fr)_minmax(24rem,0.92fr)]' : ''}`}>
+          {materialDetailsImage && (
             <div className="relative min-h-[34rem] overflow-hidden bg-white sm:min-h-[42rem] lg:min-h-[42rem]">
               <ProductImageMagnifier
-                src={secondImage}
+                src={materialDetailsImage}
                 alt={`${product.name} material detail`}
                 sizes="(max-width: 1024px) 100vw, 54vw"
                 fit={secondImageFit}
@@ -140,11 +143,11 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
               />
             </div>
           )}
-          <div className={secondImage ? 'flex min-h-[34rem] items-center px-5 py-12 sm:min-h-[42rem] sm:px-10 sm:py-14 lg:min-h-[43rem] lg:px-16 lg:py-16 xl:px-24' : 'mx-auto w-full max-w-[1400px] px-5 py-12 sm:px-8 lg:px-12 lg:py-16'}>
-            <div className={`w-full ${secondImage ? 'max-w-xl' : ''}`}>
+          <div className={materialDetailsImage ? 'flex min-h-[34rem] items-center px-5 py-12 sm:min-h-[42rem] sm:px-10 sm:py-14 lg:min-h-[43rem] lg:px-16 lg:py-16 xl:px-24' : 'mx-auto w-full max-w-[1400px] px-5 py-12 sm:px-8 lg:px-12 lg:py-16'}>
+            <div className={`w-full ${materialDetailsImage ? 'max-w-xl' : ''}`}>
               <p className="text-[0.68rem] font-bold tracking-[0.19em] text-[#292b2c] uppercase">Material specifications</p>
               <h2 id="stone-details-heading" className="font-display mt-5 text-5xl leading-tight text-[#292b2c] sm:text-6xl">Stone details</h2>
-              <dl className={`mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2 ${secondImage ? '' : 'lg:grid-cols-3'}`}>
+              <dl className={`mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2 ${materialDetailsImage ? '' : 'lg:grid-cols-3'}`}>
                 {displayStoneDetails.map((detail) => <DetailItem key={detail.label} {...detail} />)}
               </dl>
               {product.technicalSheet && (
@@ -172,6 +175,14 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
                   </div>
                 </details>
               )}
+              {product.materialIntroduction && (
+                <div className="mt-10 border-t border-stone-200 pt-7">
+                  <p className="text-[0.68rem] font-bold tracking-[0.16em] text-[#8d8067] uppercase">Volubilis Travertine</p>
+                  <div className="mt-5 space-y-4 text-base leading-7 text-stone-700">
+                    {product.materialIntroduction.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                  </div>
+                </div>
+              )}
               <p className="mt-7 text-sm leading-6 text-stone-600"><strong className="text-[#292b2c]">Suggested applications:</strong> {product.applications.join(', ')}.</p>
             </div>
           </div>
@@ -194,7 +205,7 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
 
       <section className="border-y border-stone-200 bg-white">
         <div className="grid lg:grid-cols-[minmax(22rem,0.8fr)_minmax(0,1.2fr)]">
-          <div className="flex items-center px-6 py-12 sm:px-12 lg:px-20 lg:py-14">
+          <div className="flex items-center px-6 pb-20 pt-12 sm:px-12 sm:pb-24 lg:px-20 lg:pb-28 lg:pt-14">
             <div className="max-w-md">
               <p className="text-[0.68rem] font-bold tracking-[0.19em] text-[#292b2c] uppercase">Natural material. Clear intent.</p>
               <h2 className="font-display mt-6 text-5xl leading-[1.04] text-[#292b2c] sm:text-6xl">Bring this stone into your project.</h2>
@@ -204,7 +215,12 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
           </div>
           <div className="relative aspect-[4/5] overflow-hidden bg-white lg:aspect-auto lg:min-h-[42rem]">
             {useApplicationCarousel ? (
-              <ProductImageCarousel images={applicationImages} alt={`${product.name} used in an architectural application`} imageFit={product.applicationImageFit} disableImageZoom={product.disableImageZoom} />
+              <ProductImageCarousel
+                images={applicationImages}
+                alt={`${product.name} used in an architectural application`}
+                imageFit={product.slug === 'travertine-atlas' ? product.galleryImageFit : product.applicationImageFit}
+                disableImageZoom={product.disableImageZoom}
+              />
             ) : (
               <ProductImageMagnifier
                 src={product.applicationImage}

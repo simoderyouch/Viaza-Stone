@@ -60,13 +60,6 @@ const finishes = [
   { title: 'Special Features', text: 'Bespoke stone elements crafted for distinctive architectural details and focal points.', image: '/images/finishes/Special Finish.jpeg' },
 ]
 
-const exportSteps = [
-  { number: '01', title: 'Review the brief', text: 'Share your material, finish, format, quantity, and destination requirements.' },
-  { number: '02', title: 'Confirm the selection', text: 'Align on the appropriate stone, color variation, and technical specification.' },
-  { number: '03', title: 'Prepare the order', text: 'Coordinate cutting, finishing, quality review, and protective packing.' },
-  { number: '04', title: 'Plan dispatch', text: 'Organize the shipment details and supporting information for your order.' },
-]
-
 const faqItems = [
   { question: 'Which finishes can I specify?', answer: 'Viaza Stone can help you select polished, honed, brushed, textured, and other finish directions according to the material and intended application.' },
   { question: 'Can I request custom sizes and formats?', answer: 'Yes. Share your drawings, dimensions, finish, quantity, and application so the team can review the right format for your project.' },
@@ -172,9 +165,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="overflow-hidden bg-[#292b2c] text-white">
-        <div className="grid lg:h-svh lg:grid-cols-2">
-          <ScrollReveal distance={28} className="flex items-center px-5 py-16 sm:px-10 lg:px-16 lg:py-10 xl:px-24">
+      <section className="bg-[#292b2c] text-white">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.58fr)] lg:items-center lg:gap-20">
+          <ScrollReveal distance={28} className="py-2 lg:py-0">
             <div className="max-w-xl">
               <p className="eyebrow text-xs text-[#d4c5aa] sm:text-sm">Volubilis Travertine</p>
               <h2 className="font-display mt-4 text-5xl leading-[0.98] sm:text-6xl xl:text-5xl">A wall of luxury, sculpted in Volubilis Travertine.</h2>
@@ -185,7 +178,7 @@ export default function HomePage() {
               </div>
             </div>
           </ScrollReveal>
-          <ScrollReveal distance={40} className="relative aspect-[9/16] overflow-hidden bg-black sm:aspect-[4/5] lg:aspect-auto lg:min-h-0">
+          <ScrollReveal distance={40} className="relative mx-auto aspect-[1280/2276] w-full max-w-[26rem] overflow-hidden bg-black sm:max-w-[28rem]">
             <video
               autoPlay
               loop
@@ -194,7 +187,7 @@ export default function HomePage() {
               preload="auto"
               poster="/images/applications/projects/volubilis-travertine-lobby.webp"
               aria-label="Volubilis Travertine wall installation in a hotel lobby"
-              className="absolute inset-0 h-full w-full object-cover object-center"
+              className="absolute inset-0 h-full w-full object-contain object-center"
             >
               <source src="/videos/viaza-stone-in-motion-optimized.mp4" type="video/mp4" />
             </video>
@@ -249,21 +242,6 @@ export default function HomePage() {
       </section>
 
 
-
-      <section className="bg-[#282828] px-5 py-18 text-white lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <ScrollReveal><SectionHeading eyebrow="Quality & export process" title="Organized around the details that matter" description="A simple export-oriented workflow for turning a material brief into a prepared stone order." centered inverse /></ScrollReveal>
-          <ol className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {exportSteps.map((step, index) => (
-              <ScrollReveal key={step.number} as="li" delay={index * 0.1} className="h-full border-t border-white/60 pt-5">
-                <span className="font-display text-3xl text-[#d4c5aa]">{step.number}</span>
-                <h3 className="mt-5 text-lg font-semibold text-white">{step.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-stone-300">{step.text}</p>
-              </ScrollReveal>
-            ))}
-          </ol>
-        </div>
-      </section>
 
       <section className="relative isolate overflow-hidden px-5 py-22 text-white lg:px-8">
         <Image

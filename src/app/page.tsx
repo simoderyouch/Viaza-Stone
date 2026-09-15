@@ -104,6 +104,9 @@ export default function HomePage() {
               </div>
             </ScrollReveal>
           </div>
+
+
+
           <div className="grid gap-5">
             {inspirationImages.map((image, index) => (
               <ScrollReveal key={image.src} className={image.showFullImage ? 'overflow-hidden' : 'relative aspect-[1.28] overflow-hidden sm:aspect-[1.42]'} distance={52}>
@@ -128,6 +131,28 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+
+      <section className="bg-white px-5 py-18 lg:px-8">
+        <div className="mx-auto max-w-[1680px]">
+          <ScrollReveal><SectionHeading eyebrow="Finishes & formats" title="Specify every surface detail" description="Choose a finish and format that supports the material, the setting, and the architectural intent of your project." centered /></ScrollReveal>
+          <div className="mt-11 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            {finishes.map((finish, index) => (
+              <ScrollReveal key={finish.title} delay={index * 0.07} hover className="h-full"><article className="h-full overflow-hidden border border-stone-200 bg-[#f7f5f0]">
+                <div className="relative aspect-[4/3]">
+                  <Image src={finish.image} alt={`${finish.title} stone finish`} fill sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw" className="object-cover object-center" />
+                </div>
+                <div className="p-6">
+                  <h3 className="font-display text-2xl">{finish.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-stone-600">{finish.text}</p>
+                </div>
+              </article></ScrollReveal>
+            ))}
+          </div>
+          <div className="mt-9 text-center"><Link href="/catalogue" className="button-secondary">Explore materials</Link></div>
+        </div>
+      </section>
+
 
       <section className="bg-[#e8e6df] px-5 py-16 lg:px-8">
         <div className="mx-auto max-w-7xl">
@@ -223,25 +248,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-18 lg:px-8">
-        <div className="mx-auto max-w-[1680px]">
-          <ScrollReveal><SectionHeading eyebrow="Finishes & formats" title="Specify every surface detail" description="Choose a finish and format that supports the material, the setting, and the architectural intent of your project." centered /></ScrollReveal>
-          <div className="mt-11 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-            {finishes.map((finish, index) => (
-              <ScrollReveal key={finish.title} delay={index * 0.07} hover className="h-full"><article className="h-full overflow-hidden border border-stone-200 bg-[#f7f5f0]">
-                <div className="relative aspect-[4/3]">
-                  <Image src={finish.image} alt={`${finish.title} stone finish`} fill sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw" className="object-cover object-center" />
-                </div>
-                <div className="p-6">
-                  <h3 className="font-display text-2xl">{finish.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-stone-600">{finish.text}</p>
-                </div>
-              </article></ScrollReveal>
-            ))}
-          </div>
-          <div className="mt-9 text-center"><Link href="/catalogue" className="button-secondary">Explore materials</Link></div>
-        </div>
-      </section>
+
 
       <section className="bg-[#282828] px-5 py-18 text-white lg:px-8">
         <div className="mx-auto max-w-7xl">

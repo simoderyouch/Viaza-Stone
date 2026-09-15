@@ -46,7 +46,7 @@ export default async function ApplicationsPage() {
       })}
 
       <section className="bg-[#282828] px-5 py-16 text-white lg:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 md:flex-row md:items-center">
+        <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-[1fr_auto] md:items-center">
           <div>
             <p className="text-[0.66rem] font-bold tracking-[0.16em] text-[#d4c5aa] uppercase">{copy.ctaEyebrow}</p>
             <h2 className="font-display mt-2 text-3xl">{copy.ctaTitle}</h2>

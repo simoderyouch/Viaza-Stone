@@ -23,7 +23,7 @@ export const materialCollections = [
   { name: 'Viaza Beige', href: '/collections/viaza-beige', tagline: 'Luminous tones. Timeless natural elegance.', image: '/images/collections/viaza-beige-category.jpeg', description: 'A Moroccan limestone with luminous beige tones and natural variation for refined interiors and exterior architecture.', lightText: true },
   { name: 'Viaza Grey', href: '/collections/viaza-grey', tagline: 'Refined grey tones. Strong architectural character.', image: '/images/collections/viaza-grey-category.png', description: 'A Moroccan limestone with sophisticated grey tones and expressive mineral variation for contemporary architecture.', lightText: true },
   { name: 'Travertine', href: '/collections/travertine', tagline: 'The Essence of Earth.', image: '/images/collections/travertine-category.jpeg', description: 'Moroccan travertine shaped over millions of years, defined by warm tones, mineral structure, and natural individuality.', lightText: true },
-  { name: 'Moroccan Marble', href: '/collections/moroccan-marble', tagline: 'Sculpted by time. Designed for enduring spaces.', image: '/images/products/applications/limane-grey-purple.webp', description: 'Premium Moroccan marbles with distinctive mineral structures, organic patterns, rich pigmentation, and individual veining.' },
+  { name: 'Moroccan Marble', href: '/collections/moroccan-marble', tagline: 'Sculpted by time. Designed for enduring spaces.', image: '/images/collections/moroccan-marble-category.png', description: 'Premium Moroccan marbles with distinctive mineral structures, organic patterns, rich pigmentation, and individual veining.' },
   { name: 'Blocs & Slabs', href: '/collections/blocs-slabs', tagline: 'Natural scale. Architectural possibility.', image: '/images/products/blocs-slabs/viaza-beige/block-04.webp', description: 'Natural stone blocks and slabs for architectural projects and bespoke fabrication.', lightText: true, showFullImage: true, disableImageZoom: true },
 ] as const
 
@@ -65,7 +65,7 @@ export const collectionPages = [
     eyebrow: 'Natural stone formats',
     title: 'Blocs & Slabs',
     description: 'Natural stone blocks and slabs selected for architectural projects, custom fabrication, and material-led design.',
-    image: '/images/products/blocs-slabs/viaza-beige/block-04.webp',
+    image: '/images/collections/blocs-slabs-hero.png',
     type: 'Blocs & Slabs',
     productSectionTitle: 'Explore blocks and slabs',
     productSectionDescription: 'Browse the available natural stone selections, then speak with our team about the format and material direction for your project.',

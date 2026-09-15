@@ -49,6 +49,7 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
   const secondImage = product.gallery[0]
   const additionalImages = product.gallery.slice(1)
   const isBlocksAndSlabs = product.type === 'Blocs & Slabs'
+  const isMoroccanMarble = product.type === 'Moroccan Marble'
   const blockApplicationImages = Array.from(new Set([product.applicationImage, ...product.gallery]))
   const applicationImages = isBlocksAndSlabs
     ? blockApplicationImages.length > 1
@@ -76,7 +77,7 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
     <>
       <section className={hasThreeImageStory ? 'bg-white pt-20  lg:pt-24' : 'bg-white px-5 pb-6 pt-18 sm:px-8 lg:px-12 lg:pb-8 lg:pt-20'}>
         <div className={hasThreeImageStory ? 'grid lg:grid-cols-[minmax(0,1.14fr)_minmax(22rem,0.86fr)] lg:items-center' : 'mx-auto grid max-w-[1400px] gap-10 lg:grid-cols-[minmax(0,1.14fr)_minmax(22rem,0.86fr)] lg:items-center lg:gap-20'}>
-          <div className={hasThreeImageStory ? 'relative min-h-[32rem] overflow-hidden bg-white sm:min-h-[44rem] lg:min-h-[58rem]' : 'relative aspect-[4/5] overflow-hidden bg-white'}>
+          <div className={hasThreeImageStory ? 'relative min-h-[32rem] overflow-hidden bg-white sm:min-h-[44rem] lg:min-h-[58rem]' : isMoroccanMarble ? 'relative aspect-square overflow-hidden bg-white' : 'relative aspect-[4/5] overflow-hidden bg-white'}>
             <ProductImageMagnifier
               src={heroImage}
               alt={product.name}
@@ -95,7 +96,11 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
             <p className="mt-8 text-[0.68rem] font-bold tracking-[0.19em] text-[#292b2c] uppercase">{product.type}</p>
             <h1 data-no-translate className="font-display mt-4 text-5xl leading-[1.02] text-[#292b2c] sm:text-6xl lg:text-7xl">{product.name}</h1>
             <p className="mt-5 text-lg leading-8 text-stone-600">{product.color} {product.material.toLowerCase()} in a {product.finishes.join(', ').toLowerCase()} finish.</p>
-            {!hasThreeImageStory && <p className="mt-6 text-base leading-7 text-stone-700">{descriptionParagraphs[0]}</p>}
+            {!hasThreeImageStory && !product.descriptionHeading && (
+              <div className="mt-6 space-y-4 text-base leading-7 text-stone-700">
+                {descriptionParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              </div>
+            )}
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href={`/contact?material=${encodeURIComponent(product.name)}&enquiry=Project%20quote`} className="button-primary">Contact / Request a Quote</Link>
               <Link href={`/contact?sample=${encodeURIComponent(product.name)}`} className="button-secondary">Request a sample</Link>
@@ -139,16 +144,39 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
               <dl className={`mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2 ${secondImage ? '' : 'lg:grid-cols-3'}`}>
                 {displayStoneDetails.map((detail) => <DetailItem key={detail.label} {...detail} />)}
               </dl>
-              <div className="mt-10 border-t border-stone-200 pt-7">
-                <h3 className="text-sm font-bold tracking-[0.14em] text-[#292b2c] uppercase">Selection & technical confirmation</h3>
-                <p className="mt-3 text-sm leading-6 text-stone-600">{product.note}</p>
-                <p className="mt-4 text-sm leading-6 text-stone-600"><strong className="text-[#292b2c]">Suggested applications:</strong> {product.applications.join(', ')}.</p>
-                <Link href={`/contact?material=${encodeURIComponent(product.name)}&enquiry=Technical%20documentation`} className="button-secondary mt-6 w-fit">Request technical documentation</Link>
-              </div>
+              <p className="mt-10 border-t border-stone-200 pt-7 text-sm leading-6 text-stone-600"><strong className="text-[#292b2c]">Suggested applications:</strong> {product.applications.join(', ')}.</p>
+              {product.descriptionHeading && (
+                <div className="mt-10 border-t border-stone-200 pt-8">
+                  <p className="text-[0.68rem] font-bold tracking-[0.16em] text-[#8d8067] uppercase">{product.descriptionHeading}</p>
+                  <div className="mt-5 space-y-4 text-base leading-7 text-stone-700">
+                    {descriptionParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </section>
+
+      {product.technicalSheet && (
+        <section className="border-y border-stone-200 bg-[#f5f5f2] px-5 py-14 sm:px-8 lg:px-12 lg:py-20" aria-labelledby="technical-sheet-heading">
+          <div className="mx-auto grid max-w-[1400px] gap-10 lg:grid-cols-[minmax(16rem,0.68fr)_minmax(0,1.32fr)] lg:gap-20">
+            <div>
+              <p className="text-[0.68rem] font-bold tracking-[0.19em] text-[#8d8067] uppercase">Technical data sheet</p>
+              <h2 id="technical-sheet-heading" className="font-display mt-5 text-5xl leading-tight text-[#292b2c] sm:text-6xl">Material performance, clearly stated.</h2>
+              <p className="mt-6 max-w-md text-base leading-7 text-stone-600">Indicative characteristics for VIAZA Limestone. Natural stone varies by quarry face, batch, format, and finish; confirm project-specific values before final specification.</p>
+            </div>
+            <dl className="grid border-l border-t border-stone-300 sm:grid-cols-2 xl:grid-cols-3">
+              {product.technicalSheet.map((specification) => (
+                <div key={specification.label} className="border-b border-r border-stone-300 px-5 py-5 sm:px-6">
+                  <dt className="text-[0.65rem] font-bold tracking-[0.14em] text-stone-500 uppercase">{specification.label}</dt>
+                  <dd className="mt-3 text-base leading-6 text-[#292b2c]">{specification.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+      )}
 
       {!useApplicationCarousel && additionalImages.map((image, index) => (
         <section key={image} className="border-t border-stone-200 bg-white" aria-label={`${product.name} additional material view ${index + 1}`}>

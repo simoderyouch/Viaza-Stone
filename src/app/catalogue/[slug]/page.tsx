@@ -137,14 +137,39 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
               />
             </div>
           )}
-          <div className={secondImage ? 'flex min-h-[34rem] items-center px-5 sm:min-h-[42rem] sm:px-10 lg:min-h-[43rem] lg:px-16 xl:px-24' : 'mx-auto w-full max-w-[1400px] px-5 py-12 sm:px-8 lg:px-12 lg:py-16'}>
+          <div className={secondImage ? 'flex min-h-[34rem] items-center px-5 py-12 sm:min-h-[42rem] sm:px-10 sm:py-14 lg:min-h-[43rem] lg:px-16 lg:py-16 xl:px-24' : 'mx-auto w-full max-w-[1400px] px-5 py-12 sm:px-8 lg:px-12 lg:py-16'}>
             <div className={`w-full ${secondImage ? 'max-w-xl' : ''}`}>
               <p className="text-[0.68rem] font-bold tracking-[0.19em] text-[#292b2c] uppercase">Material specifications</p>
               <h2 id="stone-details-heading" className="font-display mt-5 text-5xl leading-tight text-[#292b2c] sm:text-6xl">Stone details</h2>
               <dl className={`mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2 ${secondImage ? '' : 'lg:grid-cols-3'}`}>
                 {displayStoneDetails.map((detail) => <DetailItem key={detail.label} {...detail} />)}
               </dl>
-              <p className="mt-10 border-t border-stone-200 pt-7 text-sm leading-6 text-stone-600"><strong className="text-[#292b2c]">Suggested applications:</strong> {product.applications.join(', ')}.</p>
+              {product.technicalSheet && (
+                <details className="group mt-10 overflow-hidden border border-stone-300 bg-[#f5f5f2] transition-colors hover:bg-[#efede7] group-open:bg-white">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-4 py-4 text-[#292b2c] focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#8d8067] sm:px-5 [&::-webkit-details-marker]:hidden">
+                    <span>
+                      <span className="block text-[0.58rem] font-bold tracking-[0.15em] text-[#8d8067] uppercase">Viaza Limestone</span>
+                      <span className="font-display mt-1 block text-xl leading-tight">Technical data sheet</span>
+                    </span>
+                    <span className="flex shrink-0 items-center gap-3 text-[0.6rem] font-bold tracking-[0.13em] text-stone-600 uppercase">
+                      <span className="hidden sm:group-open:inline">Close</span>
+                      <span className="sm:group-open:hidden">View</span>
+                      <span className="grid size-8 place-items-center border border-stone-300 bg-white text-base leading-none transition duration-300 group-hover:border-[#292b2c] group-open:rotate-180" aria-hidden="true">↓</span>
+                    </span>
+                  </summary>
+                  <div className="border-t border-stone-300 bg-white px-4 py-4 sm:px-5 sm:py-5">
+                    <dl className="divide-y border-y border-stone-200">
+                      {product.technicalSheet.map((specification) => (
+                        <div key={specification.label} className="grid gap-1 px-3 py-3 sm:grid-cols-[minmax(10rem,0.8fr)_minmax(0,1.2fr)] sm:items-center sm:gap-6 sm:px-4">
+                          <dt className="text-[0.58rem] font-bold tracking-[0.12em] text-stone-500 uppercase">{specification.label}</dt>
+                          <dd className="text-xs leading-5 text-[#292b2c] sm:text-right">{specification.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </div>
+                </details>
+              )}
+              <p className="mt-7 text-sm leading-6 text-stone-600"><strong className="text-[#292b2c]">Suggested applications:</strong> {product.applications.join(', ')}.</p>
               {product.descriptionHeading && (
                 <div className="mt-10 border-t border-stone-200 pt-8">
                   <p className="text-[0.68rem] font-bold tracking-[0.16em] text-[#8d8067] uppercase">{product.descriptionHeading}</p>
@@ -157,26 +182,6 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
           </div>
         </div>
       </section>
-
-      {product.technicalSheet && (
-        <section className="border-y border-stone-200 bg-[#f5f5f2] px-5 py-14 sm:px-8 lg:px-12 lg:py-20" aria-labelledby="technical-sheet-heading">
-          <div className="mx-auto grid max-w-[1400px] gap-10 lg:grid-cols-[minmax(16rem,0.68fr)_minmax(0,1.32fr)] lg:gap-20">
-            <div>
-              <p className="text-[0.68rem] font-bold tracking-[0.19em] text-[#8d8067] uppercase">Technical data sheet</p>
-              <h2 id="technical-sheet-heading" className="font-display mt-5 text-5xl leading-tight text-[#292b2c] sm:text-6xl">Material performance, clearly stated.</h2>
-              <p className="mt-6 max-w-md text-base leading-7 text-stone-600">Indicative characteristics for VIAZA Limestone. Natural stone varies by quarry face, batch, format, and finish; confirm project-specific values before final specification.</p>
-            </div>
-            <dl className="grid border-l border-t border-stone-300 sm:grid-cols-2 xl:grid-cols-3">
-              {product.technicalSheet.map((specification) => (
-                <div key={specification.label} className="border-b border-r border-stone-300 px-5 py-5 sm:px-6">
-                  <dt className="text-[0.65rem] font-bold tracking-[0.14em] text-stone-500 uppercase">{specification.label}</dt>
-                  <dd className="mt-3 text-base leading-6 text-[#292b2c]">{specification.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </section>
-      )}
 
       {!useApplicationCarousel && additionalImages.map((image, index) => (
         <section key={image} className="border-t border-stone-200 bg-white" aria-label={`${product.name} additional material view ${index + 1}`}>

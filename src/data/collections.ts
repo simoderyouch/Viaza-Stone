@@ -11,6 +11,10 @@ export const catalogueCategories = [
     value: 'Moroccan Marble', label: 'Moroccan Marble', href: '/catalogue?type=Moroccan%20Marble',
     description: 'The Essence of Earth: premium Moroccan travertines and marbles shaped by time across the Atlas Mountains and ancient landscapes.',
   },
+  {
+    value: 'Blocs & Slabs', label: 'Blocs & Slabs', href: '/catalogue?type=Blocs%20%26%20Slabs',
+    description: 'Natural stone blocks and slabs selected for architectural projects and bespoke fabrication.',
+  },
 ] as const
 
 export type ProductType = (typeof catalogueCategories)[number]['value']
@@ -20,6 +24,7 @@ export const materialCollections = [
   { name: 'Viaza Grey', href: '/collections/viaza-grey', tagline: 'Refined grey tones. Strong architectural character.', image: '/images/collections/viaza-grey-category.png', description: 'A Moroccan limestone with sophisticated grey tones and expressive mineral variation for contemporary architecture.', lightText: true },
   { name: 'Travertine', href: '/collections/travertine', tagline: 'The Essence of Earth.', image: '/images/collections/travertine-category.jpeg', description: 'Moroccan travertine shaped over millions of years, defined by warm tones, mineral structure, and natural individuality.', lightText: true },
   { name: 'Moroccan Marble', href: '/collections/moroccan-marble', tagline: 'Sculpted by time. Designed for enduring spaces.', image: '/images/products/applications/limane-grey-purple.webp', description: 'Premium Moroccan marbles with distinctive mineral structures, organic patterns, rich pigmentation, and individual veining.' },
+  { name: 'Blocs & Slabs', href: '/collections/blocs-slabs', tagline: 'Natural scale. Architectural possibility.', image: '/images/products/blocs-slabs/viaza-beige/block-04.webp', description: 'Natural stone blocks and slabs for architectural projects and bespoke fabrication.', lightText: true, showFullImage: true, disableImageZoom: true },
 ] as const
 
 export const collectionPages = [
@@ -55,6 +60,17 @@ export const collectionPages = [
     image: '/images/products/applications/limane-grey-purple.webp',
     material: 'Marble',
   },
+  {
+    slug: 'blocs-slabs',
+    eyebrow: 'Natural stone formats',
+    title: 'Blocs & Slabs',
+    description: 'Natural stone blocks and slabs selected for architectural projects, custom fabrication, and material-led design.',
+    image: '/images/products/blocs-slabs/viaza-beige/block-04.webp',
+    type: 'Blocs & Slabs',
+    productSectionTitle: 'Explore blocks and slabs',
+    productSectionDescription: 'Browse the available natural stone selections, then speak with our team about the format and material direction for your project.',
+    productCountLabel: 'available materials',
+  },
 ] as const
 
 export function getCollectionPage(slug: string) {
@@ -77,13 +93,15 @@ function hasProductsForCollection(
 
 export function matchesCollectionProduct(
   collection: (typeof collectionPages)[number],
-  product: Pick<CollectionProduct, 'name' | 'material' | 'collectionSlug'>,
+  product: Pick<CollectionProduct, 'name' | 'material' | 'type' | 'collectionSlug'>,
 ) {
   if (product.collectionSlug) return product.collectionSlug === collection.slug
 
   if ('productNamePrefixes' in collection) {
     return collection.productNamePrefixes.some((prefix) => product.name.startsWith(prefix))
   }
+
+  if ('type' in collection) return product.type === collection.type
 
   return product.material === collection.material
 }
@@ -118,6 +136,7 @@ export function getAvailableFooterCollectionLinks(products: readonly CollectionP
     ...(availableTypes.has('Viaza Limestone') ? [{ href: '/catalogue?type=Viaza%20Limestone', label: 'Viaza Limestone' }] : []),
     ...(availableTypes.has('Travertine') ? [{ href: '/catalogue?type=Travertine', label: 'Travertine' }] : []),
     ...(availableTypes.has('Moroccan Marble') ? [{ href: '/catalogue?type=Moroccan%20Marble', label: 'Moroccan Marble' }] : []),
+    ...(availableTypes.has('Blocs & Slabs') ? [{ href: '/collections/blocs-slabs', label: 'Blocs & Slabs' }] : []),
     { href: '/catalogue', label: 'View Catalogue' },
   ]
 }

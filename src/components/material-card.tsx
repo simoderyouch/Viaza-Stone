@@ -9,9 +9,11 @@ type MaterialCardProps = {
   href?: string
   index?: number
   lightText?: boolean
+  showFullImage?: boolean
+  disableImageZoom?: boolean
 }
 
-export function MaterialCard({ name, tagline, description, image, href = '/products', index, lightText = false, className = '' }: MaterialCardProps & { className?: string }) {
+export function MaterialCard({ name, tagline, description, image, href = '/products', index, lightText = false, showFullImage = false, disableImageZoom = false, className = '' }: MaterialCardProps & { className?: string }) {
   return (
     <Link href={href} className={`group relative block min-h-80 overflow-hidden bg-stone-900 ${className}`}>
       <Image
@@ -19,7 +21,7 @@ export function MaterialCard({ name, tagline, description, image, href = '/produ
         alt={`${name} surface`}
         fill
         sizes="(max-width: 768px) 100vw, 50vw"
-        className="object-cover transition duration-700 ease-out group-hover:scale-110"
+        className={`${showFullImage ? 'object-contain' : 'object-cover'} transition duration-700 ease-out ${disableImageZoom ? '' : 'group-hover:scale-110'}`}
       />
       <div className={`absolute inset-0 bg-linear-to-t transition-colors duration-500 ${lightText ? 'from-black/95 via-black/55 to-black/20 group-hover:from-black/90 group-hover:via-black/40' : 'from-black/90 via-black/30 to-black/5 group-hover:from-black/85 group-hover:via-black/20'}`} />
       <div className={`absolute inset-x-0 top-0 flex items-center justify-between p-7 text-[0.65rem] font-bold tracking-[0.18em] uppercase sm:p-8 ${lightText ? 'text-white' : 'text-[#e5d6b9]'}`}>

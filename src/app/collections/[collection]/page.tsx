@@ -36,11 +36,17 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
   const collectionProducts = getMatchingProducts(collection)
 
   if (collectionProducts.length === 0) notFound()
+  const showFullImage = 'showFullImage' in collection && collection.showFullImage
+  const productSectionTitle = 'productSectionTitle' in collection ? collection.productSectionTitle : 'Find your own finish'
+  const productSectionDescription = 'productSectionDescription' in collection
+    ? collection.productSectionDescription
+    : `Explore the available ${collection.title.toLowerCase()} finishes and choose the material expression that best fits your project.`
+  const productCountLabel = 'productCountLabel' in collection ? collection.productCountLabel : 'available finishes'
 
   return (
     <>
       <section className="relative isolate mt-20 overflow-hidden bg-stone-900 px-5 pb-16 pt-22 lg:mt-24 lg:px-8 lg:pb-20 lg:pt-28">
-        <Image src={collection.image} alt={`${collection.title} natural stone`} fill priority sizes="100vw" className="object-cover" />
+        <Image src={collection.image} alt={`${collection.title} natural stone`} fill priority sizes="100vw" className={showFullImage ? 'object-contain' : 'object-cover'} />
         <div className="absolute inset-0 bg-linear-to-r from-black/60 via-black/60 via-40% to-transparent to-55%" />
         <div className="relative mx-auto max-w-7xl text-white">
           <p className="text-[0.7rem] font-bold tracking-[0.19em] text-[#d4c5aa] uppercase">{collection.eyebrow}</p>
@@ -53,12 +59,12 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow={collection.eyebrow}
-            title="Find your own finish"
-            description={`Explore the available ${collection.title.toLowerCase()} finishes and choose the material expression that best fits your project.`}
+            title={productSectionTitle}
+            description={productSectionDescription}
           />
           <div className="mt-10 flex items-center border-y border-stone-200 py-5">
             <p className="text-sm text-stone-600">
-              <strong className="text-[#292b2c]">{collectionProducts.length}</strong> available finishes
+              <strong className="text-[#292b2c]">{collectionProducts.length}</strong> {productCountLabel}
             </p>
           </div>
           <div className="mt-7 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">

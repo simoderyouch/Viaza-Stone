@@ -14,6 +14,8 @@ export function ProductCard({ product, compact = false }: { product: Product; co
     ? (locale === 'fr' ? 'Calcaire Viaza' : locale === 'ar' ? 'حجر فيازا الجيري' : product.type)
     : product.type === 'Travertine'
       ? (locale === 'fr' ? 'Travertin' : locale === 'ar' ? 'ترافرتين' : product.type)
+      : product.type === 'Blocs & Slabs'
+        ? (locale === 'fr' ? 'Blocs et tranches' : locale === 'ar' ? 'كتل وألواح' : product.type)
       : (locale === 'fr' ? 'Marbre marocain' : locale === 'ar' ? 'رخام مغربي' : product.type)
   const materialLabel = product.material === 'Limestone'
     ? (locale === 'fr' ? 'Calcaire' : locale === 'ar' ? 'حجر جيري' : product.material)

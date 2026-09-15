@@ -48,8 +48,18 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
   const descriptionParagraphs = Array.isArray(product.description) ? product.description : [product.description]
   const secondImage = product.gallery[0]
   const additionalImages = product.gallery.slice(1)
-  const useApplicationCarousel = product.slug === 'viaza-beige-tumbled' && additionalImages.length > 0
-  const applicationImages = useApplicationCarousel ? [product.applicationImage, ...additionalImages] : []
+  const isBlocksAndSlabs = product.type === 'Blocs & Slabs'
+  const blockApplicationImages = Array.from(new Set([product.applicationImage, ...product.gallery]))
+  const applicationImages = isBlocksAndSlabs
+    ? blockApplicationImages.length > 1
+      ? blockApplicationImages
+      : Array.from(new Set([product.image, ...product.gallery]))
+    : product.slug === 'viaza-beige-tumbled'
+      ? [product.applicationImage, ...additionalImages]
+      : []
+  const useApplicationCarousel = isBlocksAndSlabs
+    ? applicationImages.length > 1
+    : product.slug === 'viaza-beige-tumbled' && additionalImages.length > 0
   const secondImageFit = product.galleryImageFit ?? product.imageFit
   const hasThreeImageStory = Boolean(secondImage)
   const heroImage = hasThreeImageStory ? product.image : product.thumbnail
@@ -75,6 +85,7 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
               fit={heroImageFit}
               imageClassName={product.imageClassName}
               noTranslate
+              disableZoom={product.disableImageZoom}
             />
           </div>
           <div className={hasThreeImageStory ? 'max-w-xl px-5 py-10 sm:px-8 lg:px-16 lg:py-6 xl:px-24' : 'max-w-xl lg:py-6'}>
@@ -83,7 +94,7 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
             </Link>
             <p className="mt-8 text-[0.68rem] font-bold tracking-[0.19em] text-[#292b2c] uppercase">{product.type}</p>
             <h1 data-no-translate className="font-display mt-4 text-5xl leading-[1.02] text-[#292b2c] sm:text-6xl lg:text-7xl">{product.name}</h1>
-            <p className="mt-5 text-lg leading-8 text-stone-600">{product.color} limestone in a {product.finishes.join(', ').toLowerCase()} finish.</p>
+            <p className="mt-5 text-lg leading-8 text-stone-600">{product.color} {product.material.toLowerCase()} in a {product.finishes.join(', ').toLowerCase()} finish.</p>
             {!hasThreeImageStory && <p className="mt-6 text-base leading-7 text-stone-700">{descriptionParagraphs[0]}</p>}
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href={`/contact?material=${encodeURIComponent(product.name)}&enquiry=Project%20quote`} className="button-primary">Contact / Request a Quote</Link>
@@ -117,6 +128,7 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
                 sizes="(max-width: 1024px) 100vw, 54vw"
                 fit={secondImageFit}
                 imageClassName={product.galleryImageClassName}
+                disableZoom={product.disableImageZoom}
               />
             </div>
           )}
@@ -146,6 +158,7 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
               alt={`${product.name} additional material view ${index + 1}`}
               sizes="100vw"
               fit={product.galleryImageFit ?? product.imageFit}
+              disableZoom={product.disableImageZoom}
             />
           </div>
         </section>
@@ -163,13 +176,14 @@ export default async function CatalogueProductPage({ params }: ProductPageProps)
           </div>
           <div className="relative aspect-[4/5] overflow-hidden bg-white lg:aspect-auto lg:min-h-[42rem]">
             {useApplicationCarousel ? (
-              <ProductImageCarousel images={applicationImages} alt={`${product.name} used in an architectural application`} imageFit={product.applicationImageFit} />
+              <ProductImageCarousel images={applicationImages} alt={`${product.name} used in an architectural application`} imageFit={product.applicationImageFit} disableImageZoom={product.disableImageZoom} />
             ) : (
               <ProductImageMagnifier
                 src={product.applicationImage}
                 alt={`${product.name} used in an architectural application`}
                 sizes="(max-width: 1024px) 100vw, 60vw"
                 fit={product.applicationImageFit}
+                disableZoom={product.disableImageZoom}
               />
             )}
           </div>

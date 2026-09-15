@@ -9,9 +9,10 @@ type ProductImageCarouselProps = {
   images: string[]
   alt: string
   imageFit?: 'cover' | 'contain'
+  disableImageZoom?: boolean
 }
 
-export function ProductImageCarousel({ images, alt, imageFit = 'cover' }: ProductImageCarouselProps) {
+export function ProductImageCarousel({ images, alt, imageFit = 'cover', disableImageZoom = false }: ProductImageCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const activeImage = images[activeIndex]
   const hasMultipleImages = images.length > 1
@@ -35,6 +36,7 @@ export function ProductImageCarousel({ images, alt, imageFit = 'cover' }: Produc
           alt={`${alt}, image ${activeIndex + 1} of ${images.length}`}
           sizes="(max-width: 1024px) 100vw, 54vw"
           fit={imageFit}
+          disableZoom={disableImageZoom}
         />
 
         {hasMultipleImages && (

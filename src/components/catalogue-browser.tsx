@@ -67,7 +67,7 @@ export function CatalogueBrowser({
 
   return (
     <div>
-      <div className="sticky top-20 z-20 grid gap-4 border-y border-stone-200 bg-[#f7f5f0]/95 py-5 backdrop-blur md:grid-cols-2 xl:top-24 xl:grid-cols-4">
+      <div className="grid gap-4 border-y border-stone-200 bg-[#f7f5f0] py-5 md:grid-cols-2 xl:grid-cols-4">
         <div className="block">
           <span className="mb-2 block text-[0.65rem] font-bold tracking-[0.14em] text-stone-600 uppercase">Product type</span>
           <CustomSelect

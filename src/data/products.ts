@@ -13,6 +13,7 @@ export type Product = {
   image: string
   imageFit?: 'cover' | 'contain'
   imageClassName?: string
+  disableImageZoom?: boolean
   largeHeroImage?: boolean
   thumbnail: string
   thumbnailFit?: 'cover' | 'contain'
@@ -65,6 +66,13 @@ const extractedStoneDetails = (finish: string): NonNullable<Product['stoneDetail
   { label: 'Availability', value: 'Enquire for availability', icon: 'availability' },
 ]
 
+const blockAndSlabDetails = (material: string): NonNullable<Product['stoneDetails']> => [
+  { label: 'Material', value: material, icon: 'material' },
+  { label: 'Collection origin', value: 'Morocco', icon: 'origin' },
+  { label: 'Available formats', value: 'Blocks and slabs', icon: 'dimensions' },
+  { label: 'Availability', value: 'Enquire for availability', icon: 'availability' },
+]
+
 function createProduct({
   name,
   slug,
@@ -74,10 +82,12 @@ function createProduct({
   collectionSlug,
   description,
   finish,
+  formats = ['Tiles', 'Slabs', 'Wall cladding', 'Cut-to-size'],
   applications,
   image,
   largeHeroImage,
   imageClassName,
+  disableImageZoom,
   thumbnail,
   thumbnailFit,
   thumbnailImageClassName,
@@ -101,10 +111,12 @@ function createProduct({
   collectionSlug?: Product['collectionSlug']
   description: Product['description']
   finish: string
+  formats?: string[]
   applications: string[]
   image?: string
   imageFit?: Product['imageFit']
   imageClassName?: string
+  disableImageZoom?: boolean
   largeHeroImage?: boolean
   thumbnail?: string
   thumbnailFit?: Product['thumbnailFit']
@@ -126,6 +138,8 @@ function createProduct({
     ? 'Viaza Beige is a Moroccan limestone with luminous tones and natural mineral variation. Confirm the selected sample, finish, dimensions, intended application, and current technical documentation before final approval.'
     : isViazaGrey
       ? 'Viaza Grey is a Moroccan limestone with refined grey tones and natural mineral variation. Confirm the selected sample, finish, dimensions, intended application, and current technical documentation before final approval.'
+      : type === 'Blocs & Slabs'
+        ? 'Natural stone blocks and slabs vary in tone, veining, texture, and dimensions. Confirm the selected material and required format before final approval.'
       : 'Every premium Moroccan stone is shaped by geological forces over millions of years. Natural pigment, mineral structure, veining, and tone vary from slab to slab; confirm the selected material before final approval.'
 
   return {
@@ -139,6 +153,7 @@ function createProduct({
     image: image ?? detailImage(slug),
     imageFit,
     imageClassName,
+    disableImageZoom,
     largeHeroImage,
     thumbnail: thumbnail ?? thumbnailImage(slug),
     thumbnailFit,
@@ -156,7 +171,7 @@ function createProduct({
     description,
     availability: 'Enquire for availability',
     finishes: [finish],
-    formats: ['Tiles', 'Slabs', 'Wall cladding', 'Cut-to-size'],
+    formats,
     applications,
     note: selectionNote,
   }
@@ -346,6 +361,35 @@ const allProducts: Product[] = [
   createProduct({ name: 'Grey Flifel', slug: 'grey-flifel', type: 'Moroccan Marble', material: 'Marble', color: 'Grey', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan marble with an architectural grey tone.' }),
   createProduct({ name: 'Atlas Black', slug: 'atlas-black', type: 'Moroccan Marble', material: 'Marble', color: 'Black', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan black marble for strong, dramatic material statements.' }),
   createProduct({ name: 'Atlas Absolute Black', slug: 'atlas-absolute-black', type: 'Moroccan Marble', material: 'Marble', color: 'Absolute Black', finish: 'Enquire for available finishes', applications: marbleApplications, description: 'Premium Moroccan marble with an absolute black colour direction.' }),
+  createProduct({
+    name: 'Viaza Beige Blocks & Slabs', slug: 'viaza-beige-blocks-slabs', type: 'Blocs & Slabs', material: 'Limestone', color: 'Natural Beige', finish: 'Natural block', formats: ['Blocks', 'Slabs'], applications: beigeApplications,
+    image: '/images/products/blocs-slabs/viaza-beige/block-01.webp', imageFit: 'contain', thumbnail: '/images/products/blocs-slabs/viaza-beige/block-01.webp', thumbnailFit: 'contain', gallery: [
+      '/images/products/blocs-slabs/viaza-beige/block-02.webp', '/images/products/blocs-slabs/viaza-beige/block-03.webp', '/images/products/blocs-slabs/viaza-beige/block-04.webp', '/images/products/blocs-slabs/viaza-beige/block-05.webp',
+    ], galleryImageFit: 'contain', applicationImage: '/images/products/blocs-slabs/viaza-beige/block-06.webp', applicationImageFit: 'contain', disableImageZoom: true, detailHeading: 'VIAZA Beige Blocks & Slabs',
+    description: 'Natural Viaza Beige limestone offered as blocks and slabs. Its warm beige character and subtle mineral variation make it a considered starting point for architectural stonework and bespoke fabrication.', stoneDetails: blockAndSlabDetails('Limestone'),
+  }),
+  createProduct({
+    name: 'Viaza Grey Blocks & Slabs', slug: 'viaza-grey-blocks-slabs', type: 'Blocs & Slabs', material: 'Limestone', color: 'Natural Grey', finish: 'Natural block', formats: ['Blocks', 'Slabs'], applications: greyApplications,
+    image: '/images/products/blocs-slabs/viaza-grey/block-01.webp', imageFit: 'contain', thumbnail: '/images/products/blocs-slabs/viaza-grey/block-01.webp', thumbnailFit: 'contain', gallery: [
+      '/images/products/blocs-slabs/viaza-grey/block-02.webp', '/images/products/blocs-slabs/viaza-grey/block-03.webp', '/images/products/blocs-slabs/viaza-grey/block-04.webp',
+    ], galleryImageFit: 'contain', applicationImage: '/images/products/blocs-slabs/viaza-grey/block-05.webp', applicationImageFit: 'contain', disableImageZoom: true, detailHeading: 'VIAZA Grey Blocks & Slabs',
+    description: 'Natural Viaza Grey limestone offered as blocks and slabs, defined by a cool grey palette and calm mineral movement for architectural projects and custom stone fabrication.', stoneDetails: blockAndSlabDetails('Limestone'),
+  }),
+  createProduct({
+    name: 'Tuda Grey Blocks & Slabs', slug: 'tuda-grey-blocks-slabs', type: 'Blocs & Slabs', material: 'Limestone', color: 'Natural Grey', finish: 'Natural block', formats: ['Blocks', 'Slabs'], applications: greyApplications,
+    image: '/images/products/blocs-slabs/tuda-grey/block-01.webp', imageFit: 'contain', thumbnail: '/images/products/blocs-slabs/tuda-grey/block-01.webp', thumbnailFit: 'contain', gallery: ['/images/products/blocs-slabs/tuda-grey/block-02.webp'], galleryImageFit: 'contain', applicationImage: '/images/products/blocs-slabs/tuda-grey/block-03.webp', applicationImageFit: 'contain', disableImageZoom: true, detailHeading: 'Tuda Grey Blocks & Slabs',
+    description: 'Tuda Grey limestone blocks and slabs with expressive linear mineral character, available for projects that require natural stone in substantial architectural formats.', stoneDetails: blockAndSlabDetails('Limestone'),
+  }),
+  createProduct({
+    name: 'Grey Aldo Blocks & Slabs', slug: 'grey-aldo-blocks-slabs', type: 'Blocs & Slabs', material: 'Limestone', color: 'Natural Grey', finish: 'Natural block', formats: ['Blocks', 'Slabs'], applications: greyApplications,
+    image: '/images/products/blocs-slabs/grey-aldo/block-01.webp', imageFit: 'contain', thumbnail: '/images/products/blocs-slabs/grey-aldo/block-01.webp', thumbnailFit: 'contain', gallery: ['/images/products/blocs-slabs/grey-aldo/block-02.webp'], galleryImageFit: 'contain', applicationImage: '/images/products/blocs-slabs/grey-aldo/block-02.webp', applicationImageFit: 'contain', disableImageZoom: true, detailHeading: 'Grey Aldo Blocks & Slabs',
+    description: 'Grey Aldo limestone presented in block and slab form, with a balanced natural grey character suited to considered architectural stone selection.', stoneDetails: blockAndSlabDetails('Limestone'),
+  }),
+  createProduct({
+    name: 'Travertine Blocks & Slabs', slug: 'travertine-blocks-slabs', type: 'Blocs & Slabs', material: 'Travertine', color: 'Natural Beige', finish: 'Natural block', formats: ['Blocks', 'Slabs'], applications: marbleApplications,
+    image: '/images/products/blocs-slabs/travertine/block-01.webp', imageFit: 'contain', thumbnail: '/images/products/blocs-slabs/travertine/block-01.webp', thumbnailFit: 'contain', gallery: ['/images/products/blocs-slabs/travertine/block-02.webp'], galleryImageFit: 'contain', applicationImage: '/images/products/blocs-slabs/travertine/block-03.webp', applicationImageFit: 'contain', disableImageZoom: true, detailHeading: 'Travertine Blocks & Slabs',
+    description: 'Natural travertine blocks and slabs with warm tonal movement and open mineral texture, selected for architectural projects and bespoke fabrication.', stoneDetails: blockAndSlabDetails('Travertine'),
+  }),
 ]
 
 const productDisplayOrder = [
@@ -364,6 +408,11 @@ const productDisplayOrder = [
   'viaza-grey-tuda-light',
   'viaza-grey-rustic-tuda',
   'viaza-grey-crazy-paving',
+  'viaza-beige-blocks-slabs',
+  'viaza-grey-blocks-slabs',
+  'tuda-grey-blocks-slabs',
+  'grey-aldo-blocks-slabs',
+  'travertine-blocks-slabs',
 ]
 
 const productDisplayPriority = new Map(productDisplayOrder.map((slug, index) => [slug, index]))

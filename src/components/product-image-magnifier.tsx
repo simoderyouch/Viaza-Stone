@@ -11,6 +11,7 @@ type ProductImageMagnifierProps = {
   fit?: 'contain' | 'cover'
   imageClassName?: string
   noTranslate?: boolean
+  disableZoom?: boolean
 }
 
 export function ProductImageMagnifier({
@@ -21,6 +22,7 @@ export function ProductImageMagnifier({
   fit = 'cover',
   imageClassName,
   noTranslate = false,
+  disableZoom = false,
 }: ProductImageMagnifierProps) {
   const lensRef = useRef<HTMLDivElement>(null)
   const magnifiedImageRef = useRef<HTMLDivElement>(null)
@@ -48,9 +50,9 @@ export function ProductImageMagnifier({
 
   return (
     <div
-      className="absolute inset-0 overflow-hidden lg:cursor-none"
-      onPointerMove={updateLens}
-      onPointerLeave={hideLens}
+      className={`absolute inset-0 overflow-hidden ${disableZoom ? '' : 'lg:cursor-none'}`}
+      onPointerMove={disableZoom ? undefined : updateLens}
+      onPointerLeave={disableZoom ? undefined : hideLens}
     >
       <Image
         data-no-translate={noTranslate ? '' : undefined}
@@ -61,7 +63,7 @@ export function ProductImageMagnifier({
         sizes={sizes}
         className={`${fit === 'contain' ? 'object-contain' : 'object-cover'} ${imageClassName ?? ''}`}
       />
-      <div
+      {!disableZoom && <div
         ref={lensRef}
         aria-hidden="true"
         className="pointer-events-none absolute left-0 top-0 z-10 hidden size-44 overflow-hidden rounded-full border-2 border-white bg-white opacity-0 shadow-[0_10px_30px_rgb(41_43_44_/_0.28)] transition-opacity duration-150 lg:block"
@@ -69,7 +71,7 @@ export function ProductImageMagnifier({
         <div ref={magnifiedImageRef} className="absolute overflow-hidden">
           <Image src={src} alt="" fill sizes="176px" className={fit === 'contain' ? 'object-contain' : 'object-cover'} />
         </div>
-      </div>
+      </div>}
     </div>
   )
 }
